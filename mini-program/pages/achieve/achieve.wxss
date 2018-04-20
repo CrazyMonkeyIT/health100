@@ -1,0 +1,45 @@
+page{
+  height: 100%;
+}
+.userinfo-avatar {
+  position:absolute;
+  width:150rpx;
+  left:300rpx;
+  top:130rpx;
+  height:150rpx;
+  border-radius:50%;
+}
+.userInfo_name{
+  position:absolute;
+  width:200rpx;
+  left:270rpx;
+  top:290rpx;
+  height:50rpx;
+  font-size:30rpx;
+  text-align:center;
+  color:darkblue;
+}
+.count_sign_day{
+  position:absolute;
+  top:440rpx;
+  left:190rpx;
+  width:70rpx;
+  text-align: center;
+  color:fuchsia;
+}
+.point_panking{
+  position:absolute;
+  top:440rpx;
+  left:465rpx;
+  width:90rpx;
+  text-align: center;
+  color:fuchsia;
+}
+.userInfo_donate{
+  position:absolute;
+  top:630rpx;
+  left:365rpx;
+  width:90rpx;
+  text-align:center;
+  color:fuchsia;
+}

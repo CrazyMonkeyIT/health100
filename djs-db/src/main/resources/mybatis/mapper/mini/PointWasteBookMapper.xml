@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.valueservice.djs.db.dao.mini.PointWasteBookMapper">
+  <resultMap id="BaseResultMap" type="com.valueservice.djs.db.entity.mini.PointWasteBook">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="point" jdbcType="DECIMAL" property="point" />
+    <result column="point_source" jdbcType="VARCHAR" property="pointSource" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, open_id, point, point_source, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_point_waste_book
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_b_point_waste_book
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.valueservice.djs.db.entity.mini.PointWasteBook">
+    insert into t_b_point_waste_book ( open_id, point,
+      point_source, create_time)
+    values ( #{openId,jdbcType=VARCHAR}, #{point,jdbcType=DECIMAL},
+      #{pointSource,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.PointWasteBook">
+    insert into t_b_point_waste_book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="point != null">
+        point,
+      </if>
+      <if test="pointSource != null">
+        point_source,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null">
+        #{point,jdbcType=DECIMAL},
+      </if>
+      <if test="pointSource != null">
+        #{pointSource,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.PointWasteBook">
+    update t_b_point_waste_book
+    <set>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null">
+        point = #{point,jdbcType=DECIMAL},
+      </if>
+      <if test="pointSource != null">
+        point_source = #{pointSource,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.valueservice.djs.db.entity.mini.PointWasteBook">
+    update t_b_point_waste_book
+    set open_id = #{openId,jdbcType=VARCHAR},
+      point = #{point,jdbcType=DECIMAL},
+      point_source = #{pointSource,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

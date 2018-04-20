@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.valueservice.djs.db.dao.mini.MiniSignMapper">
+  <resultMap id="BaseResultMap" type="com.valueservice.djs.db.entity.mini.MiniSign">
+    <id column="sign_id" jdbcType="BIGINT" property="signId" />
+    <result column="mini_user_id" jdbcType="BIGINT" property="miniUserId" />
+    <result column="last_sign_time" jdbcType="TIMESTAMP" property="lastSignTime" />
+    <result column="count_days" jdbcType="INTEGER" property="countDays" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sign_id, mini_user_id, last_sign_time, count_days
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_mini_sign
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_b_mini_sign
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.valueservice.djs.db.entity.mini.MiniSign">
+    insert into t_b_mini_sign (sign_id, mini_user_id, last_sign_time, 
+      count_days)
+    values (#{signId,jdbcType=BIGINT}, #{miniUserId,jdbcType=BIGINT}, #{lastSignTime,jdbcType=TIMESTAMP}, 
+      #{countDays,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniSign">
+    insert into t_b_mini_sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="signId != null">
+        sign_id,
+      </if>
+      <if test="miniUserId != null">
+        mini_user_id,
+      </if>
+      <if test="lastSignTime != null">
+        last_sign_time,
+      </if>
+      <if test="countDays != null">
+        count_days,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="signId != null">
+        #{signId,jdbcType=BIGINT},
+      </if>
+      <if test="miniUserId != null">
+        #{miniUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastSignTime != null">
+        #{lastSignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countDays != null">
+        #{countDays,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.MiniSign">
+    update t_b_mini_sign
+    <set>
+      <if test="miniUserId != null">
+        mini_user_id = #{miniUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastSignTime != null">
+        last_sign_time = #{lastSignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countDays != null">
+        count_days = #{countDays,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.valueservice.djs.db.entity.mini.MiniSign">
+    update t_b_mini_sign
+    set mini_user_id = #{miniUserId,jdbcType=BIGINT},
+      last_sign_time = #{lastSignTime,jdbcType=TIMESTAMP},
+      count_days = #{countDays,jdbcType=INTEGER}
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByMiniUserId" resultMap="BaseResultMap">
+    select * from t_b_mini_sign where mini_user_id=#{miniUserId,jdbcType=BIGINT}
+  </select>
+</mapper>

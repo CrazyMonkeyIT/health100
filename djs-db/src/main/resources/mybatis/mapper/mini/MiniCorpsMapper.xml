@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.valueservice.djs.db.dao.mini.MiniCorpsMapper">
+  <resultMap id="BaseResultMap" type="com.valueservice.djs.db.entity.mini.MiniCorps">
+    <id column="corps_id" jdbcType="BIGINT" property="corpsId" />
+    <result column="corps_name" jdbcType="VARCHAR" property="corpsName" />
+    <result column="corps_head_image" jdbcType="VARCHAR" property="corpsHeadImage" />
+    <result column="corps_banner_image" jdbcType="VARCHAR" property="corpsBannerImage" />
+    <result column="point" jdbcType="DECIMAL" property="point" />
+    <result column="corps_introduce" jdbcType="VARCHAR" property="corpsIntroduce" />
+    <result column="is_top" jdbcType="INTEGER" property="isTop" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    corps_id, corps_name, corps_head_image, corps_banner_image, point
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_mini_corps
+    where corps_id = #{corpsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_b_mini_corps
+    where corps_id = #{corpsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.valueservice.djs.db.entity.mini.MiniCorps">
+    insert into t_b_mini_corps (corps_name, corps_head_image,
+      corps_banner_image, point,corps_introduce)
+    values (#{corpsName,jdbcType=VARCHAR}, #{corpsHeadImage,jdbcType=VARCHAR},
+      #{corpsBannerImage,jdbcType=VARCHAR}, #{point,jdbcType=DECIMAL},#{corpsIntroduce,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniCorps">
+    insert into t_b_mini_corps
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="corpsId != null">
+        corps_id,
+      </if>
+      <if test="corpsName != null">
+        corps_name,
+      </if>
+      <if test="corpsHeadImage != null">
+        corps_head_image,
+      </if>
+      <if test="corpsBannerImage != null">
+        corps_banner_image,
+      </if>
+      <if test="point != null">
+        point,
+      </if>
+      <if test="isTop != null">
+        is_top,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="corpsId != null">
+        #{corpsId,jdbcType=BIGINT},
+      </if>
+      <if test="corpsName != null">
+        #{corpsName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpsHeadImage != null">
+        #{corpsHeadImage,jdbcType=VARCHAR},
+      </if>
+      <if test="corpsBannerImage != null">
+        #{corpsBannerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null">
+        #{point,jdbcType=DECIMAL},
+      </if>
+      <if test="isTop != null">
+        #{isTop,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.MiniCorps">
+    update t_b_mini_corps
+    <set>
+      <if test="corpsName != null">
+        corps_name = #{corpsName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpsHeadImage != null">
+        corps_head_image = #{corpsHeadImage,jdbcType=VARCHAR},
+      </if>
+      <if test="corpsBannerImage != null">
+        corps_banner_image = #{corpsBannerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null">
+        point = #{point,jdbcType=DECIMAL},
+      </if>
+      <if test="isTop != null">
+        is_top = #{isTop,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where corps_id = #{corpsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.valueservice.djs.db.entity.mini.MiniCorps">
+    update t_b_mini_corps
+    set corps_name = #{corpsName,jdbcType=VARCHAR},
+      corps_head_image = #{corpsHeadImage,jdbcType=VARCHAR},
+      corps_banner_image = #{corpsBannerImage,jdbcType=VARCHAR},
+      point = #{point,jdbcType=DECIMAL}
+    where corps_id = #{corpsId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectCorpsPanking" resultMap="BaseResultMap">
+  select c.corps_id,c.corps_head_image,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point from t_b_mini_corps c
+  left join t_b_mini_user u on c.corps_id=u.corps_id
+  group by c.corps_id,c.corps_head_image,c.corps_name
+  order by point desc limit 20;
+  </select>
+
+  <select id="selectCorpsList" resultMap="BaseResultMap">
+    select c.corps_id,c.corps_head_image,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point,c.corps_introduce,c.corps_banner_image,c.is_top from t_b_mini_corps c
+    left join t_b_mini_user u on c.corps_id=u.corps_id
+    <if test="corpsName!=null ">
+      where c.corps_name like CONCAT('%',#{corpsName,jdbcType=VARCHAR},'%')
+    </if>
+    group by c.corps_id
+  </select>
+
+  <select id="selectByCorpsName" resultMap="BaseResultMap">
+    select * from t_b_mini_corps where corps_name = #{corpsName,jdbcType=VARCHAR}
+  </select>
+
+  <update id="corpsCancelTop">
+    update t_b_mini_corps set is_top=0 where is_top=1
+  </update>
+
+  <update id="corpsTop">
+    update t_b_mini_corps set is_top=1 where corps_id = #{corpsId,jdbcType=BIGINT}
+  </update>
+</mapper>

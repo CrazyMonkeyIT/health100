@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.valueservice.djs.db.dao.mini.MiniSignWasteBookMapper">
+  <resultMap id="BaseResultMap" type="com.valueservice.djs.db.entity.mini.MiniSignWasteBook">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sign_id" jdbcType="BIGINT" property="signId" />
+    <result column="sign_type" jdbcType="INTEGER" property="signType" />
+    <result column="is_check" jdbcType="INTEGER" property="isCheck" />
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sign_id, sign_type, is_check, image_path
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_mini_sign_waste_book
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_b_mini_sign_waste_book
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.valueservice.djs.db.entity.mini.MiniSignWasteBook">
+    insert into t_b_mini_sign_waste_book (id, sign_id, sign_type, 
+      is_check, image_path)
+    values (#{id,jdbcType=BIGINT}, #{signId,jdbcType=BIGINT}, #{signType,jdbcType=INTEGER}, 
+      #{isCheck,jdbcType=INTEGER}, #{imagePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniSignWasteBook">
+    insert into t_b_mini_sign_waste_book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="signId != null">
+        sign_id,
+      </if>
+      <if test="signType != null">
+        sign_type,
+      </if>
+      <if test="isCheck != null">
+        is_check,
+      </if>
+      <if test="imagePath != null">
+        image_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="signId != null">
+        #{signId,jdbcType=BIGINT},
+      </if>
+      <if test="signType != null">
+        #{signType,jdbcType=INTEGER},
+      </if>
+      <if test="isCheck != null">
+        #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="imagePath != null">
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.MiniSignWasteBook">
+    update t_b_mini_sign_waste_book
+    <set>
+      <if test="signId != null">
+        sign_id = #{signId,jdbcType=BIGINT},
+      </if>
+      <if test="signType != null">
+        sign_type = #{signType,jdbcType=INTEGER},
+      </if>
+      <if test="isCheck != null">
+        is_check = #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="imagePath != null">
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.valueservice.djs.db.entity.mini.MiniSignWasteBook">
+    update t_b_mini_sign_waste_book
+    set sign_id = #{signId,jdbcType=BIGINT},
+      sign_type = #{signType,jdbcType=INTEGER},
+      is_check = #{isCheck,jdbcType=INTEGER},
+      image_path = #{imagePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectNotCheckWasteBook" resultMap="BaseResultMap">
+    select * from t_b_mini_sign_waste_book where sign_type=1 and is_check=0
+  </select>
+</mapper>

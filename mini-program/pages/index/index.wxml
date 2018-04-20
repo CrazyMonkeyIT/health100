@@ -1,0 +1,70 @@
+<!--index.wxml-->
+<scroll-view scroll-y="{{isScroll}}">
+  <image src="../images/index_back.jpg" mode='widthFix' style='width:100%'></image>
+  <image src='../images/camp_rule.jpg' mode='widthFix' class='camp_rule' bindtap='ruleinfo'></image>
+
+  <view class='index-join-day'>
+      <text>100</text>
+      <text>参加天数</text>
+  </view>
+  
+  <view class='index-total-point'>
+      <text>9602</text>
+      <text>总积分</text>
+  </view>
+  <image src="../images/health100_run_line.gif" bindtap='scrollBottom' class='run_health_line' mode='widthFix'></image>
+  <image src="../images/health100_run.gif" bindtap='scrollBottom' class='run_health' mode='widthFix'></image>
+<!--button-->
+  <view class="{{one?'hidden':'show'}}">
+   <image src='../images/index_corp_click.png' bindtap='scrollBottom' class='sign_click' mode='widthFix'></image>
+   <image src='../images/index_click.png' bindtap='scrollBottom' class='corps_click' mode='widthFix'></image>
+  </view>
+  <view class="{{one?'show':'hidden'}}">
+    <image src='../images/one_join.png' bindtap='scrollBottom' class='one_join' mode='widthFix'></image>
+  </view>
+<!--button-->
+<!--tab-->
+  <view class='tab_main'>
+    <image src='../images/ranking_back.png' mode='widthFix' class='tab_main_back'></image>
+<!--战队榜 主体-->
+    <view class="{{selected?'show':'hidden'}}">
+        <image src='../images/ranking_corps.png' mode='widthFix' class='ranking_corps'></image>
+        <text style='position: absolute;left:440rpx;top:110rpx;font-size:40rpx;'>积分</text>
+        <view class='table_view'>
+        <view class='table_view_tr' wx:for="{{corpsPanking}}" wx:for-index="key" wx:key="{{corpsId}}" wx:for-item="value">
+            <view class="table_view_td">
+            <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no'></image>
+            <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no'></image>
+              <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no'></image>
+              <text class='table_view_td_no' wx:else>{{key+1}}</text>
+              <image src='../images/panking_headImage.png' mode='widthFix' class='table_headimage'></image>
+              <text class='table_view_td_name'>{{value.corpsName}}</text>
+              <text class='table_view_td_point'>{{value.point}}</text>
+            </view>
+        </view>
+        </view>
+    </view>
+<!--战队榜 主体end-->
+<!--个人榜 主体-->
+    <view class="{{selected1?'show':'hidden'}}">
+      <image src='../images/ranking_users.png' mode='widthFix' class='ranking_corps'></image>
+    </view>
+<!--个人榜 主体end-->
+<!--tab 头-->
+    <view class='tab_corps' bindtap="selected">
+      <text class="{{selected?'red':'default'}}">战队榜</text>
+    </view> 
+     <view class='tab_users' bindtap="selected1">
+      <text class="{{selected1?'red':'default'}}">个人榜</text>
+    </view> 
+<!--tab 头end-->
+  </view>
+  <image animation="{{animationData}}" src="../images/down.png" bindtap='scrollBottom' class='down_png' mode='widthFix'></image>
+  <!--弹出层  -->
+  <view class="modal-dialog" wx:if="{{modalHidden}}">
+        <image src='../images/rule_info_back.png' class='modal-dialog-info-back' mode='widthFix'></image>  
+        <image src='../images/rule_info.png' class='modal-dialog-info' mode='widthFix'></image>  
+       <image src='../images/rule_info_cancel.png' mode='widthFix' class='modal-dialog-info-cancel' bindtap='ruleInfoCancel'></image> 
+  </view>
+</scroll-view>
+ 

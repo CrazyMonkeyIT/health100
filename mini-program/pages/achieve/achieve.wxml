@@ -1,0 +1,8 @@
+<view>
+  <image src='../images/achieve/achieve_back.jpg' mode='widthFix' style='width:100%'></image>
+  <image bindtap="bindViewTap" bindtouchstart='timestart' bindtouchend='timeend'  class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover" ></image>
+  <text class='userInfo_name'>{{userInfo.nickName}}</text>
+  <text class='count_sign_day'>{{userInfo.contSignDay}}</text>
+  <text class='point_panking'>{{userInfo.pointPanking}}</text>
+  <text class='userInfo_donate'>{{userInfo.donate}}</text>
+</view>

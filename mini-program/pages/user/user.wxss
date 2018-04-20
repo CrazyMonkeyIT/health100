@@ -1,0 +1,124 @@
+page{
+  height: 100%;
+}
+.go_back_image{
+  position: absolute;
+  width:20rpx;
+  left:30rpx;
+  top:20rpx;
+}
+.down_png{
+  position: fixed;
+  bottom: 20rpx;
+  left :320rpx;
+  width:70rpx;
+}
+.userinfo-avatar {
+  position:absolute;
+  width:180rpx;
+  left:75rpx;
+  top:140rpx;
+  height:180rpx;
+  border-radius:50%;
+}
+.user_name_text{
+  position:absolute;
+  left:300rpx;
+  top:140rpx;
+  font-size:40rpx;
+  color: white;
+}
+.badge_1_image{
+  position:absolute;
+  width:75rpx;
+  left:290rpx;
+  top:195rpx;
+  height:70rpx;
+}
+.badge_2_image{
+  position:absolute;
+  width:75rpx;
+  left:360rpx;
+  top:195rpx;
+  height:70rpx;
+}
+.badge_3_image{
+  position:absolute;
+  width:75rpx;
+  left:430rpx;
+  top:195rpx;
+  height:70rpx;
+}
+.badge_4_image{
+  position:absolute;
+  width:75rpx;
+  left:500rpx;
+  top:195rpx;
+  height:70rpx;
+}
+.inv_card_image{
+  position:absolute;
+  width: 190rpx;
+  left:290rpx;
+  top:255rpx;
+}
+.user_achieve_image{
+  position:absolute;
+  width: 170rpx;
+  left:480rpx;
+  top:255rpx;
+}
+.signDay_text{
+  position:absolute;
+  left:100rpx;
+  top:425rpx;
+  width:90rpx;
+  font-size:50rpx;
+  color:white;
+  text-align: center;
+}
+.countSignDay_text{
+  position:absolute;
+  left:100rpx;
+  top:580rpx;
+  width:90rpx;
+  font-size:50rpx;
+  color:white;
+  text-align: center;
+}
+.point_text{
+  position:absolute;
+  left:428rpx;
+  top:549rpx;
+  width:100rpx;
+  font-size:50rpx;
+  color:white;
+  text-align:center;
+}
+.corps_name_text{
+  position:absolute;
+  left:428rpx;
+  top:860rpx;
+  width:300rpx;
+  font-size:40rpx;
+  color:white;
+  text-align:right;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.corps_point_text{
+  position:absolute;
+  left:428rpx;
+  top:949rpx;
+  width:300rpx;
+  font-size:50rpx;
+  color:white;
+  text-align:right;
+}
+.percent_image{
+  position:absolute;
+  width:487rpx;
+  left:240rpx;
+  top:378rpx;
+
+}

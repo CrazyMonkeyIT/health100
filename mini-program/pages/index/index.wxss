@@ -1,0 +1,198 @@
+/**index.wxss**/
+page{
+    height :100%;
+    overflow-y: hidden;
+}
+ scroll-view {
+  height: 100%;
+} 
+::-webkit-scrollbar{
+  width: 0rpx;
+  height: 0rpx;
+  color: transparent;
+}
+.down_png{
+  position: fixed;
+  bottom: 20rpx;
+  left :320rpx;
+  width:70rpx;
+}
+.camp_rule{
+  position: absolute;
+  width:90px;
+  left:10rpx;
+  top:80rpx;
+}
+.index-join-day {
+  position: absolute;
+  left :85rpx;
+  top :400rpx;
+  font-size: 24rpx;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content :center;
+  text-align: center;
+}
+.index-total-point {
+  position: absolute;
+  left :580rpx;
+  top :430rpx;
+  font-size: 24rpx;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content :center;
+  text-align: center;
+}
+.run_health {
+  position: absolute;
+  left :100rpx;
+  top :420rpx;
+  width : 520rpx;
+}
+.run_health_line {
+  position: absolute;
+  left :15rpx;
+  top :520rpx;
+  width : 750rpx;
+}
+.sign_click{
+ position: absolute;
+ left :95rpx;
+ top :1020rpx;
+ width : 250rpx;
+}
+.corps_click{
+  position: absolute;
+  left: 355rpx;
+  top :1020rpx;
+  width : 300rpx;
+}
+.one_join{
+  position: absolute;
+  left: 225rpx;
+  top :1020rpx;
+  width : 300rpx;
+}
+.tab_main{
+  position: absolute;
+  left :85rpx;
+  width:78%;
+  top :1210rpx;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content :center;
+  text-align: center;
+  flex-direction:row;
+}
+.tab_corps{
+  position: absolute;
+  font-size: 50rpx;
+  top :20rpx;
+  left: 100rpx;
+  width: 150rpx;
+}
+.tab_users{
+  position: absolute;
+  font-size: 50rpx;
+  left: 180rpx;
+  top:20rpx;
+  width: 450rpx;
+}
+.tab_main_back{
+  position: absolute;
+  left: 0rpx;
+  width: 100%;
+}
+.ranking_corps{
+  position: absolute;
+  width: 100%;
+  left: 0rpx;
+}
+.ranking_users{
+ position: absolute;
+ width: 100%;
+ left: 0rpx;
+}
+.show{display:block;text-align:center;}
+.hidden{display:none;text-align:center;}
+.red{
+  color: red;
+}
+.buydes-dialog-container{  
+    width: 100%;  
+    height: 100%;  
+    justify-content: space-between;  
+    background-color:rgba(15, 15, 26, 0.7);  
+    position: fixed;  
+    z-index: 999;  
+}
+.table_view{
+  position: absolute;
+  left: 50rpx;
+  top:170rpx;
+}
+.table_headimage{
+  position: absolute;
+  left: 70rpx;
+  width: 60rpx;
+}
+.table_view_tr{
+  justify-content: space-between;
+  align-content: space-around;
+}
+.table_view_td{
+  height: 80rpx;
+}
+.table_view_td_no{
+  position: absolute;
+  left: 0rpx;
+  width: 60rpx;
+}
+.table_view_td_name{
+  position: absolute;
+  left:150rpx;
+  font-size:25rpx;
+  width: 180rpx;
+  text-align: left;
+  padding: 10rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+.table_view_td_point{
+  position: absolute;
+  left:400rpx;
+  font-size:30rpx;
+  padding: 10rpx; 
+  text-align: left;
+}
+
+.modal-dialog{
+ width: 600rpx;
+ height: 950rpx;
+ position: fixed;
+ top: 150rpx;
+ left: 70rpx;
+ overflow: scroll;
+}
+.modal-dialog-info-back{
+   position: absolute;
+   width: 600rpx;
+   height: 950rpx;
+}
+.modal-dialog-info{
+  position: absolute;
+  width: 600rpx;
+  height: 950rpx;
+}
+.modal-dialog-info-cancel{
+  position: fixed;
+  width: 50rpx;
+  top: 150rpx;
+  left: 620rpx;
+}

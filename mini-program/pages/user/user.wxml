@@ -1,0 +1,25 @@
+<scroll-view>
+  <image src='../images/user/user_back.jpg' mode='widthFix' style='width:100%'></image>
+  <image src='../images/user/user_return.jpg' mode='widthFix' bindtap='go_back' class='go_back_image'></image>
+  <image class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
+  <text class='user_name_text'>{{userInfo.nickName}}</text>
+  <!-- 徽章 -->
+  <image src='{{userInfo.badge1}}' class='badge_1_image'></image>
+  <image src='{{userInfo.badge2}}' class='badge_2_image'></image>
+  <image src='{{userInfo.badge3}}' class='badge_3_image'></image>
+  <image src='{{userInfo.badge4}}' class='badge_4_image'></image> 
+  <!-- 徽章下按钮 -->
+  <image src='../images/user/inv_card.png' mode='widthFix' class ='inv_card_image' bindtap="inv_card_lick"></image>
+   <image src='../images/user/user_achieve.png' mode='widthFix' class ='user_achieve_image' bindtap="user_achieve_lick"></image>
+   <!-- 积分打卡天数 -->
+   <text class='signDay_text'>{{userInfo.signDay}}</text>
+   <text class='countSignDay_text'>{{userInfo.contSignDay}}</text>
+   <text class='point_text'>{{userInfo.point}}</text>
+   <image src='{{userInfo.percent}}' mode='widthFix' class='percent_image'></image>
+   <!-- 战队 -->
+   <text class='corps_name_text'>{{userInfo.corpsName}}</text>
+   <text class='corps_point_text'>{{userInfo.corpsPoint}}</text>
+   <!-- 打卡图片 -->
+   
+   <image animation="{{animationData}}" src="../images/down.png" bindtap='scrollBottom' class='down_png' mode='widthFix'></image>
+</scroll-view>
