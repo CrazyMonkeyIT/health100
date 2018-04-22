@@ -1,0 +1,274 @@
+/* pages/livechat/livechat.wxss */
+/**index.wxss**/
+page {
+  height: 100%;
+}
+
+.chat_container {
+  height: 80%;
+  min-height: 97.6%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 15rpx 15rpx;
+  background-color: gainsboro;
+}
+
+.chat-list {
+  flex: 1;
+  padding-bottom: 80rpx;
+}
+
+.scrool-view {
+  height: 60%
+}
+
+.chat-left {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.chat-right {
+  display: flex;
+  margin-top: 20rpx;
+}
+.chat-msg-title {
+  flex: 1;
+  margin-left: 10rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-msg-title-right{
+  margin-right: 10rpx;
+  display: flex;
+  flex: 4;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chat-left text {
+  border-radius: 11rpx;
+  word-break: break-all;
+  padding: 5rpx 10rpx;
+  background-color: white;
+}
+.voice-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.voice-duration {
+  padding: 15rpx 10rpx 0 35rpx;
+  font-size: 30rpx;
+}
+
+.voice-view-left {
+  border-radius: 11rpx;
+  padding: 10rpx 10rpx 1rpx;
+  width: 200rpx;
+  background-color: white;
+}
+.voice-view-right {
+  border-radius: 11rpx;
+  padding: 10rpx 10rpx 1rpx;
+  width: 200rpx;
+  background-color: #7afec6;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.voice-view-left-play {
+  border-radius: 11rpx;
+  padding: 10rpx 10rpx;
+  width: 200rpx;
+  background-color: greenyellow;
+}
+
+.voice-view-right-play {
+  border-radius: 11rpx;
+  padding: 10rpx 10rpx;
+  width: 200rpx;
+  background-color: greenyellow;
+}
+.chat-audio-img{
+  width: 40rpx;
+  height: 40rpx;
+  display:inline-block;
+}
+
+.chat-audio-img-right {
+  width: 40rpx;
+  height: 40rpx;
+  display:inline-block;
+  -moz-transform:scaleX(-1);
+  -webkit-transform:scaleX(-1);
+  -o-transform:scaleX(-1);
+  transform:scaleX(-1);
+  /*IE*/
+  filter:FlipH;
+}
+
+.chat-left label {
+  word-break: break-all;
+  padding: 5rpx 10rpx;
+  font-size: 22rpx;
+}
+
+.chat-right {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.chat-right label {
+  word-break: break-all;
+  padding: 5rpx 10rpx;
+  font-size: 22rpx;
+}
+
+.chat-right text {
+  flex: 1;
+  margin-right: 10rpx;
+  padding: 5rpx 10rpx;
+  background-color: #7afec6;
+  border-radius: 11rpx;
+  word-break: break-all;
+}
+
+.avatar-img {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 70rpx;
+}
+
+.courseware-area{
+  width : 100%;
+  height: 30%;
+  white-space: nowrap;
+  background-color: #E6E6FA;
+}
+.courseware-area-item{
+  margin :15rpx;
+  display: inline-block;
+}
+
+.slide-image {
+
+  height : 330rpx;
+}
+.text-video-img {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 60rpx;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.ask-input-word {
+  width: 100%;
+  position: fixed;
+  bottom: 5rpx;
+  display: flex;
+  align-items: center;
+  background-color: #f3f3fa;
+  margin: 0 -15rpx 0 -15rpx;
+}
+
+.ask-input-word input {
+  background: white;
+  border-radius: 10rpx;
+  width: 85%;
+  flex: 1;
+  height:2rem;
+  min-height:2rem;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: 9px;
+  margin-bottom: 20rpx;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.ask-input-word button {
+  height:2rem;
+  min-height:2rem;
+  font-size:18px;
+  padding:0 0.34em;
+  width:85%;
+  text-align: center;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 20rpx;
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #000000;
+  line-height: 2rem;
+  border-radius: 5px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.button-hover{
+  background-color:#CCCCCC;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.olami-info{
+  font-size: 10px;
+  align-items: right;
+}
+.speaker-view {
+  position: fixed; 
+    left: 50%;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.speaker{ 
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 96px;
+    height: 96px;
+} 
+.speaker-sec {
+  font-size: 28px;
+  color: #2828ff;
+  margin-left:-25px;
+}
+
+.speaker-sec-notice {
+  font-size: 28px;
+  color: #ff9224;
+  margin-left:-25px;
+}
+
+.speaker-sec-warn {
+  font-size: 28px;
+  color: #930000;
+  margin-left:-25px;
+}
+
+.showAuthor{
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.author{
+  text-align: right;
+  margin-left: 19%;
+}

@@ -1,0 +1,69 @@
+<!--index.wxml-->
+ 
+<view class = "index">
+
+<view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{wxSearchData.value}}" bindconfirm='bindconfirm'  />
+        </view>
+    </view>
+</view>
+
+  <!--广告-->
+	<view class = "index_advertisement">
+    <swiper indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="imgs">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150"/>
+        </swiper-item>
+      </block>
+    </swiper>
+	</view>
+
+  <!--路演-->
+	<view>
+    <view class='head-container'>
+      <view class="left">路演预告</view>
+      <view class="right">更多>></view>
+    </view> 
+    <view class="content">
+      <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex">  
+        <view class="content_image" wx:for="{{roadShowImages}}" wx:key="roadShows" >  
+          <view style='text-align:center'>03月29 10:00</view>
+          <image src="{{item}}" mode="aspectFit" style="width: 150px;height: 100px;"></image>
+        </view>  
+      </scroll-view> 
+    </view>
+	</view>
+
+  <!--首席-->
+  <view>
+    <view class = "head-container">
+      <view class="left">首席推荐</view>
+      <view class="right" bindtap='moreChiefInfo'>更多>></view>
+    </view>
+    <view wx:for="{{chiefInfoList}}" wx:key="chiefs" class="lecturer-container">
+      <view class='left'>
+        <view><image src="{{item.headPhotoFile}}" mode="aspectFit" style="width:50px;height:50px;border-radius:50%"></image> </view>
+        <view>{{index}}---{{item.lecturerName}}</view>
+      </view>
+      <view class='right'>
+        <view class='tag'>
+          <view>{{item.company}}</view>
+          <view style='margin-left:10px;'>{{item.position}}</view>
+        </view>
+        <view style='font-size:13px;color:#616161'>{{item.introduction}}</view>
+      </view> 
+    </view>
+  </view>
+  
+  <!--直播-->
+	<view class = "head-container">
+    <view class="left">直播列表</view>
+    <view class="right">更多>></view>
+	</view>
+
+</view>

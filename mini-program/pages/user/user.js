@@ -3,7 +3,13 @@ var that = null;
 Page({
   data: {
     userInfo:{},
-    animationData: {}
+    animationData: {},
+    circleDeg : -20,
+    leftBBtop :345,//345
+    cleftright:240,//234
+    clefttop:0,
+    crightright :130,
+    crightBottom : 200,
   },
   onLoad: function () {
     that = this;
@@ -17,7 +23,7 @@ Page({
     this.setData({
       animationData: animation.export()
     })
-
+    this.continuousDay(68);
     setInterval(function () {
       animation.bottom(20).step().bottom(50).step()
       this.setData({
@@ -39,7 +45,6 @@ Page({
         contSignDay:89,
         corpsName:'天大地大我最大',
         corpsPoint:9999,
-        percent:'../images/user/percent/1.png'
       }
     })
   },
@@ -60,5 +65,36 @@ Page({
     wx.navigateTo({
       url: "/pages/achieve/achieve?userId="+this.data.userInfo.userId
     })
+  },
+  continuousDay : function(day){
+    let initDeg = -20, step = 2.4, cleftright = 120,clefttop=0,
+    crightright = 130,crightBottom = 200;
+    if(day < 30){
+      clefttop = 345-30 - 9 * day;
+    }
+    if(day >= 30 && day < 50){
+      clefttop = 0;
+      cleftright = 100 + (day-30) * 9
+    }
+    if(day >=50 && day <= 65){
+      cleftright = 240;
+      crightright = 240 + (day - 50) * 9
+    } else if (day > 65 && day <=80){
+      cleftright = 240;
+      crightright = 480;
+      crightBottom = 105 + (day - 65) * 5.2
+    }else if(day > 80){
+      cleftright = 240;
+      crightright = 480;
+      crightBottom = 105 + (day - 65) * 7.4
+    }
+    this.setData({
+      circleDeg: (step * day) + initDeg,
+      cleftright: cleftright,
+      clefttop: clefttop,
+      crightright: crightright,
+      crightBottom: crightBottom
+    })
+
   }
 })

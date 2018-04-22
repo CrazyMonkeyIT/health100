@@ -1,0 +1,32 @@
+<!--pages/personal/wallet/detail/detail.wxml-->
+<view style="width:100%;height:90rpx;font-weight:bold;padding-left:32rpx;line-height:90rpx;font-size:28rpx;">
+  <view style="width:33%;float:left;">金额</view>
+  <view style="width:33%;float:left;">描述</view>
+  <view style="width:33%;float:left;">创建时间</view>
+</view>
+<view class="navigator-bottom-border"></view>
+
+<view wx:if="{{list.length == 0}}">
+    <view style="width:100%;text-align:center;color:#999;font-size:28rpx;">暂无记录</view>
+</view>
+
+<view hidden="{{tradeRecordDiv}}" wx:for="{{list}}" wx:for-item="obj">
+  <view class="navigator" style="height:90rpx;" hover-class="none">
+        <view class="navigator-content" style="padding-left:20rpx;font-size:28rpx;">
+            <view style="width:33%;float:left;">{{obj.tradeAmount}}</view>
+            <view style="width:33%;float:left;">{{obj.tradeType}}</view>
+            <view style="width:33%;float:left;">{{obj.createTime}}</view>
+        </view>
+  </view>
+  <view class="navigator-bottom-border"></view>
+</view>
+<view hidden="{{incomeDiv}}" wx:for="{{list}}" wx:for-item="obj">
+  <view class="navigator" style="height:90rpx;" hover-class="none">
+        <view class="navigator-content" style="padding-left:20rpx;font-size:28rpx;">
+            <view style="width:33%;float:left;">{{obj.amount}}</view>
+            <view style="width:33%;float:left;">{{obj.incomeType}}</view>
+            <view style="width:33%;float:left;">{{obj.createTime}}</view>
+        </view>
+  </view>
+  <view class="navigator-bottom-border"></view>
+</view>

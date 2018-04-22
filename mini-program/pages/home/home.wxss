@@ -1,0 +1,96 @@
+
+/**index.wxss**/
+
+.index{
+  font-size: 15px;
+  width: 100%;
+}
+.index_search{
+  height: 50px;
+}
+.slide-image{
+  width: 100%;
+  height: 150px;
+}
+
+.index_view{
+  overflow: auto;
+}
+.index_view .position_left{
+   float: left;
+   width: 50%;
+   text-align: left;
+}
+.index_view .position_right{
+   float: right;
+   width: 50%;
+   text-align: right;
+}
+.content_image{
+  display: inline-block;
+  width: 150px;
+  height: 100px;
+  margin: 5px;
+}
+.lecturer-list {
+  width: 100%;
+  height: 350rpx;
+  background-color: #DCDCDC;
+  display:flex;
+  border: 1px 0 1px 0;
+  border-color: black;
+  border-style: solid;
+  margin: 5rpx;
+}
+.lecturer-avat {
+  flex: 1;
+  width: 220rpx;
+  display: flex;
+  flex-direction :column;
+  justify-content: center;
+}
+.lecturer-intro {
+  padding: 10rpx;
+  text-indent:2em;
+}
+
+/**讲师content列表样式*/
+.lecturer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 13px;
+}
+.lecturer-container .left {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10px;
+}
+.lecturer-container .right {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+} 
+.lecturer-container .right .tag {
+  display: flex;
+  flex-direction: row;
+}
+
+/**头部列表样式*/
+.head-container{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  font-size: 13px;
+  margin-top: 10px;
+}
+.head-container .left{
+  border-left: 5px solid #f46b30;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+.head-container .right{
+  color: #f46b30;
+}

@@ -1,0 +1,62 @@
+<view class="container">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <block wx:if="{{tempFilePath != ''}}">
+          <image src="{{tempFilePath}}" class="image" mode="aspectFit"></image>
+        </block>
+        <block wx:if="{{tempFilePath === '' && savedFilePath != ''}}">
+          <image src="{{savedFilePath}}" class="image" mode="aspectFit"></image>
+        </block>
+        <block wx:if="{{tempFilePath === '' && savedFilePath === ''}}">
+          <view class="image-plus image-plus-nb" bindtap="chooseImage">
+            <view class="image-plus-horizontal"></view>
+            <view class="image-plus-vertical"></view>
+          </view>
+          <view class="image-plus-text">请选择直播封面</view>
+        </block>
+      </view>
+
+      <view class="page-section">
+        <view class="page-section-title">主题</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="input" placeholder="" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="page-section">
+        <view class="page-section-title">简介</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" rows="3"></textarea>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="page-section">
+        <view class="page-section-title">邀请码</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+                <text class="reload-code">325965</text>
+                <image class="reload-code-image" src="../../../../images/personal/reload.png" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-area">
+        <button type="primary" bindtap="saveFile">确定</button>
+        <button bindtap="clean">取消</button>
+      </view>
+    </view>
+  </view>
+
+  <modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">{{dialog.content}}</modal>
+</view>

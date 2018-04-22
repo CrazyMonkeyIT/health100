@@ -119,6 +119,47 @@ page{
   position:absolute;
   width:487rpx;
   left:240rpx;
-  top:378rpx;
-
+  top:370rpx;
+  z-index:20;
+}
+.wear-rect-img {
+  position: inherit;
+  left :-488rpx;
+  width:732rpx;
+  top :200rpx;
+  transform: rotate(80deg);
+  transform-origin: 100% 50%;
+  z-index:1;
+}
+.percent-view {
+  position:absolute;
+  width:488rpx;
+  height: 488rpx;
+  left:240rpx;
+  top:370rpx;
+  overflow: hidden;
+}
+.percent-circle {
+  position: inherit;
+  left :1rpx;
+  width:244rpx;
+  top :200rpx;
+  
+  transform-origin: 100% 50%;
+  z-index:30;
+}
+.circle-image {
+  width:487rpx;
+  position: inherit;
+  z-index: 20;
+}
+.circle-bb {
+  width:370rpx;
+  height:386rpx;
+  border:40rpx solid #EE00A2;
+  border-radius:351rpx;
+  position:absolute;
+  left:20rpx;
+  top:13rpx;
+  
 }

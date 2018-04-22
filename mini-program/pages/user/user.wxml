@@ -15,7 +15,13 @@
    <text class='signDay_text'>{{userInfo.signDay}}</text>
    <text class='countSignDay_text'>{{userInfo.contSignDay}}</text>
    <text class='point_text'>{{userInfo.point}}</text>
-   <image src='{{userInfo.percent}}' mode='widthFix' class='percent_image'></image>
+   <view class='percent-view'>
+      <view class='circle-bb'style="clip:rect({{clefttop}}rpx, {{cleftright}}rpx, 345rpx, 0px);"></view>
+      <view class='circle-bb'style="clip:rect(0px, {{crightright}}rpx, {{crightBottom}}rpx, 130px);"></view>
+      <image src='../images/user/png_circle.png' mode='widthFix' style='width:487rpx' class='circle-image'></image>
+      <image class='percent-circle' src='../images/user/percent_cirlce.png' mode='widthFix' style='transform: rotate({{circleDeg}}deg);'></image>
+   </view>
+  
    <!-- 战队 -->
    <text class='corps_name_text'>{{userInfo.corpsName}}</text>
    <text class='corps_point_text'>{{userInfo.corpsPoint}}</text>

@@ -1,0 +1,67 @@
+/* pages/personal/speaker/speaker.wxss */
+
+/* pages/personal/mylive/create/create.wxss */
+.page-body-info {
+  display: flex;
+  box-sizing: border-box;
+  height: 400rpx;
+  border: 1rpx solid #D9D9D9;
+  align-items: center;
+  justify-content: center;
+}
+textarea{
+  height:200rpx;
+}
+.reload-code{
+  float:left;
+  font-size: 14px;
+  line-height: 2.58823529em;
+}
+.reload-code-image{
+  height:50rpx;
+  width:50rpx;
+  margin:10rpx 0;
+  float:right;
+}
+
+
+
+.head-page-body-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  padding: 50rpx 0 50rpx 0;
+}
+.head-image-plus {
+  width: 150rpx;
+  height: 100rpx;
+  border: 2rpx solid #D9D9D9;
+  position: relative;
+}
+.head-image-plus-nb{
+  border: 0;
+}
+.head-image-plus-text{
+  color: #888888;
+  font-size: 28rpx;
+}
+.head-image-plus-horizontal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 4rpx;
+  height: 80rpx;
+  transform: translate(-50%, -50%);
+}
+.head-image-plus-vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 80rpx;
+  height: 4rpx;
+  transform: translate(-50%, -50%);
+}

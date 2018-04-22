@@ -1,0 +1,23 @@
+/**讲师content列表样式*/
+.lecturer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 13px;
+}
+.lecturer-container .left {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10px;
+}
+.lecturer-container .right {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+} 
+.lecturer-container .right .tag {
+  display: flex;
+  flex-direction: row;
+}

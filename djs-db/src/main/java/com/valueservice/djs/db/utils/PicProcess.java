@@ -1,4 +1,4 @@
-package com.valueservice.djs.utils;
+package com.valueservice.djs.db.utils;
 
 import com.valueservice.djs.db.bean.MiniImage;
 
@@ -59,11 +59,17 @@ public class PicProcess {
         return mainPic;
     }
 
-    public static void writeImg(BufferedImage mainPic,MiniImage ... img){
-        Long time = System.currentTimeMillis();
+    /**
+     * 根据传入的主图片及需要附加的图片，将他们整合成一张图片后存储成png图片
+     * @param pngName
+     * @param mainPic
+     * @param img
+     */
+    public static void writePngImg(String pngName,BufferedImage mainPic,MiniImage ... img){
+
         BufferedImage resultImg = ImageTogeterAny(mainPic,img);
         try {
-            File outputfile = new File("/Users/maowankui/Documents/testImg/" + time+".png");
+            File outputfile = new File(pngName);
             ImageIO.write(resultImg, "png", outputfile);
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -96,10 +102,9 @@ public class PicProcess {
         post.setImage(mini1);
         MiniImage qrcode = new MiniImage(303, 1124, 150, 150);
         qrcode.setImage(mini2);
-        writeImg(mainPic,post,qrcode);
-
-
-
+        Long time = System.currentTimeMillis();
+        String pngName = "/Users/maowankui/Documents/" + time + ".png";
+        writePngImg(pngName,mainPic,post,qrcode);
     }
 
 }

@@ -1,0 +1,16 @@
+<!--pages/personal/mylive/mylive.wxml-->
+<view class="globle_back_view" style='background-color: #D8D8D8;'>
+  <view class="empty_tip" >
+    
+    <view class="no-date">
+      <image class="image" src="../../../images/personal/audio.png"></image>
+      <view class="page-head-line"></view>
+      <view class="text">暂无直播</view>
+    </view>
+
+    <navigator class="bottom-botton" url="create/create">
+      <image src="../../../images/personal/add.png"></image>发起直播
+    </navigator>
+  </view>
+</view>
+

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.valueservice.djs.db.dao.mini.PostPicItemMapper">
+  <resultMap id="BaseResultMap" type="com.valueservice.djs.db.entity.mini.PostPicItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="web_url" jdbcType="VARCHAR" property="webUrl" />
+    <result column="local_uri" jdbcType="VARCHAR" property="localUri" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="active" jdbcType="INTEGER" property="active" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, web_url, local_uri, type, active, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_post_pic_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_post_pic_item
+    where type = #{TYPE ,jdbcType=VARCHAR} and active = 1 order by create_time desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_b_post_pic_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.valueservice.djs.db.entity.mini.PostPicItem">
+    insert into t_b_post_pic_item (id, web_url, local_uri, 
+      type, active, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{webUrl,jdbcType=VARCHAR}, #{localUri,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{active,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.PostPicItem">
+    insert into t_b_post_pic_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="webUrl != null">
+        web_url,
+      </if>
+      <if test="localUri != null">
+        local_uri,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="webUrl != null">
+        #{webUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="localUri != null">
+        #{localUri,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.PostPicItem">
+    update t_b_post_pic_item
+    <set>
+      <if test="webUrl != null">
+        web_url = #{webUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="localUri != null">
+        local_uri = #{localUri,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.valueservice.djs.db.entity.mini.PostPicItem">
+    update t_b_post_pic_item
+    set web_url = #{webUrl,jdbcType=VARCHAR},
+      local_uri = #{localUri,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      active = #{active,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
