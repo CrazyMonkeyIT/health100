@@ -9,9 +9,10 @@
     <result column="point" jdbcType="DECIMAL" property="point" />
     <result column="corps_introduce" jdbcType="VARCHAR" property="corpsIntroduce" />
     <result column="is_top" jdbcType="INTEGER" property="isTop" />
+    <result column="is_special" jdbcType="INTEGER" property="isSpecial" />
   </resultMap>
   <sql id="Base_Column_List">
-    corps_id, corps_name, corps_head_image, corps_banner_image, point
+    corps_id, corps_name, corps_head_image, corps_banner_image, point,is_special
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -105,6 +106,14 @@
   <select id="selectCorpsPanking" resultMap="BaseResultMap">
   select c.corps_id,c.corps_head_image,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point from t_b_mini_corps c
   left join t_b_mini_user u on c.corps_id=u.corps_id
+  group by c.corps_id,c.corps_head_image,c.corps_name
+  order by point desc limit 20;
+  </select>
+
+  <select id="selectSpecialPanking" resultMap="BaseResultMap">
+  select c.corps_id,c.corps_head_image,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point from t_b_mini_corps c
+  left join t_b_mini_user u on c.corps_id=u.corps_id
+  where c.is_special = 1
   group by c.corps_id,c.corps_head_image,c.corps_name
   order by point desc limit 20;
   </select>

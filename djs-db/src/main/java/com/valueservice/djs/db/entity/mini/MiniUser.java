@@ -2,7 +2,7 @@ package com.valueservice.djs.db.entity.mini;
 
 import java.util.Date;
 
-public class MiniUserDO {
+public class MiniUser {
     private Integer id;
 
     private String nickName;
@@ -32,8 +32,6 @@ public class MiniUserDO {
     private Date updateTime;
 
     private Integer active;
-
-    private Boolean oneSign;
 
     public Integer getId() {
         return id;
@@ -155,12 +153,4 @@ public class MiniUserDO {
         this.active = active;
     }
 
-
-    public Boolean getOneSign() {
-        return oneSign;
-    }
-
-    public void setOneSign(Boolean oneSign) {
-        this.oneSign = oneSign;
-    }
 }

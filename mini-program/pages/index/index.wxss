@@ -21,7 +21,7 @@ page{
   position: absolute;
   width:90px;
   left:10rpx;
-  top:80rpx;
+  top:10rpx;
 }
 .index-join-day {
   position: absolute;
@@ -138,6 +138,7 @@ page{
 }
 .table_headimage{
   position: absolute;
+  border-radius:50%;
   left: 70rpx;
   width: 60rpx;
 }

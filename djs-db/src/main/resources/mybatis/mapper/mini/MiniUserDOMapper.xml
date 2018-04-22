@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.valueservice.djs.db.dao.mini.MiniUserDOMapper">
-  <resultMap id="BaseResultMap" type="com.valueservice.djs.db.entity.mini.MiniUserDO">
+  <resultMap id="BaseResultMap" type="com.valueservice.djs.db.entity.mini.MiniUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="gender" jdbcType="INTEGER" property="gender" />
@@ -32,7 +32,7 @@
     delete from t_b_mini_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.valueservice.djs.db.entity.mini.MiniUserDO">
+  <insert id="insert" parameterType="com.valueservice.djs.db.entity.mini.MiniUser">
     insert into t_b_mini_user (id, nick_name, gender, 
       country, province, city, 
       language, avatar_url, open_id, 
@@ -46,7 +46,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{active,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniUserDO">
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniUser">
     insert into t_b_mini_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -143,7 +143,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.MiniUserDO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.MiniUser">
     update t_b_mini_user
     <set>
       <if test="nickName != null">
@@ -191,7 +191,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.valueservice.djs.db.entity.mini.MiniUserDO">
+  <update id="updateByPrimaryKey" parameterType="com.valueservice.djs.db.entity.mini.MiniUser">
     update t_b_mini_user
     set nick_name = #{nickName,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},
@@ -213,7 +213,7 @@
     select * from t_b_mini_user where open_id=#{openId,jdbcType=VARCHAR}
   </select>
   <select id="selectUserPanking" resultMap="BaseResultMap">
-  select * from t_b_mini_corps
+  select * from t_b_mini_user
   GROUP BY point desc limit 30
   </select>
 </mapper>

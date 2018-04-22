@@ -14,9 +14,17 @@ var config = {
     saveUser:host + '/minigram/saveUser',
     //获取用户加密信息的解密文档
     getauth: host + '/minigram/getauth',
+    //获取用户信息
+    getMiniUser: host + '/minigram/getMiniUser',
+    //战队排行
+    pankingCorps: host + "/minigram/corpsPanking",
+    //个人排行
+    pankingUsers:host + '/minigram/usersPanking',
+    //校验用户打卡类型
+    checkSign:host+'/minigram/checkSign',
     //上传文件URL
     upUrl : host + '/import/up/',
-    pankingCorps: host +"/minigram/corpsPanking",
+    
     socketUrl: wsshost
   }
 };

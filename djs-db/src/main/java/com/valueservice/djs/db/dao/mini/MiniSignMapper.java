@@ -17,4 +17,6 @@ public interface MiniSignMapper {
     int updateByPrimaryKey(MiniSign record);
 
     MiniSign selectByMiniUserId(@Param("miniUserId")Long miniUserId);
+
+
 }

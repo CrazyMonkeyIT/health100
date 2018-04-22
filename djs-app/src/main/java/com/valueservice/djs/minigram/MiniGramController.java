@@ -2,8 +2,9 @@ package com.valueservice.djs.minigram;
 
 import com.valueservice.djs.bean.BaseResult;
 import com.valueservice.djs.bean.EncryptUserInfo;
+import com.valueservice.djs.db.bean.MiniUserVO;
 import com.valueservice.djs.db.entity.mini.MiniCorps;
-import com.valueservice.djs.db.entity.mini.MiniUserDO;
+import com.valueservice.djs.db.entity.mini.MiniUser;
 import com.valueservice.djs.service.mini.MiniCorpService;
 import com.valueservice.djs.service.mini.MiniUserService;
 import com.valueservice.djs.util.WechatUserEncrypt;
@@ -36,10 +37,10 @@ public class MiniGramController {
     }
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public @ResponseBody BaseResult saveMiniUser(@RequestBody MiniUserDO miniUserDO){
+    public @ResponseBody BaseResult saveMiniUser(@RequestBody MiniUser miniUserDO){
         BaseResult result = new BaseResult();
         try {
-            MiniUserDO record = miniUserService.saveOrUpdate(miniUserDO);
+            MiniUser record = miniUserService.saveOrUpdate(miniUserDO);
             if (!Objects.isNull(record)) {
                 result.setResult(true);
                 result.setObj(record);
@@ -52,19 +53,42 @@ public class MiniGramController {
     }
 
     /**
-     * 获取战队排行
+     * 主页面用户信息
+     * @param userId
      * @return
      */
-    @RequestMapping(value = "/corpsPanking",method = RequestMethod.POST)
-    public @ResponseBody BaseResult getCropsRanking(){
+    @RequestMapping(value = "/getMiniUser",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getMiniUser(Integer userId){
         BaseResult result = new BaseResult();
         try {
-            List<MiniCorps> corpsPanking = miniCorpService.selectCorpsPanking();
+            MiniUserVO userVO = miniUserService.getMiniUserByOpenId(userId);
+            if(!Objects.isNull(userVO)){
+                result.setResult(true);
+                result.setObj(userVO);
+                result.setMessage("获取用户信息成功！");
+            }
+        }catch (Exception ex){
+            LOGGER.error("获取小程序用户异常",ex);
+        }
+        return result;
+    }
+
+    /**
+     * 获取战队排行
+     * 根据用户的战队  如果用户的战队的战队是特殊排行 获取特殊的排行
+     * 用户没有战队或不是特殊排行的战队 获取正常的战队排行
+     * @return
+     */
+    @RequestMapping(value = "/corpsPanking",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getCropsRanking(Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            List<MiniCorps> corpsPanking = miniCorpService.selectCorpsPanking(userId);
             result.setResult(true);
             result.setObj(corpsPanking);
             result.setMessage("获取战队排行成功~~");
         }catch (Exception e){
-            LOGGER.error("打卡异常",e);
+            LOGGER.error("获取战队排行异常",e);
         }
         return result;
     }
@@ -73,20 +97,29 @@ public class MiniGramController {
      * 获取个人排行
      * @return
      */
-    @RequestMapping(value = "/userPanking",method = RequestMethod.GET)
+    @RequestMapping(value = "/usersPanking",method = RequestMethod.GET)
     public @ResponseBody BaseResult getUserRanking(){
         BaseResult result = new BaseResult();
         try {
-            List<MiniUserDO> corpsPanking = miniUserService.selectUserPanking();
+            List<MiniUser> corpsPanking = miniUserService.selectUserPanking();
             result.setResult(true);
             result.setObj(corpsPanking);
-            result.setMessage("加入战队成功~~");
+            result.setMessage("获取个人排行成功~~");
         }catch (Exception e){
-            LOGGER.error("打卡异常",e);
+            LOGGER.error("获取个人排行异常",e);
         }
         return result;
     }
+    @RequestMapping(value = "/checkSign",method = RequestMethod.GET)
+    public @ResponseBody BaseResult checkSign(Integer userId){
+        BaseResult result = new BaseResult();
+        try {
 
+        }catch (Exception e){
+            LOGGER.error("校验用户打卡状态失败",e);
+        }
+        return result;
+    }
     /**
      * 获取战队成员信息
      * @return
@@ -131,7 +164,7 @@ public class MiniGramController {
     public @ResponseBody BaseResult puchClock(String openId){
         BaseResult result = new BaseResult();
         /*try{
-            MiniUserDO miniUserDO = miniUserService.puchClock(openId);
+            MiniUser miniUserDO = miniUserService.puchClock(openId);
             if(miniUserDO!=null){
                 result.setResult(true);
                 result.setObj(miniUserDO);

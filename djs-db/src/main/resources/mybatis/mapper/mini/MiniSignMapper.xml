@@ -83,4 +83,6 @@
   <select id="selectByMiniUserId" resultMap="BaseResultMap">
     select * from t_b_mini_sign where mini_user_id=#{miniUserId,jdbcType=BIGINT}
   </select>
+
+
 </mapper>

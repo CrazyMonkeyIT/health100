@@ -7,7 +7,7 @@ import com.valueservice.djs.db.dao.mini.MiniSignWasteBookMapper;
 import com.valueservice.djs.db.dao.mini.MiniUserDOMapper;
 import com.valueservice.djs.db.entity.mini.MiniSign;
 import com.valueservice.djs.db.entity.mini.MiniSignWasteBook;
-import com.valueservice.djs.db.entity.mini.MiniUserDO;
+import com.valueservice.djs.db.entity.mini.MiniUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +49,7 @@ public class MiniSignService {
         if(miniSign == null)
             return false;
 
-        MiniUserDO miniUser = miniUserDOMapper.selectByPrimaryKey(miniSign.getMiniUserId().intValue());
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(miniSign.getMiniUserId().intValue());
         if(miniUser == null)
             return false;
 

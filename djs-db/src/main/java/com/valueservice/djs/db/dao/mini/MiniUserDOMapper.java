@@ -1,23 +1,23 @@
 package com.valueservice.djs.db.dao.mini;
 
-import com.valueservice.djs.db.entity.mini.MiniUserDO;
+import com.valueservice.djs.db.entity.mini.MiniUser;
 
 import java.util.List;
 
 public interface MiniUserDOMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(MiniUserDO record);
+    int insert(MiniUser record);
 
-    int insertSelective(MiniUserDO record);
+    int insertSelective(MiniUser record);
 
-    MiniUserDO selectByPrimaryKey(Integer id);
+    MiniUser selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(MiniUserDO record);
+    int updateByPrimaryKeySelective(MiniUser record);
 
-    int updateByPrimaryKey(MiniUserDO record);
+    int updateByPrimaryKey(MiniUser record);
 
-    MiniUserDO selectByOpenId(String openId);
+    MiniUser selectByOpenId(String openId);
 
-    List<MiniUserDO> selectUserPanking();
+    List<MiniUser> selectUserPanking();
 }

@@ -178,6 +178,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/loginSubmit", "anon");
         filterChainDefinitionMap.put("/minigram/**", "anon");
+        filterChainDefinitionMap.put("/minifile/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setLoginUrl("/login");

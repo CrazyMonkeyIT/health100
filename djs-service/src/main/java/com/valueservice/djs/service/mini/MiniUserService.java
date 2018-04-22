@@ -1,21 +1,19 @@
 package com.valueservice.djs.service.mini;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.valueservice.djs.db.bean.MiniUserVO;
 import com.valueservice.djs.db.dao.mini.MiniSignMapper;
 import com.valueservice.djs.db.dao.mini.MiniUserDOMapper;
 import com.valueservice.djs.db.dao.mini.PointWasteBookMapper;
 import com.valueservice.djs.db.entity.mini.MiniSign;
-import com.valueservice.djs.db.entity.mini.MiniUserDO;
+import com.valueservice.djs.db.entity.mini.MiniUser;
 import com.valueservice.djs.db.entity.mini.PointWasteBook;
-import com.valueservice.djs.util.DateUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MiniUserService {
@@ -35,19 +33,30 @@ public class MiniUserService {
      * @return
      * @throws Exception
      */
-    public MiniUserDO saveOrUpdate(MiniUserDO record) throws Exception{
-        MiniUserDO existsUser = miniUserDOMapper.selectByOpenId(record.getOpenId());
+    public MiniUser saveOrUpdate(MiniUser record) throws Exception{
+        MiniUser existsUser = miniUserDOMapper.selectByOpenId(record.getOpenId());
         if(existsUser == null){
             record.setActive(1);
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             miniUserDOMapper.insert(record);
-            return resultMiniUser(record);
+            return record;
         }else {
             record.setId(existsUser.getId());
-            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()
+            ));
             miniUserDOMapper.updateByPrimaryKeySelective(record);
-            return resultMiniUser(existsUser);
+            return existsUser;
         }
+    }
+
+    /**
+     * 根据openId获取 微信用户  并返回 vo对象
+     * @param userId
+     * @return
+     */
+    public MiniUserVO getMiniUserByOpenId(Integer userId){
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        return resultMiniUser(miniUser);
     }
 
     /**
@@ -55,18 +64,23 @@ public class MiniUserService {
      * @param miniUser
      * @return
      */
-    public MiniUserDO resultMiniUser(MiniUserDO miniUser){
-        MiniSign sign = miniSignMapper.selectByMiniUserId(Long.valueOf(miniUser.getId()));
-        if(sign!=null)
-            miniUser.setOneSign(false);
-        miniUser.setOneSign(true);
-        return miniUser;
+    public MiniUserVO resultMiniUser(MiniUser miniUser){
+        MiniUserVO miniUserVO = null;
+        if(!Objects.isNull(miniUser)){
+            miniUserVO = new MiniUserVO();
+            miniUserVO.setUserId(miniUser.getId());
+            MiniSign sign = miniSignMapper.selectByMiniUserId(Long.valueOf(miniUser.getId()));
+            if(sign!=null)
+                miniUserVO.setOneSign(false);
+            miniUserVO.setOneSign(true);
+        }
+        return miniUserVO;
     }
     /**
      * 获取用户积分排行榜 前30
      * @return
      */
-    public List<MiniUserDO> selectUserPanking(){
+    public List<MiniUser> selectUserPanking(){
         return miniUserDOMapper.selectUserPanking();
     }
     /**
@@ -74,7 +88,7 @@ public class MiniUserService {
      * @param openId
      * @return
      */
-    public MiniUserDO selectByOpenId(String openId){
+    public MiniUser selectByOpenId(String openId){
         return miniUserDOMapper.selectByOpenId(openId);
     }
 
@@ -85,7 +99,7 @@ public class MiniUserService {
      * @return
      */
     public Integer initCorps(String openId, Long corpsId){
-        MiniUserDO miniUser = miniUserDOMapper.selectByOpenId(openId);
+        MiniUser miniUser = miniUserDOMapper.selectByOpenId(openId);
         Long point = miniUser.getPoint()==0?0:miniUser.getPoint()/2;
         miniUser.setPoint(point);
         miniUser.setCorpsId(corpsId);
@@ -98,8 +112,8 @@ public class MiniUserService {
      * @param openId
      * @return
      */
-//    public MiniUserDO puchClock(String openId){
-//        MiniUserDO miniUserDO = miniUserDOMapper.selectByOpenId(openId);
+//    public MiniUser puchClock(String openId){
+//        MiniUser miniUserDO = miniUserDOMapper.selectByOpenId(openId);
 //        if(miniUserDO!=null){
 //            Long point = getPoint(miniUserDO.getId().longValue(),5L,"");
 //            miniUserDO.setPoint(point);
@@ -165,7 +179,7 @@ public class MiniUserService {
 //        if(wasteBook==null)
 //            return false;
 //
-//        MiniUserDO miniUser = miniUserDOMapper.selectByPrimaryKey(wasteBook.getMiniUserId().intValue());
+//        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(wasteBook.getMiniUserId().intValue());
 //        if(miniUser == null)
 //            return false;
 //        Integer point = 20*wasteBook.getContinuousDays();

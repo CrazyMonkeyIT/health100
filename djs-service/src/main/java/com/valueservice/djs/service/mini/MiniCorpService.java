@@ -3,14 +3,14 @@ package com.valueservice.djs.service.mini;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.valueservice.djs.db.dao.mini.MiniCorpsMapper;
+import com.valueservice.djs.db.dao.mini.MiniUserDOMapper;
 import com.valueservice.djs.db.entity.mini.MiniCorps;
+import com.valueservice.djs.db.entity.mini.MiniUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by weiying on 2018/4/8.
@@ -19,6 +19,9 @@ import java.util.Map;
 public class MiniCorpService {
     @Resource
     private MiniCorpsMapper miniCorpsMapper;
+
+    @Resource
+    private MiniUserDOMapper miniUserDOMapper;
 
     /**
      * 获取用户的战队信息
@@ -32,8 +35,21 @@ public class MiniCorpService {
     /**
      * 获取战队排行  20个
      */
-    public List<MiniCorps> selectCorpsPanking(){
-        return miniCorpsMapper.selectCorpsPanking();
+    public List<MiniCorps> selectCorpsPanking(Integer userId){
+        List<MiniCorps> reults = new ArrayList<>();
+        //处理特殊战队的排行  如果用户属于特殊战队  战队排行内比
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        if(Objects.isNull(miniUser)){
+            reults = miniCorpsMapper.selectCorpsPanking();
+        }else{
+            MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
+            if(miniCorps!=null && miniCorps.getIsSpecial()==1){
+                reults = miniCorpsMapper.selectSpecialPanking();
+            }else{
+                reults = miniCorpsMapper.selectCorpsPanking();
+            }
+        }
+        return reults;
     }
 
     /**

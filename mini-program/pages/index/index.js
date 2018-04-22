@@ -1,29 +1,25 @@
-const userUtil = require("../global-js/userUtil.js")
 const config = require("../../config.js")
 //index.js
 //获取应用实例
 const app = getApp();
-var currentUser = null, that = null;
+var that = null;
 Page({
   data: {
     selected: true, //tab
     selected1: false,//tab
-    one: true, //第一次登录  第二次登录false
     modalHidden: false,//活动规则弹窗
     isScroll:true,
     corpsPanking:[],
+    usersPanking:[],
+    miniUser:[],     //主页面加载数据user
     animationData: {}
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
   },
   onLoad: function () {
     that = this;
-    this.pankingCorps();
-    console.log(this.data.corpsPanking);
+    var userInfo = wx.getStorageSync('userInfo');
+    this.getUser(!userInfo.id ? '' : userInfo.id);
+    this.pankingCorps(!userInfo.id ? '' : userInfo.id);
+   
     var animation = wx.createAnimation({
       duration: 1000,
       timingFunction: 'ease-in-out',
@@ -42,6 +38,55 @@ Page({
       })
     }.bind(this), 1000)
   },
+  getUser:function(userId){
+    wx.request({
+      url: config.service.getMiniUser,
+      data: {userId:userId},
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        if(resp.data.result == true){
+          that.setData({
+            miniUser: resp.data.obj
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: '系统错误'
+          })
+        }
+      }
+    })
+  },
+  pankingCorps:function (userId) {
+    wx.request({
+      url: config.service.pankingCorps,
+      data: {userId:userId},
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        that.setData({
+          corpsPanking: resp.data.obj
+        })
+      }
+    })
+  },
+  pankingUsers:function(){
+    wx.request({
+      url: config.service.pankingUsers,
+      data:{},
+      method:'GET',
+      dataType:'json',
+      responseType:'text',
+      success:function(resp){
+        that.setData({
+          usersPanking:resp.data.obj
+        })
+      }
+    })
+  },
   scrollBottom: function (e) {
     console.log(e.target)
     if (wx.pageScrollTo) {
@@ -56,32 +101,17 @@ Page({
     }
   },
   selected: function (e) {
+    
     this.setData({
       selected1: false,
       selected: true
     })
   },
   selected1: function (e) {
+    this.pankingUsers();
     this.setData({
       selected: false,
       selected1: true
-    })
-  },
-  pankingCorps:function () {
-    wx.request({
-      url: config.service.pankingCorps,
-      data: {},
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function (resp) {
-        console.log(resp);
-        that.setData({
-          corpsPanking: resp.data.obj
-        },function(){
-          console.log(that.data);
-        })
-      }
     })
   },
   ruleinfo: function (e) {
@@ -94,6 +124,12 @@ Page({
     this.setData({
       modalHidden: !this.data.modalHidden,
       isScroll: true
+    })
+  },
+  sign_click:function(){
+    console.log(that.data.miniUser)
+    wx.navigateTo({
+      url: "/pages/sign/sign?userId=" + this.data.miniUser.userId
     })
   }
 })

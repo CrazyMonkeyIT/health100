@@ -20,6 +20,8 @@ public interface MiniCorpsMapper {
 
     List<MiniCorps> selectCorpsPanking();
 
+    List<MiniCorps> selectSpecialPanking();
+
     List<MiniCorps> selectCorpsList(@Param("corpsName")String corpsName);
 
     MiniCorps selectByCorpsName(@Param("corpsName")String corpsName);

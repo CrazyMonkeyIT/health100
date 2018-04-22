@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/corps/corps",
+    "pages/sign/sign",
     "pages/user/user",
     "pages/achieve/achieve",
-    "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {

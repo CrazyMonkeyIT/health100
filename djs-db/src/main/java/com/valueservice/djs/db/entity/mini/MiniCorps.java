@@ -17,6 +17,8 @@ public class MiniCorps {
 
     private Long isTop;
 
+    private Long isSpecial;  //0：正常 1：不参与全局比较
+
     public Long getCorpsId() {
         return corpsId;
     }
@@ -71,5 +73,13 @@ public class MiniCorps {
 
     public void setIsTop(Long isTop) {
         this.isTop = isTop;
+    }
+
+    public Long getIsSpecial() {
+        return isSpecial;
+    }
+
+    public void setIsSpecial(Long isSpecial) {
+        this.isSpecial = isSpecial;
     }
 }
