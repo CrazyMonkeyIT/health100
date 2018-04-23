@@ -1,6 +1,6 @@
 //app.js
 const config = require("config.js");
-const userUtil = require("/pages/global-js/userUtil.js")
+const userUtil = require("/global-js/userUtil.js")
 
 App({
   onLaunch: function () {

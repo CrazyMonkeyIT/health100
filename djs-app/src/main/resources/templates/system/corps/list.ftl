@@ -301,7 +301,6 @@
                 contentType: false,
                 processData: false,
                 success: function (args) {
-                    console.log(args);
                     /*服务器端的图片地址*/
                     $("#avatarPreview").attr('src',args[0].filePath);
                     /*预览图片*/

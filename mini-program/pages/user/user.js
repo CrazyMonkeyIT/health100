@@ -11,7 +11,8 @@ Page({
     crightright :130,
     crightBottom : 200,
   },
-  onLoad: function () {
+  onLoad: function (userId) {
+    console.log(userId)
     that = this;
     var animation = wx.createAnimation({
       duration: 1000,

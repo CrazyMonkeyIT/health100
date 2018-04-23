@@ -1,12 +1,6 @@
 page{
   height: 100%;
 }
-.go_back_image{
-  position: absolute;
-  width:20rpx;
-  left:30rpx;
-  top:20rpx;
-}
 .down_png{
   position: fixed;
   bottom: 20rpx;

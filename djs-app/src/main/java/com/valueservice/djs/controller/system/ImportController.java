@@ -65,7 +65,7 @@ public class ImportController {
                     }
                 }
             }catch (Exception e){
-                    logger.error("",e);
+                logger.error("",e);
             }
         });
         return lists;

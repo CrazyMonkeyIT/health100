@@ -1,5 +1,0 @@
-<!--live.wxml-->
-<view class="container">
- <live-pusher url="rtmp://47.96.184.236:1935/live/test" mode="RTC" autopush bindstatechange="statechange" style="width: 300px; height: 5px;" />
-
-</view>

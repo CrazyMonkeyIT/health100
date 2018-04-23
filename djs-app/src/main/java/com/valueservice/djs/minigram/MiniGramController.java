@@ -4,17 +4,16 @@ import com.valueservice.djs.bean.BaseResult;
 import com.valueservice.djs.bean.EncryptUserInfo;
 import com.valueservice.djs.db.bean.MiniUserVO;
 import com.valueservice.djs.db.entity.mini.MiniCorps;
+import com.valueservice.djs.db.entity.mini.MiniSign;
 import com.valueservice.djs.db.entity.mini.MiniUser;
 import com.valueservice.djs.service.mini.MiniCorpService;
+import com.valueservice.djs.service.mini.MiniSignService;
 import com.valueservice.djs.service.mini.MiniUserService;
 import com.valueservice.djs.util.WechatUserEncrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,6 +29,9 @@ public class MiniGramController {
 
     @Resource
     private MiniCorpService miniCorpService;
+
+    @Resource
+    private MiniSignService miniSignService;
 
     @RequestMapping(value = "/getauth", method = RequestMethod.GET)
     public @ResponseBody EncryptUserInfo getUserInfo(String code, String iv, String encryptedData){
@@ -74,7 +76,7 @@ public class MiniGramController {
     }
 
     /**
-     * 获取战队排行
+     * 获取战队排行 top20
      * 根据用户的战队  如果用户的战队的战队是特殊排行 获取特殊的排行
      * 用户没有战队或不是特殊排行的战队 获取正常的战队排行
      * @return
@@ -94,7 +96,7 @@ public class MiniGramController {
     }
 
     /**
-     * 获取个人排行
+     * 获取个人排行 top30
      * @return
      */
     @RequestMapping(value = "/usersPanking",method = RequestMethod.GET)
@@ -110,11 +112,37 @@ public class MiniGramController {
         }
         return result;
     }
+
+    /**
+     * 获取用户打卡类型
+     * 第一天 和 第100天 只能传图打卡
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/checkSign",method = RequestMethod.GET)
-    public @ResponseBody BaseResult checkSign(Integer userId){
+    public @ResponseBody BaseResult checkSign(@RequestParam Integer userId){
         BaseResult result = new BaseResult();
         try {
-
+            MiniSign miniSign = miniSignService.checkSign(userId);
+            result.setResult(true);
+            result.setObj(miniSign);
+            result.setMessage("获取个人排行成功~~");
+        }catch (Exception e){
+            LOGGER.error("校验用户打卡状态失败",e);
+        }
+        return result;
+    }
+    @RequestMapping(value = "/imageSign",method = RequestMethod.GET)
+    public @ResponseBody BaseResult imageSign(Integer userId,String imagePath){
+        BaseResult result = new BaseResult();
+        try {
+            String msg = miniSignService.imageSign(userId,imagePath);
+            if(msg.equals("success")){
+                result.setResult(true);
+            }else{
+                result.setResult(false);
+            }
+            result.setMessage(msg);
         }catch (Exception e){
             LOGGER.error("校验用户打卡状态失败",e);
         }

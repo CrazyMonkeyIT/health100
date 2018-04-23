@@ -1,6 +1,5 @@
 <scroll-view>
   <image src='../images/user/user_back.jpg' mode='widthFix' style='width:100%'></image>
-  <image src='../images/user/user_return.jpg' mode='widthFix' bindtap='go_back' class='go_back_image'></image>
   <image class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
   <text class='user_name_text'>{{userInfo.nickName}}</text>
   <!-- 徽章 -->

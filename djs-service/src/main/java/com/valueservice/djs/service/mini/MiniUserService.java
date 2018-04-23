@@ -69,7 +69,7 @@ public class MiniUserService {
         if(!Objects.isNull(miniUser)){
             miniUserVO = new MiniUserVO();
             miniUserVO.setUserId(miniUser.getId());
-            MiniSign sign = miniSignMapper.selectByMiniUserId(Long.valueOf(miniUser.getId()));
+            MiniSign sign = miniSignMapper.selectByMiniUserId(miniUser.getId());
             if(sign!=null)
                 miniUserVO.setOneSign(false);
             miniUserVO.setOneSign(true);

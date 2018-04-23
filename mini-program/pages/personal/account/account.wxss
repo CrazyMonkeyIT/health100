@@ -1,7 +1,0 @@
-/* pages/personal/account/account.wxss */
-.userinfo-avatar {
-  width: 88rpx;
-  height: 88rpx;
-  margin: 15rpx 45rpx;
-  border-radius: 50%;
-}

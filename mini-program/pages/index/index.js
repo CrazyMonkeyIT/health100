@@ -101,7 +101,6 @@ Page({
     }
   },
   selected: function (e) {
-    
     this.setData({
       selected1: false,
       selected: true
@@ -127,7 +126,6 @@ Page({
     })
   },
   sign_click:function(){
-    console.log(that.data.miniUser)
     wx.navigateTo({
       url: "/pages/sign/sign?userId=" + this.data.miniUser.userId
     })

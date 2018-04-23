@@ -101,4 +101,7 @@
   <select id="selectNotCheckWasteBook" resultMap="BaseResultMap">
     select * from t_b_mini_sign_waste_book where sign_type=1 and is_check=0
   </select>
+  <select id="selectLastSignWasteBook" resultMap="BaseResultMap">
+    select * from t_b_mini_sign_waste_book where sign_id=#{signId,jdbcType=BIGINT} order by sign_time desc limit 1;
+  </select>
 </mapper>

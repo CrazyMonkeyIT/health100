@@ -22,8 +22,10 @@ var config = {
     pankingUsers:host + '/minigram/usersPanking',
     //校验用户打卡类型
     checkSign:host+'/minigram/checkSign',
+    //传图打卡
+    imageSign: host +'/minigram/imageSign',
     //上传文件URL
-    upUrl : host + '/import/up/',
+    upUrl : host + '/import/up/temp',
     
     socketUrl: wsshost
   }

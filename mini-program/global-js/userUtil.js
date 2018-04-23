@@ -1,18 +1,18 @@
-
+//用户登录util
 const config = require("../config.js")
 
 const login = function(callback){
-  var userData  = wx.getStorageSync('miniUser');//从本地缓存中读取用户信息
-  if(!userData){//如果没有读取到用户信息，则进行授权
-  loginOper(callback);
-  }else if(callback){
+  var userData = wx.getStorageSync("userInfo");
+  if(!userData){
+    loginOper(callback);
+  }
+  if(callback){
     callback();
   }
   return userData;
 }
-
 //异步方法
-const asynchronous = function (result, callback){
+const asynchronous = function (result, callback) {
   wx.request({
     url: config.service.saveUser,
     data: {
@@ -22,7 +22,7 @@ const asynchronous = function (result, callback){
       avatarUrl: result.data.avatarUrl,
       city: result.data.city,
       province: result.data.province,
-      nickName: result.data.nickName
+      nickName: result.data.nickName,
     },
     method: 'POST',
     dataType: 'json',
@@ -35,9 +35,8 @@ const asynchronous = function (result, callback){
   })
 }
 //保存用户信息到缓存
-const saveUserStorage = function (result, saveRes, callback){
-  console.log(saveRes);
-  wx.setStorageSync('miniUser', {
+const saveUserStorage = function (result, saveRes, callback) {
+  wx.setStorageSync('userInfo', {
     id: saveRes.data.obj.id,
     openId: result.data.openId,
     gender: result.data.gender,
@@ -45,18 +44,13 @@ const saveUserStorage = function (result, saveRes, callback){
     avatarUrl: result.data.avatarUrl,
     city: result.data.city,
     province: result.data.province,
-    nickName: result.data.nickName,
-    isVip: saveRes.data.obj.isVip,
-    vipInvalidTime: saveRes.data.obj.vipInvalidTime,
-    vipInvalidDay: saveRes.data.obj.vipInvalidDay,
-    totalPayAmount: saveRes.data.obj.totalPayAmount
+    nickName: result.data.nickName
   });
-  if(callback){
+  if (callback) {
     callback();
   }
 }
-
-const loginOper = function(callback){
+const loginOper = function (callback) {
   wx.login({
     success: function (res) {
       if (res.code) {
@@ -73,7 +67,7 @@ const loginOper = function(callback){
               method: 'GET',
               dataType: 'json',
               success: function (result) {
-                asynchronous(result,callback);
+                asynchronous(result, callback);
               }
             })
           }
