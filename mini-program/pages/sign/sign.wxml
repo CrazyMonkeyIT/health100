@@ -6,4 +6,5 @@
   <view class='sign_remark'>
     <image src='../images/sign/sign_remark.png' mode='widthFix' class='sign_remark_image' ></image>
   </view>
+
 </view>
