@@ -3,6 +3,7 @@ package com.valueservice.djs.db.entity.mini;
 import java.util.Date;
 
 public class PostPicItem {
+
     private Integer id;
 
     private String webUrl;

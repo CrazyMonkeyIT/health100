@@ -1,4 +1,4 @@
-package com.valueservice.djs.bean;
+package com.valueservice.djs.db.bean;
 
 
 public class CommonConst {
@@ -23,12 +23,12 @@ public class CommonConst {
     /**
      * 小程序的appid
      */
-    public static final String MINI_PROGRAM_APPID = "wx25a7786747557f5e";
+    public static final String MINI_PROGRAM_APPID = "wx5698cb3117a1dffe";
 
     /**
      * 小程序的app secret
      */
-    public static final String MINI_PROGRAM_APPSECRET = "b39a61cbb66ab1766e75edbf7e5209f2";
+    public static final String MINI_PROGRAM_APPSECRET = "425dde9e9fb5afd012d8cf0e7f97419d";
 
     /**
      * 小程序的grantType

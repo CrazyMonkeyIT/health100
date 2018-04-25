@@ -26,17 +26,20 @@ public class PicIntegrationService {
     @Value("file.static.url")
     private String staticFileUrl;
 
+    @Value("invite.post.pics")
+    private String invitePostPics ;
+
     public String inviteImg(Integer userId){
         //模板文件
         String inviteTmpPic = filePath + "/inviteTmp.jpg";
         String inviteQrcode = getInviteQrcode(userId);
         BufferedImage inviteTmpBuff = PicProcess.loadImageLocal(inviteTmpPic);
         Long time = System.currentTimeMillis();
-        PostPicItem postItem = queryPostPic();
-        if(postItem == null){
+
+        BufferedImage postBuff = queryPostPic();
+        if(postBuff == null){
             return null;
         }
-        BufferedImage postBuff = PicProcess.loadImageLocal(postItem.getLocalUri());
         BufferedImage inviteQrcodeBuff = PicProcess.loadImageLocal(inviteQrcode);
         MiniImage post = new MiniImage(163, 394, 440, 616);
         post.setImage(postBuff);
@@ -60,10 +63,10 @@ public class PicIntegrationService {
      * 从数据库中随机取一个海报图片
      * @return
      */
-    private PostPicItem queryPostPic(){
-        List<PostPicItem> items = postPicItemMapper.selectByType("invite");
-        if(items.size() > 0){
-            return getRadom(items);
+    private BufferedImage queryPostPic(){
+        String[] items = invitePostPics.split(",");
+        if(items.length > 0){
+            return PicProcess.loadImageLocal(getRadom(items));
         }else {
             return null;
         }
@@ -74,8 +77,8 @@ public class PicIntegrationService {
      * @param items
      * @return
      */
-    private PostPicItem getRadom(List<PostPicItem> items){
-        int index = (int) (Math.random() * items.size());
-        return items.get(index);
+    private String getRadom(String[] items){
+        int index = (int) (Math.random() * items.length);
+        return items[index];
     }
 }
