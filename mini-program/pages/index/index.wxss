@@ -91,17 +91,17 @@ page{
 }
 .tab_corps{
   position: absolute;
-  font-size: 50rpx;
-  top :20rpx;
-  left: 100rpx;
-  width: 150rpx;
+  font-size: 40rpx;
+  top :30rpx;
+  left: 40rpx;
+  width: 250rpx;
 }
 .tab_users{
   position: absolute;
-  font-size: 50rpx;
-  left: 180rpx;
-  top:20rpx;
-  width: 450rpx;
+  font-size:40rpx;
+  left:297rpx;
+  top:30rpx;
+  width:250rpx;
 }
 .tab_main_back{
   position: absolute;

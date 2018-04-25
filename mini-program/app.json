@@ -4,6 +4,7 @@
     "pages/corps/corps",
     "pages/user/user",
     "pages/achieve/achieve",
+    "pages/sign/sign",
     "pages/logs/logs"
   ],
   "window": {

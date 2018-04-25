@@ -102,7 +102,7 @@ public class MiniSignService {
         if(result.equals("success")){
             MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
             MiniSign miniSign = miniSignMapper.selectByMiniUserId(userId);
-            miniUser.setPoint(miniUser.getPoint()+10*miniSign.getCountDays());
+            miniUser.setPoint(miniUser.getPoint()+5*miniSign.getCountDays());
             miniUser.setUpdateTime(new Timestamp(new Date().getTime()));
             miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
         }

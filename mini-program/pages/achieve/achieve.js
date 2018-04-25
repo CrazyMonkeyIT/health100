@@ -1,10 +1,15 @@
+const config = require("../../config.js")
 Page({
   data: {
-    userInfo: {},
+    miniUser: {},
+    userId:'',
     animationData: {}
   },
-  onLoad: function (userId) {
-    console.log(userId);
+  onLoad: function (param) {
+    this.setData({
+      userId:param.userId
+    });
+    miniUser = this.getUserAchieve(userId);
     this.setData({
       userInfo: {
         nickName: '天老大我老二',
@@ -14,6 +19,9 @@ Page({
         donate:50
       }
     })
+  },
+  getUserAchieve:function(userId){
+
   },
   bindViewTap:function(){
     var _this = this;

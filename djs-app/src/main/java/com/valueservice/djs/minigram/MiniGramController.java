@@ -55,7 +55,7 @@ public class MiniGramController {
     }
 
     /**
-     * 主页面用户信息
+     * 用户信息
      * @param userId
      * @return
      */
@@ -71,6 +71,42 @@ public class MiniGramController {
             }
         }catch (Exception ex){
             LOGGER.error("获取小程序用户异常",ex);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/getMiniUserAchieve",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getMiniUserAchieve(Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            MiniUserVO userVO = miniUserService.getMiniUserByOpenId(userId);
+            if(!Objects.isNull(userVO)){
+                result.setResult(true);
+                result.setObj(userVO);
+                result.setMessage("获取成就信息成功！");
+            }
+        }catch (Exception ex){
+            LOGGER.error("获取成就异常",ex);
+        }
+        return result;
+    }
+
+    /**
+     * 获取用户打卡类型
+     * 第一天 和 第100天 只能传图打卡
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/checkSign",method = RequestMethod.GET)
+    public @ResponseBody BaseResult checkSign(@RequestParam Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            MiniSign miniSign = miniSignService.checkSign(userId);
+            result.setResult(true);
+            result.setObj(miniSign);
+            result.setMessage("获取个人排行成功~~");
+        }catch (Exception e){
+            LOGGER.error("校验用户打卡状态失败",e);
         }
         return result;
     }
@@ -114,26 +150,6 @@ public class MiniGramController {
     }
 
     /**
-     * 获取用户打卡类型
-     * 第一天 和 第100天 只能传图打卡
-     * @param userId
-     * @return
-     */
-    @RequestMapping(value = "/checkSign",method = RequestMethod.GET)
-    public @ResponseBody BaseResult checkSign(@RequestParam Integer userId){
-        BaseResult result = new BaseResult();
-        try {
-            MiniSign miniSign = miniSignService.checkSign(userId);
-            result.setResult(true);
-            result.setObj(miniSign);
-            result.setMessage("获取个人排行成功~~");
-        }catch (Exception e){
-            LOGGER.error("校验用户打卡状态失败",e);
-        }
-        return result;
-    }
-
-    /**
      * 传图打卡
      * @param userId
      * @param filePath
@@ -155,6 +171,12 @@ public class MiniGramController {
         }
         return result;
     }
+
+    /**
+     * 一键打卡
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/userSign",method = RequestMethod.GET)
     public @ResponseBody BaseResult userSign(Integer userId){
         BaseResult result = new BaseResult();
@@ -171,6 +193,7 @@ public class MiniGramController {
         }
         return result;
     }
+
     /**
      * 获取战队成员信息
      * @return

@@ -3,7 +3,8 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://health100.cnsoc.org/health';
+//var host = 'https://health100.cnsoc.org/health';
+var host = 'http://localhost:9090/health';
 
 var config = {
   // 下面的地址配合云端 Demo 工作

@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.1.2</version>
+            <!--<version>1.1.2</version>-->
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -54,9 +54,9 @@
             <version>1.1.1</version>
         </dependency>
         <dependency>
-            <groupId>com.meidusa.toolkit</groupId>
+            <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.1.9</version>
+            <version>1.2.37</version>
         </dependency>
     </dependencies>
 
