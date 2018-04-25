@@ -24,6 +24,8 @@ var config = {
     checkSign:host+'/minigram/checkSign',
     //传图打卡
     imageSign: host +'/minigram/imageSign',
+    // 一键打卡
+    userSign:host+'/minigram/userSign',
     //上传文件URL
     upUrl : host + '/import/up/temp',
     

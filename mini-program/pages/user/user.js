@@ -1,8 +1,9 @@
-
+const config = require("../../config.js")
 var that = null;
 Page({
   data: {
-    userInfo:{},
+    miniUser:{},
+    userId:'',
     animationData: {},
     circleDeg : -20,
     leftBBtop :345,//345
@@ -11,41 +12,48 @@ Page({
     crightright :130,
     crightBottom : 200,
   },
-  onLoad: function (userId) {
-    console.log(userId)
+  onLoad: function (param) {
     that = this;
+    this.setData({userId: param.userId});
+    this.getUser(param.userId);
+
     var animation = wx.createAnimation({
       duration: 1000,
       timingFunction: 'ease-in-out',
     })
     this.animation = animation
-
     animation.bottom(50).step().bottom(20).step()
     this.setData({
       animationData: animation.export()
     })
-    this.continuousDay(68);
+    
     setInterval(function () {
       animation.bottom(20).step().bottom(50).step()
       this.setData({
         animationData: animation.export()
       })
     }.bind(this), 1000)
-    
-    this.setData({
-      userInfo:{
-        userId:'1',
-        nickName:'天老大我老二',
-        point:9999,
-        avatar:'https://wx.qlogo.cn/mmopen/vi_32/GGHSy6Xf1ia9JyqRn3DNH1ib7U4eviadichuBPTlAibBy5TqEfnD4jqUBRwT7Ck5LNdHznVkDET5KlkRY09eYPksevw/0',
-        badge1: '../images/user/badge_1_y.png',
-        badge2: '../images/user/badge_2_y.png',
-        badge3: '../images/user/badge_3_n.png',
-        badge4: '../images/user/badge_4_n.png',
-        signDay:100,
-        contSignDay:89,
-        corpsName:'天大地大我最大',
-        corpsPoint:9999,
+  },
+  getUser:function (userId) {
+    wx.request({
+      url: config.service.getMiniUser,
+      data: { userId: userId },
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        console.log(resp)
+        if (resp.data.result == true) {
+          that.setData({
+            miniUser: resp.data.obj
+          })
+          that.continuousDay(resp.data.obj.signDay);
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '系统错误'
+          })
+        }
       }
     })
   },
@@ -64,7 +72,7 @@ Page({
   },
   user_achieve_lick:function(){
     wx.navigateTo({
-      url: "/pages/achieve/achieve?userId="+this.data.userInfo.userId
+      url: "/pages/achieve/achieve?userId="+this.data.miniUser.userId
     })
   },
   continuousDay : function(day){

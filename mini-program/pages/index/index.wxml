@@ -3,20 +3,20 @@
   <image src="../images/index_back.jpg" mode='widthFix' style='width:100%'></image>
   <image src='../images/camp_rule.jpg' mode='widthFix' class='camp_rule' bindtap='ruleinfo'></image>
 
-  <view class='index-join-day'>
-      <text>1000000</text>
+  <view class='index-join-day' bindtap='userInfo_click'>
+      <text>{{miniUser.signDay}}</text>
       <text>参加天数</text>
   </view>
   
-  <view class='index-total-point'>
-      <text>9602</text>
+  <view class='index-total-point' bindtap='userInfo_click'>
+      <text>{{miniUser.point}}</text>
       <text>总积分</text>
   </view>
   <image src="../images/health100_run_line.gif" bindtap='scrollBottom' class='run_health_line' mode='widthFix'></image>
   <image src="../images/health100_run.gif" bindtap='scrollBottom' class='run_health' mode='widthFix'></image>
 <!--button-->
   <view class="{{miniUser.oneSign?'hidden':'show'}}">
-   <image src='../images/index_corp_click.png' bindtap='scrollBottom' class='sign_click' mode='widthFix'></image>
+   <image src='../images/index_corp_click.png' bindtap='corps_click' class='sign_click' mode='widthFix'></image>
    <image src='../images/index_click.png' bindtap='sign_click' class='corps_click' mode='widthFix'></image>
   </view>
   <view class="{{miniUser.oneSign?'show':'hidden'}}">

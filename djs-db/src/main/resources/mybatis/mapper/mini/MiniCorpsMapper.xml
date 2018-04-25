@@ -15,10 +15,9 @@
     corps_id, corps_name, corps_head_image, corps_banner_image, point,is_special
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_b_mini_corps
-    where corps_id = #{corpsId,jdbcType=BIGINT}
+    select a.corps_id,a.corps_name,a.corps_head_image,a.corps_banner_image,a.corps_introduce,a.is_top,if(a.is_special is null,0,a.is_special),if(sum(b.point) is null,0,sum(b.point)) as point
+    from t_b_mini_corps a left join t_b_mini_user b on a.corps_id=b.corps_id
+    where a.corps_id = #{corpsId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_b_mini_corps

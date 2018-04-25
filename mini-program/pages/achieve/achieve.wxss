@@ -22,7 +22,7 @@ page{
 .count_sign_day{
   position:absolute;
   top:440rpx;
-  left:190rpx;
+  left:200rpx;
   width:70rpx;
   text-align: center;
   color:fuchsia;
@@ -30,7 +30,7 @@ page{
 .point_panking{
   position:absolute;
   top:440rpx;
-  left:465rpx;
+  left:459rpx;
   width:90rpx;
   text-align: center;
   color:fuchsia;

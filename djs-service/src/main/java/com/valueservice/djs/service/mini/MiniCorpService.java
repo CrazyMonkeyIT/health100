@@ -42,11 +42,15 @@ public class MiniCorpService {
         if(Objects.isNull(miniUser)){
             reults = miniCorpsMapper.selectCorpsPanking();
         }else{
-            MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
-            if(miniCorps!=null && miniCorps.getIsSpecial()==1){
-                reults = miniCorpsMapper.selectSpecialPanking();
-            }else{
+            if(miniUser.getCorpsId()==null){
                 reults = miniCorpsMapper.selectCorpsPanking();
+            }else{
+                MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
+                if(miniCorps!=null && miniCorps.getIsSpecial()==1){
+                    reults = miniCorpsMapper.selectSpecialPanking();
+                }else{
+                    reults = miniCorpsMapper.selectCorpsPanking();
+                }
             }
         }
         return reults;

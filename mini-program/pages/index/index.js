@@ -88,7 +88,6 @@ Page({
     })
   },
   scrollBottom: function (e) {
-    console.log(e.target)
     if (wx.pageScrollTo) {
       wx.pageScrollTo({
         scrollTop: e.target.offsetTop + 200
@@ -128,6 +127,16 @@ Page({
   sign_click:function(){
     wx.navigateTo({
       url: "/pages/sign/sign?userId=" + this.data.miniUser.userId
+    })
+  },
+  corps_click:function(){
+    wx.navigateTo({
+      url: "/pages/corps/corps?userId=" + this.data.miniUser.userId
+    })
+  },
+  userInfo_click:function(){
+    wx.navigateTo({
+      url: "/pages/user/user?userId=" + this.data.miniUser.userId
     })
   }
 })

@@ -1,9 +1,11 @@
 package com.valueservice.djs.service.mini;
 
 import com.valueservice.djs.db.bean.MiniUserVO;
+import com.valueservice.djs.db.dao.mini.MiniCorpsMapper;
 import com.valueservice.djs.db.dao.mini.MiniSignMapper;
 import com.valueservice.djs.db.dao.mini.MiniUserDOMapper;
 import com.valueservice.djs.db.dao.mini.PointWasteBookMapper;
+import com.valueservice.djs.db.entity.mini.MiniCorps;
 import com.valueservice.djs.db.entity.mini.MiniSign;
 import com.valueservice.djs.db.entity.mini.MiniUser;
 import com.valueservice.djs.db.entity.mini.PointWasteBook;
@@ -26,6 +28,9 @@ public class MiniUserService {
 
     @Resource
     private MiniSignMapper miniSignMapper;
+
+    @Resource
+    private MiniCorpsMapper miniCorpsMapper;
 
     /**
      * 保存或修改miniUser
@@ -69,10 +74,54 @@ public class MiniUserService {
         if(!Objects.isNull(miniUser)){
             miniUserVO = new MiniUserVO();
             miniUserVO.setUserId(miniUser.getId());
+            miniUserVO.setPoint(miniUser.getPoint()==null?0L:miniUser.getPoint());
+            miniUserVO.setNickName(miniUser.getNickName());
+            miniUserVO.setAvatar(miniUser.getAvatarUrl());
+
+            MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
+            if(!Objects.isNull(miniCorps)){
+                miniUserVO.setCorpsName(miniCorps.getCorpsName());
+                miniUserVO.setCorpsPoint(miniCorps.getPoint());
+            }else{
+                miniUserVO.setCorpsName("");
+                miniUserVO.setCorpsPoint(0L);
+            }
+
             MiniSign sign = miniSignMapper.selectByMiniUserId(miniUser.getId());
-            if(sign!=null)
+            if(sign!=null){
                 miniUserVO.setOneSign(false);
-            miniUserVO.setOneSign(true);
+                miniUserVO.setSignDay(sign.getSignDays());
+                miniUserVO.setSignCountDay(sign.getCountDays());
+                if(sign.getSignDays()>=1 && sign.getSignDays()<30){
+                    miniUserVO.setBadge1("../images/user/badge_1_y.png");
+                    miniUserVO.setBadge2("../images/user/badge_2_n.png");
+                    miniUserVO.setBadge3("../images/user/badge_3_n.png");
+                    miniUserVO.setBadge4("../images/user/badge_4_n.png");
+                }else if(sign.getSignDays()>=30 && sign.getSignDays()<60){
+                    miniUserVO.setBadge1("../images/user/badge_1_y.png");
+                    miniUserVO.setBadge2("../images/user/badge_2_y.png");
+                    miniUserVO.setBadge3("../images/user/badge_3_n.png");
+                    miniUserVO.setBadge4("../images/user/badge_4_n.png");
+                }else if(sign.getSignDays()>=60 && sign.getSignDays()<100){
+                    miniUserVO.setBadge1("../images/user/badge_1_y.png");
+                    miniUserVO.setBadge2("../images/user/badge_2_y.png");
+                    miniUserVO.setBadge3("../images/user/badge_3_y.png");
+                    miniUserVO.setBadge4("../images/user/badge_4_n.png");
+                }else if(sign.getSignDays()==100){
+                    miniUserVO.setBadge1("../images/user/badge_1_y.png");
+                    miniUserVO.setBadge2("../images/user/badge_2_y.png");
+                    miniUserVO.setBadge3("../images/user/badge_3_y.png");
+                    miniUserVO.setBadge4("../images/user/badge_4_y.png");
+                }
+            }else{
+                miniUserVO.setBadge1("../images/user/badge_1_n.png");
+                miniUserVO.setBadge2("../images/user/badge_2_n.png");
+                miniUserVO.setBadge3("../images/user/badge_3_n.png");
+                miniUserVO.setBadge4("../images/user/badge_4_n.png");
+                miniUserVO.setSignDay(0);
+                miniUserVO.setSignCountDay(0);
+                miniUserVO.setOneSign(true);
+            }
         }
         return miniUserVO;
     }

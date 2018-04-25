@@ -6,9 +6,10 @@
     <result column="mini_user_id" jdbcType="BIGINT" property="miniUserId" />
     <result column="last_sign_time" jdbcType="TIMESTAMP" property="lastSignTime" />
     <result column="count_days" jdbcType="INTEGER" property="countDays" />
+    <result column="sign_days" jdbcType="INTEGER" property="signDays" />
   </resultMap>
   <sql id="Base_Column_List">
-    sign_id, mini_user_id, last_sign_time, count_days
+    sign_id, mini_user_id, last_sign_time, count_days ,sign_days
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -26,7 +27,7 @@
     values (#{signId,jdbcType=BIGINT}, #{miniUserId,jdbcType=BIGINT}, #{lastSignTime,jdbcType=TIMESTAMP}, 
       #{countDays,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniSign">
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniSign" useGeneratedKeys="true" keyProperty="signId" >
     insert into t_b_mini_sign
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="signId != null">
@@ -40,6 +41,9 @@
       </if>
       <if test="countDays != null">
         count_days,
+      </if>
+      <if test="signDays != null">
+        sign_days,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -55,6 +59,9 @@
       <if test="countDays != null">
         #{countDays,jdbcType=INTEGER},
       </if>
+      <if test="signDays != null">
+        #{signDays,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.MiniSign">
@@ -68,6 +75,9 @@
       </if>
       <if test="countDays != null">
         count_days = #{countDays,jdbcType=INTEGER},
+      </if>
+      <if test="signDays != null">
+        sign_days = #{signDays,jdbcType=INTEGER},
       </if>
     </set>
     where sign_id = #{signId,jdbcType=BIGINT}

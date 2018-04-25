@@ -132,11 +132,34 @@ public class MiniGramController {
         }
         return result;
     }
+
+    /**
+     * 传图打卡
+     * @param userId
+     * @param filePath
+     * @return
+     */
     @RequestMapping(value = "/imageSign",method = RequestMethod.GET)
-    public @ResponseBody BaseResult imageSign(Integer userId,String imagePath){
+    public @ResponseBody BaseResult imageSign(Integer userId,String filePath){
         BaseResult result = new BaseResult();
         try {
-            String msg = miniSignService.imageSign(userId,imagePath);
+            String msg = miniSignService.imageSign(userId,filePath);
+            if(msg.equals("success")){
+                result.setResult(true);
+            }else{
+                result.setResult(false);
+            }
+            result.setMessage(msg);
+        }catch (Exception e){
+            LOGGER.error("校验用户打卡状态失败",e);
+        }
+        return result;
+    }
+    @RequestMapping(value = "/userSign",method = RequestMethod.GET)
+    public @ResponseBody BaseResult userSign(Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            String msg = miniSignService.userSign(userId);
             if(msg.equals("success")){
                 result.setResult(true);
             }else{

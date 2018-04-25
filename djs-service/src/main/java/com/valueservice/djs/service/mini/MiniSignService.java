@@ -97,6 +97,17 @@ public class MiniSignService {
         return saveOrUpdateSign(userId,imagePath);
     }
 
+    public String userSign(Integer userId)throws Exception{
+        String result = saveOrUpdateSign(userId,"");
+        if(result.equals("success")){
+            MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+            MiniSign miniSign = miniSignMapper.selectByMiniUserId(userId);
+            miniUser.setPoint(miniUser.getPoint()+10*miniSign.getCountDays());
+            miniUser.setUpdateTime(new Timestamp(new Date().getTime()));
+            miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+        }
+        return result;
+    }
     /**
      * 创建打卡记录
      * @param userId
@@ -111,6 +122,7 @@ public class MiniSignService {
                 miniSign.setMiniUserId(Long.valueOf(userId));
                 miniSign.setLastSignTime(new Timestamp(new Date().getTime()));
                 miniSign.setCountDays(1);
+                miniSign.setSignDays(1);
                 miniSignMapper.insertSelective(miniSign);
             }else{
                 /**当天是否已经打过卡**/
@@ -130,6 +142,7 @@ public class MiniSignService {
                     /**非连续打卡**/
                     miniSign.setCountDays(1);
                 }
+                miniSign.setSignDays(miniSign.getSignDays()+1);
                 miniSign.setLastSignTime(new Timestamp(new Date().getTime()));
                 miniSignMapper.updateByPrimaryKeySelective(miniSign);
             }
@@ -151,7 +164,7 @@ public class MiniSignService {
         miniSignWasteBook.setSignId(signId);
         miniSignWasteBook.setSignTime(new Timestamp(new Date().getTime()));
         /**传图打卡**/
-        if(!StringUtil.isNotEmpty(imagePath)){
+        if(StringUtil.isNotEmpty(imagePath)){
             miniSignWasteBook.setSignType(1);
             miniSignWasteBook.setImagePath(imagePath);
         }else{

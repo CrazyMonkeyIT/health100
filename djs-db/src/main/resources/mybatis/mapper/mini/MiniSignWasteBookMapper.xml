@@ -47,6 +47,12 @@
       <if test="imagePath != null">
         image_path,
       </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -63,6 +69,12 @@
       </if>
       <if test="imagePath != null">
         #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
