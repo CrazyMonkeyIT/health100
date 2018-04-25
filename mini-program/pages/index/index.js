@@ -1,4 +1,5 @@
 const config = require("../../config.js")
+const userUtil = require("../../global-js/userUtil.js")
 //index.js
 //获取应用实例
 const app = getApp();
@@ -16,9 +17,15 @@ Page({
   },
   onLoad: function () {
     that = this;
-    var userInfo = wx.getStorageSync('userInfo');
-    this.getUser(!userInfo.id ? '' : userInfo.id);
-    this.pankingCorps(!userInfo.id ? '' : userInfo.id);
+    userUtil.login(function(){
+      var userInfo = wx.getStorageSync('userInfo');
+      that.setData({
+        miniUser: userInfo
+      })
+      that.getUser(userInfo.id);
+      that.pankingCorps(!userInfo.id ? '' : userInfo.id);
+    });
+    
    
     var animation = wx.createAnimation({
       duration: 1000,
@@ -46,7 +53,8 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
-        if(resp.data.result == true){
+        console.log(resp.data.result);
+        if(resp.data.result === true){
           that.setData({
             miniUser: resp.data.obj
           })

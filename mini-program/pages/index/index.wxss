@@ -25,7 +25,7 @@ page{
 }
 .index-join-day {
   position: absolute;
-  left :85rpx;
+  left :80rpx;
   top :400rpx;
   font-size: 24rpx;
   color: #fff;
@@ -37,7 +37,7 @@ page{
 }
 .index-total-point {
   position: absolute;
-  left :580rpx;
+  left :575rpx;
   top :430rpx;
   font-size: 24rpx;
   color: #fff;

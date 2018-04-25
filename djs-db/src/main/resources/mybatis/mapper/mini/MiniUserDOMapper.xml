@@ -46,7 +46,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{active,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniUser">
+  <insert id="insertSelective" parameterType="com.valueservice.djs.db.entity.mini.MiniUser" useGeneratedKeys="true" keyProperty="id">
     insert into t_b_mini_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

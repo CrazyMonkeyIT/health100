@@ -43,7 +43,7 @@ public class MiniUserService {
         if(existsUser == null){
             record.setActive(1);
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
-            miniUserDOMapper.insert(record);
+            miniUserDOMapper.insertSelective(record);
             return record;
         }else {
             record.setId(existsUser.getId());

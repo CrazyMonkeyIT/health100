@@ -5,6 +5,7 @@ const login = function(callback){
   var userData = wx.getStorageSync("userInfo");
   if(!userData){
     loginOper(callback);
+    return;
   }
   if(callback){
     callback();
