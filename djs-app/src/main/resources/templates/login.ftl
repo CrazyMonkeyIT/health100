@@ -7,7 +7,7 @@
     <meta http-equiv="pragma" content="no-cache"></meta>
     <meta http-equiv="cache-control" content="no-cache"></meta>
     <meta http-equiv="expires" content="0"></meta>
-    <title>独角兽后台管理</title>
+    <title>Health100后台管理</title>
     <link href="${request.contextPath}/static/login/css/default.css" rel="stylesheet" type="text/css" />
     <!--必要样式-->
     <link href="${request.contextPath}/static/login/css/styles.css" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
 <canvas></canvas>
 <div class='login'>
     <div class='login_title' style="text-align:center;">
-        <span>独角兽后台管理</span>
+        <span>Health100后台管理</span>
     </div>
     <div class='login_fields'>
         <div class='login_fields__user'>
@@ -61,7 +61,7 @@
     <div class='success'>
     </div>
     <div class='disclaimer' >
-        <p>欢迎登录中小企业商票信用风险测评预警系统</p>
+        <p>欢迎登录Health100后台管理系统</p>
     </div>
 </div>
 <div class='authent'>
