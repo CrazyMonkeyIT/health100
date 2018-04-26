@@ -1,0 +1,18 @@
+<view class='view_main'>
+  <image src='../images/corps/join_corps_back.jpg' style='width:100%;height:100%;'></image>
+  <image src='../images/one_join.png' bindtap='sign_click' class='one_join' mode='widthFix' bindtap='sign_click'></image>
+ <view class='tab_main'>
+    <view class='table_view_tr' wx:for="{{corps}}" wx:for-index="key" wx:key="{{corpsId}}" wx:for-item="value">
+      <view class="table_view_td">
+        <image src='../images/corps/join_corps_info.png' mode='widthFix' class='table_view_td_back'></image>
+        <view class='table_view_td_info'>
+          <image src='{{value.corpsHeadImage}}' mode='widthFix' class='headImage'></image>
+          <text class='corps_name_text'>{{value.corpsName}}</text>
+          <text class='corps_point_text_1'>积分</text>
+          <text class='corps_point_text'>{{value.point}}</text>
+          <image src='../images/corps/corps_join.png' mode='widthFix' class='corps_join' bindtap='joincorps' data-id='{{value.corpsId}}'></image>
+        </view>
+      </view>
+    </view>
+ </view>
+</view>
