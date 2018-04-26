@@ -96,6 +96,7 @@ Page({
           filePath: tempFilePaths[0],
           name:'file',
           success: function (resp) {
+            wx.hideToast();
             var obj = JSON.parse(resp.data)
             that.userImageSign(obj[0].filePath);
           },

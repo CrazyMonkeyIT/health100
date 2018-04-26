@@ -1,14 +1,8 @@
 package com.valueservice.djs.service.mini;
 
 import com.valueservice.djs.db.bean.MiniUserVO;
-import com.valueservice.djs.db.dao.mini.MiniCorpsMapper;
-import com.valueservice.djs.db.dao.mini.MiniSignMapper;
-import com.valueservice.djs.db.dao.mini.MiniUserDOMapper;
-import com.valueservice.djs.db.dao.mini.PointWasteBookMapper;
-import com.valueservice.djs.db.entity.mini.MiniCorps;
-import com.valueservice.djs.db.entity.mini.MiniSign;
-import com.valueservice.djs.db.entity.mini.MiniUser;
-import com.valueservice.djs.db.entity.mini.PointWasteBook;
+import com.valueservice.djs.db.dao.mini.*;
+import com.valueservice.djs.db.entity.mini.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +22,9 @@ public class MiniUserService {
 
     @Resource
     private MiniSignMapper miniSignMapper;
+
+    @Resource
+    private MiniSignWasteBookMapper miniSignWasteBookMapper;
 
     @Resource
     private MiniCorpsMapper miniCorpsMapper;
@@ -140,6 +137,10 @@ public class MiniUserService {
      */
     public MiniUser selectByOpenId(String openId){
         return miniUserDOMapper.selectByOpenId(openId);
+    }
+
+    public List<MiniSignWasteBook> selectUserSignImage(Integer userId){
+        return miniSignWasteBookMapper.selectUserSignImage(userId);
     }
 
     public MiniUserVO getMiniUserAchieve(Integer userId){

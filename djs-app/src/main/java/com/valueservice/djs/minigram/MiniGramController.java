@@ -5,6 +5,7 @@ import com.valueservice.djs.bean.EncryptUserInfo;
 import com.valueservice.djs.db.bean.MiniUserVO;
 import com.valueservice.djs.db.entity.mini.MiniCorps;
 import com.valueservice.djs.db.entity.mini.MiniSign;
+import com.valueservice.djs.db.entity.mini.MiniSignWasteBook;
 import com.valueservice.djs.db.entity.mini.MiniUser;
 import com.valueservice.djs.service.mini.MiniCorpService;
 import com.valueservice.djs.service.mini.MiniSignService;
@@ -249,6 +250,26 @@ public class MiniGramController {
         return result;
     }
 
+    /**
+     * 获取用户打卡图片
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/getSignImage",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getSignImage(Integer userId){
+        BaseResult result = new BaseResult();
+        try{
+            List<MiniSignWasteBook> miniSignWasteBooks = miniUserService.selectUserSignImage(userId);
+            if (!Objects.isNull(miniSignWasteBooks)) {
+                result.setResult(true);
+                result.setObj(miniSignWasteBooks);
+                result.setMessage("获取用户打卡图片成功");
+            }
+        }catch (Exception e){
+            LOGGER.error("获取打卡图片异常",e);
+        }
+        return result;
+    }
 
     /**
      * 获取战队成员信息

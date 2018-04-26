@@ -22,6 +22,7 @@ Page({
         userId: userInfo.id
       })
       that.getUser(userInfo.id);
+      that.userSignImages();
     });
     var animation = wx.createAnimation({
       duration: 1000,
@@ -64,8 +65,18 @@ Page({
     })
   },
   userSignImages:function(){
-    that.setData({
-      userSignImages:[{imagePath:'',id:''}]
+    wx.request({
+      url: config.service.getSignImage,
+      data: { userId: that.data.userId },
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        console.log(resp)
+        that.setData({
+          userSignImages: resp.data.obj
+        })
+        }
     })
   },
   scrollBottom:function(e){

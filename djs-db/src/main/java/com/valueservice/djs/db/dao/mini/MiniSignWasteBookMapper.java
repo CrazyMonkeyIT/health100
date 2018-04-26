@@ -21,4 +21,6 @@ public interface MiniSignWasteBookMapper {
     List<MiniSignWasteBook> selectNotCheckWasteBook();
 
     MiniSignWasteBook selectLastSignWasteBook(@Param("signId")Long signId);
+
+    List<MiniSignWasteBook> selectUserSignImage(@Param("userId")Integer userId);
 }

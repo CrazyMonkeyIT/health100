@@ -116,4 +116,10 @@
   <select id="selectLastSignWasteBook" resultMap="BaseResultMap">
     select * from t_b_mini_sign_waste_book where sign_id=#{signId,jdbcType=BIGINT} order by sign_time desc limit 1;
   </select>
+
+  <select id="selectUserSignImage" resultMap="BaseResultMap">
+    SELECT * from t_b_mini_sign_waste_book a
+    inner join t_b_mini_sign b on a.sign_id=b.sign_id
+    where b.mini_user_id=#{userId,jdbcType=BIGINT} and sign_type=1
+  </select>
 </mapper>

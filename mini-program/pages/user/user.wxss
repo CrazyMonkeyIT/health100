@@ -157,14 +157,21 @@ page{
   top:13rpx;
   
 }
-.sign_image_view{
+.sign_iamge_main{
   position:absolute;
-  top:1150rpx;
   left:40rpx;
-  width:90%;
-  height:400rpx;
+  top:1150rpx;
+  width:670rpx;
+  height:430rpx;
+  overflow: scroll;
+  display: flex;
+  flex-flow: row;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-.table_view_tr{
-  position:absolute;
-  width:50%;
+.sign_image{
+  margin-left: 6rpx;
+  width: 310rpx;
+  height: 190rpx;
+  border: violet solid 5px; 
 }

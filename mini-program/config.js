@@ -32,6 +32,8 @@ var config = {
     joinCorps: host + '/minigram/joinCorps',
     //获取积分top1的战队
     getTop1Corps: host +'/minigram/getTop1Corps',
+    //获取用户打卡图片
+    getSignImage: host +'/minigram/getSignImage',
     //上传文件URL
     upUrl : host + '/import/up/temp'
   }
