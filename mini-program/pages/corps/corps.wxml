@@ -1,16 +1,16 @@
 <view>
   <image src="../images/corps/corps_back.png" mode='widthFix' style='width:100%;'></image>
-  <image src='{{pankingTopCorp.banner}}' mode='widthFix' class='banner_image'></image>
-  <text class='corps_msg_01'>{{pankingTopCorp.msg1}}</text>
-  <text class='corps_msg_02'>{{pankingTopCorp.msg2}}</text>
-  <image src='../images/corps/corps_click.png' mode='widthFix' class='corps_click_image'></image>
+  <image src='{{pankingTopCorp.corpsBannerImage}}' mode='widthFix' class='banner_image'></image>
+  <text class='corps_msg_01'>{{pankingTopCorp.corpsIntroduce1}}</text>
+  <text class='corps_msg_02'>{{pankingTopCorp.corpsIntroduce}}</text>
+  <image src='../images/corps/corps_click.png' mode='widthFix' class='corps_click_image' bindtap='sign_click'></image>
   <!--tab-->
   <view class='tab_main'>
     <image src='../images/ranking_back.png' mode='widthFix' class='tab_main_back'></image>
 <!--战队榜 主体-->
     <view class="{{selected?'show':'hidden'}}">
         <image src='../images/ranking_corps.png' mode='widthFix' class='ranking_corps'></image>
-        <text style='position: absolute;left:500rpx;top:110rpx;font-size:40rpx;'>积分</text>
+        <text style='position: absolute;left:550rpx;top:120rpx;font-size:35rpx;color:blue;font-weight: bold;'>积分</text>
         <view class='table_view'>
         <view class='table_view_tr' wx:for="{{corpsPanking}}" wx:for-index="key" wx:key="{{corpsId}}" wx:for-item="value">
             <view class="table_view_td">
@@ -30,6 +30,20 @@
 <!--个人榜 主体-->
     <view class="{{selected1?'show':'hidden'}}">
       <image src='../images/ranking_users.png' mode='widthFix' class='ranking_corps'></image>
+      <text style='position: absolute;left:550rpx;top:120rpx;font-size:35rpx;color:blue;font-weight: bold;'>积分</text>
+      <view class='table_view'>
+        <view class='table_view_tr' wx:for="{{usersPanking}}" wx:for-index="key" wx:key="{{id}}" wx:for-item="value">
+            <view class="table_view_td">
+            <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no'></image>
+            <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no'></image>
+              <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no'></image>
+              <text class='table_view_td_no' wx:else>{{key+1}}</text>
+              <image src='{{value.avatarUrl}}' mode='widthFix' class='table_headimage'></image>
+              <text class='table_view_td_name'>{{value.nickName}}</text>
+              <text class='table_view_td_point'>{{value.point}}</text>
+            </view>
+        </view>
+        </view>
     </view>
 <!--个人榜 主体end-->
 <!--tab 头-->

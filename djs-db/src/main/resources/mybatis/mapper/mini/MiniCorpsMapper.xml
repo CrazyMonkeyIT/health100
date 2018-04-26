@@ -8,14 +8,15 @@
     <result column="corps_banner_image" jdbcType="VARCHAR" property="corpsBannerImage" />
     <result column="point" jdbcType="DECIMAL" property="point" />
     <result column="corps_introduce" jdbcType="VARCHAR" property="corpsIntroduce" />
+    <result column="corps_introduce_1" jdbcType="VARCHAR" property="corpsIntroduce1" />
     <result column="is_top" jdbcType="INTEGER" property="isTop" />
     <result column="is_special" jdbcType="INTEGER" property="isSpecial" />
   </resultMap>
   <sql id="Base_Column_List">
-    corps_id, corps_name, corps_head_image, corps_banner_image, point,is_special
+    corps_id, corps_name, corps_head_image, corps_banner_image, point,is_special,corps_introduce_1
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select a.corps_id,a.corps_name,a.corps_head_image,a.corps_banner_image,a.corps_introduce,a.is_top,if(a.is_special is null,0,a.is_special),if(sum(b.point) is null,0,sum(b.point)) as point
+    select a.corps_id,a.corps_name,a.corps_head_image,a.corps_banner_image,a.is_top,a.is_special,a.corps_introduce,a.is_top,if(a.is_special is null,0,a.is_special),if(sum(b.point) is null,0,sum(b.point)) as point
     from t_b_mini_corps a left join t_b_mini_user b on a.corps_id=b.corps_id
     where a.corps_id = #{corpsId,jdbcType=BIGINT}
   </select>
@@ -50,6 +51,15 @@
       <if test="isTop != null">
         is_top,
       </if>
+      <if test="corpsIntroduce != null">
+        corps_Introduce,
+      </if>
+      <if test="corpsIntroduce1 != null">
+        corps_Introduce_1,
+      </if>
+      <if test="isSpecial != null">
+        is_special,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="corpsId != null">
@@ -70,6 +80,15 @@
       <if test="isTop != null">
         #{isTop,jdbcType=INTEGER},
       </if>
+      <if test="corpsIntroduce != null">
+        #{corpsIntroduce,jdbcType=INTEGER},
+      </if>
+      <if test="corpsIntroduce1 != null">
+        #{corpsIntroduce1,jdbcType=INTEGER},
+      </if>
+      <if test="isSpecial != null">
+        #{isSpecial,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.valueservice.djs.db.entity.mini.MiniCorps">
@@ -89,6 +108,15 @@
       </if>
       <if test="isTop != null">
         is_top = #{isTop,jdbcType=DECIMAL},
+      </if>
+      <if test="corpsIntroduce != null">
+        corps_Introduce = #{corpsIntroduce,jdbcType=INTEGER},
+      </if>
+      <if test="corpsIntroduce1 != null">
+        corps_Introduce_1 = #{corpsIntroduce1,jdbcType=INTEGER},
+      </if>
+      <if test="isSpecial != null">
+        is_special = #{isSpecial,jdbcType=INTEGER},
       </if>
     </set>
     where corps_id = #{corpsId,jdbcType=BIGINT}
@@ -117,6 +145,14 @@
   order by point desc limit 20;
   </select>
 
+  <select id="selectAllCorpsList" resultMap="BaseResultMap">
+    select c.corps_id,c.corps_head_image,c.corps_banner_image,c.corps_Introduce,c.corps_Introduce_1,c.is_top,c.is_special,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point from t_b_mini_corps c
+    left join t_b_mini_user u on c.corps_id=u.corps_id
+    where c.is_special = 1
+    group by c.corps_id,c.corps_head_image,c.corps_name
+    order by point desc
+  </select>
+
   <select id="selectCorpsList" resultMap="BaseResultMap">
     select c.corps_id,c.corps_head_image,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point,c.corps_introduce,c.corps_banner_image,c.is_top from t_b_mini_corps c
     left join t_b_mini_user u on c.corps_id=u.corps_id
@@ -124,6 +160,7 @@
       where c.corps_name like CONCAT('%',#{corpsName,jdbcType=VARCHAR},'%')
     </if>
     group by c.corps_id
+    order by point desc
   </select>
 
   <select id="selectByCorpsName" resultMap="BaseResultMap">
@@ -137,4 +174,16 @@
   <update id="corpsTop">
     update t_b_mini_corps set is_top=1 where corps_id = #{corpsId,jdbcType=BIGINT}
   </update>
+
+  <select id="selectTopCorps" resultMap="BaseResultMap">
+    select * from t_b_mini_corps where is_top=1 limit 1
+  </select>
+
+  <select id="selectTop1Corps" resultMap="BaseResultMap">
+    select c.corps_id,c.corps_head_image,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point,c.corps_introduce,c.corps_banner_image,c.is_top from t_b_mini_corps c
+    left join t_b_mini_user u on c.corps_id=u.corps_id
+    group by c.corps_id
+	order by point desc
+    limit 1
+  </select>
 </mapper>

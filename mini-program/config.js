@@ -26,6 +26,12 @@ var config = {
     imageSign: host +'/minigram/imageSign',
     // 一键打卡
     userSign:host+'/minigram/userSign',
+    //获取所有的战队信息
+    getCorpsList: host +'/minigram/getCorpsList',
+    //加入战队
+    joinCorps: host + '/minigram/joinCorps',
+    //获取积分top1的战队
+    getTop1Corps: host +'/minigram/getTop1Corps',
     //上传文件URL
     upUrl : host + '/import/up/temp'
   }

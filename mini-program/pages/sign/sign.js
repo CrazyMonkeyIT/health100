@@ -1,4 +1,5 @@
 const config = require("../../config.js")
+const userUtil = require("../../global-js/userUtil.js")
 var that = null;
 Page({
   data: {
@@ -7,12 +8,16 @@ Page({
     userId:'',
     miniSign:[],
   },
-  onLoad: function (param) {
+  onShow: function () {
     that = this;
-    this.setData({
-      userId: param.userId
+    userUtil.login(function () {
+      var userInfo = wx.getStorageSync('userInfo');
+      that.setData({
+        userId:userInfo.id
+      })
+      that.checkUserSign(userInfo.id);
     });
-    this.checkUserSign(this.data.userId);
+    
   },
   checkUserSign:function(param){
     wx.request({
@@ -45,7 +50,7 @@ Page({
   sign_click:function(){
     wx.request({
       url: config.service.userSign,
-      data: { userId: this.data.userId},
+      data: { userId: that.data.userId},
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
@@ -57,7 +62,7 @@ Page({
           })
         } else {
           wx.navigateTo({
-            url: "/pages/user/user?userId=" + that.data.userId
+            url: "/pages/user/user"
           })
         }
       }
@@ -79,7 +84,6 @@ Page({
       sourceType: ['album', 'camera'], 
       success: function (res) {  
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-        console.log(res.tempFilePaths)
         var tempFilePaths = res.tempFilePaths; 
         wx.showToast({
           title: '正在上传...',
@@ -87,20 +91,15 @@ Page({
           mask: true,
           duration: 10000
         })
-        console.log("11000001")
         wx.uploadFile({
           url: config.service.upUrl,
           filePath: tempFilePaths[0],
           name:'file',
           success: function (resp) {
-            console.log(resp)
-            console.log("111")
             var obj = JSON.parse(resp.data)
             that.userImageSign(obj[0].filePath);
           },
           fail: function (res) { 
-            console.log(res);
-            console.log("222")
           },
         })
       }
@@ -109,7 +108,7 @@ Page({
   userImageSign:function(filePath){
     wx.request({
       url: config.service.imageSign,
-      data: { userId: this.data.userId ,filePath:filePath},
+      data: { userId: that.data.userId ,filePath:filePath},
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
@@ -122,7 +121,7 @@ Page({
           })
         }else{
           wx.navigateTo({
-            url: "/pages/user/user?userId="+that.data.userId
+            url: "/pages/user/user"
           })
         }
       }

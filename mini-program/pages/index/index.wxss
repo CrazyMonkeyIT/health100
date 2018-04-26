@@ -79,9 +79,9 @@ page{
 }
 .tab_main{
   position: absolute;
-  left :85rpx;
-  width:78%;
-  top :1210rpx;
+  left :25rpx;
+  width:94%;
+  top :1140rpx;
   color: #fff;
   display: flex;
   flex-wrap: wrap;
@@ -92,16 +92,16 @@ page{
 .tab_corps{
   position: absolute;
   font-size: 40rpx;
-  top :30rpx;
-  left: 40rpx;
-  width: 250rpx;
+  top:35rpx;
+  left:55rpx;
+  width:300rpx;
 }
 .tab_users{
   position: absolute;
   font-size:40rpx;
-  left:297rpx;
-  top:30rpx;
-  width:250rpx;
+  left:355rpx;
+  top:35rpx;
+  width:300rpx;
 }
 .tab_main_back{
   position: absolute;
@@ -156,18 +156,17 @@ page{
 }
 .table_view_td_name{
   position: absolute;
-  left:150rpx;
-  font-size:25rpx;
-  width: 180rpx;
+  left:170rpx;
+  font-size:30rpx;
+  width: 240rpx;
   text-align: left;
-  padding: 10rpx;
   white-space:nowrap;
   overflow:hidden;
   text-overflow: ellipsis;
 }
 .table_view_td_point{
   position: absolute;
-  left:400rpx;
+  left:500rpx;
   font-size:30rpx;
   padding: 10rpx; 
   text-align: left;

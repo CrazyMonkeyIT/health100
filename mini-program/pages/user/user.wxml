@@ -25,6 +25,9 @@
    <text class='corps_name_text'>{{miniUser.corpsName}}</text>
    <text class='corps_point_text'>{{miniUser.corpsPoint}}</text>
    <!-- 打卡图片 -->
-   
+   <view class='sign_image_view'>
+    <view class='table_view_tr' wx:for="{{usersPanking}}" wx:for-index="key" wx:key="{{id}}" wx:for-item="value">
+    </view>
+   </view>
    <image animation="{{animationData}}" src="../images/down.png" bindtap='scrollBottom' class='down_png' mode='widthFix'></image>
 </scroll-view>

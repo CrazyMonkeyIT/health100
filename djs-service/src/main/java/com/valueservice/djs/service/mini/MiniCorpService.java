@@ -24,6 +24,12 @@ public class MiniCorpService {
     private MiniUserDOMapper miniUserDOMapper;
 
     /**
+     * 获取所有的战队信息
+     * @return
+     */
+    public List<MiniCorps> selectAllCorpsList(){return miniCorpsMapper.selectAllCorpsList();}
+
+    /**
      * 获取用户的战队信息
      * @param corpsId
      * @return
@@ -38,10 +44,11 @@ public class MiniCorpService {
     public List<MiniCorps> selectCorpsPanking(Integer userId){
         List<MiniCorps> reults = new ArrayList<>();
         //处理特殊战队的排行  如果用户属于特殊战队  战队排行内比
-        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
-        if(Objects.isNull(miniUser)){
+
+        if(Objects.isNull(userId)){
             reults = miniCorpsMapper.selectCorpsPanking();
         }else{
+            MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
             if(miniUser.getCorpsId()==null){
                 reults = miniCorpsMapper.selectCorpsPanking();
             }else{
@@ -81,8 +88,25 @@ public class MiniCorpService {
         return miniCorpsMapper.selectByCorpsName(corpsName);
     }
 
+    /**
+     * 加入战队
+     * 个人积分减半
+     * @param corpsId
+     * @param userId
+     */
+    public String joinCorps(Long corpsId,Integer userId){
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        if(miniUser.getCorpsId()!=null)
+            return "您已加入过战队";
+        miniUser.setCorpsId(corpsId);
+        Long point = miniUser.getPoint()==0?0:miniUser.getPoint()/2;
+        miniUser.setPoint(point);
+        miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+        return "success";
+    }
+
     public boolean saveMiniCorps(MiniCorps miniCorps){
-        int result = miniCorpsMapper.insert(miniCorps);
+        int result = miniCorpsMapper.insertSelective(miniCorps);
         if(result>0)
             return true;
         return false;
@@ -108,6 +132,14 @@ public class MiniCorpService {
         if(result>0)
             return true;
         return false;
+    }
+
+    public MiniCorps selectTop1Corps(){
+        MiniCorps miniCorps = miniCorpsMapper.selectTopCorps();
+        if(Objects.isNull(miniCorps)){
+            miniCorps = miniCorpsMapper.selectTop1Corps();
+        }
+        return miniCorps;
     }
 
 }

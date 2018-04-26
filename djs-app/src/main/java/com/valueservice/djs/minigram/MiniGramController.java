@@ -132,6 +132,61 @@ public class MiniGramController {
     }
 
     /**
+     * 获取所有的战队信息
+     * @return
+     */
+    @RequestMapping(value = "/corpsList",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getCorpsList(){
+        BaseResult result = new BaseResult();
+        try {
+            List<MiniCorps> corps = miniCorpService.selectAllCorpsList();
+            result.setResult(true);
+            result.setObj(corps);
+            result.setMessage("获取战队排行成功~~");
+        }catch (Exception e){
+            LOGGER.error("获取战队排行异常",e);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/getTop1Corps",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getTop1Corps(){
+        BaseResult result = new BaseResult();
+        try {
+            MiniCorps corps = miniCorpService.selectTop1Corps();
+            result.setResult(true);
+            result.setObj(corps);
+            result.setMessage("获取top1战队成功~~");
+        }catch (Exception e){
+            LOGGER.error("获取top1战队异常",e);
+        }
+        return result;
+    }
+    /**
+     * 加入战队
+     * @param corpsId
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/joinCorps",method = RequestMethod.GET)
+    public @ResponseBody BaseResult joinCorps(Long corpsId,Integer userId){
+        BaseResult result = new BaseResult();
+        try{
+            String msg = miniCorpService.joinCorps(corpsId,userId);
+            if(msg.equals("success")){
+                result.setResult(true);
+                result.setMessage("加入战队成功~~");
+            }else{
+                result.setResult(false);
+                result.setMessage(msg);
+            }
+        }catch (Exception e){
+            LOGGER.error("加入战队异常",e);
+        }
+        return result;
+    }
+
+    /**
      * 获取个人排行 top30
      * @return
      */
@@ -194,6 +249,7 @@ public class MiniGramController {
         return result;
     }
 
+
     /**
      * 获取战队成员信息
      * @return
@@ -205,48 +261,5 @@ public class MiniGramController {
         return result;
     }
 
-    /**
-     * 加入战队
-     * 加入成功返回战队信息
-     * @param openId
-     * @param corpsId
-     * @return
-     */
-    @RequestMapping(value = "/initCorps",method = RequestMethod.GET)
-    public @ResponseBody BaseResult joinCorps(String openId,Long corpsId){
-        BaseResult result = new BaseResult();
-        try {
-            Integer res = miniUserService.initCorps(openId,corpsId);
-            if(res>0){
-                MiniCorps corps = miniCorpService.getCorps(corpsId);
-                result.setResult(true);
-                result.setObj(corps);
-                result.setMessage("加入战队成功~~");
-            }
-        }catch (Exception e){
-            LOGGER.error("打卡异常",e);
-        }
-        return result;
-    }
 
-    /**
-     * 打卡 （一键打卡）
-     * @param openId
-     * @return
-     */
-    @RequestMapping(value = "/puchClock",method = RequestMethod.GET)
-    public @ResponseBody BaseResult puchClock(String openId){
-        BaseResult result = new BaseResult();
-        /*try{
-            MiniUser miniUserDO = miniUserService.puchClock(openId);
-            if(miniUserDO!=null){
-                result.setResult(true);
-                result.setObj(miniUserDO);
-                result.setMessage("打卡成功~~");
-            }
-        }catch (Exception e){
-            LOGGER.error("打卡异常",e);
-        }*/
-        return result;
-    }
 }

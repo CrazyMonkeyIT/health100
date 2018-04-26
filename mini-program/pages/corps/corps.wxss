@@ -44,18 +44,18 @@ page{
   flex-direction:row;
 }
 .tab_corps{
-  position: absolute;
-  font-size: 50rpx;
-  top :35rpx;
-  left: 120rpx;
-  width: 150rpx;
+  position:absolute;
+  font-size:40rpx;
+  top:35rpx;
+  left:55rpx;
+  width:300rpx;
 }
 .tab_users{
   position: absolute;
-  font-size: 50rpx;
-  left: 270rpx;
+  font-size:40rpx;
+  left:355rpx;
   top:35rpx;
-  width: 450rpx;
+  width:300rpx;
 }
 .tab_main_back{
   position: absolute;
@@ -85,7 +85,7 @@ page{
 .table_headimage{
   position: absolute;
   left: 70rpx;
-  width: 70rpx;
+  width: 60rpx;
   border-radius:50%;
 }
 .table_view_tr{
@@ -103,7 +103,7 @@ page{
 .table_view_td_name{
   position: absolute;
   left:170rpx;
-  font-size:40rpx;
+  font-size:30rpx;
   width: 240rpx;
   text-align: left;
   white-space:nowrap;
@@ -112,8 +112,8 @@ page{
 }
 .table_view_td_point{
   position: absolute;
-  left:450rpx;
-  font-size:40rpx;
+  left:500rpx;
+  font-size:30rpx;
   padding: 10rpx; 
   text-align: left;
 }

@@ -29,4 +29,10 @@ public interface MiniCorpsMapper {
     int corpsTop(@Param("corpsId")Long corpsId);
 
     void corpsCancelTop();
+
+    List<MiniCorps> selectAllCorpsList();
+
+    MiniCorps selectTopCorps();
+
+    MiniCorps selectTop1Corps();
 }

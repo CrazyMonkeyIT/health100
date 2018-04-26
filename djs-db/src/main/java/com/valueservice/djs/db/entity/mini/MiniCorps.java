@@ -15,6 +15,8 @@ public class MiniCorps {
 
     private String corpsIntroduce;
 
+    private String corpsIntroduce1;
+
     private Long isTop;
 
     private Long isSpecial;  //0：正常 1：不参与全局比较
@@ -81,5 +83,14 @@ public class MiniCorps {
 
     public void setIsSpecial(Long isSpecial) {
         this.isSpecial = isSpecial;
+    }
+
+
+    public String getCorpsIntroduce1() {
+        return corpsIntroduce1;
+    }
+
+    public void setCorpsIntroduce1(String corpsIntroduce1) {
+        this.corpsIntroduce1 = corpsIntroduce1;
     }
 }

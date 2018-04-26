@@ -15,15 +15,12 @@ Page({
     miniUser:[],     //主页面加载数据user
     animationData: {}
   },
-  onLoad: function () {
+  onShow: function () {
     that = this;
     userUtil.login(function(){
       var userInfo = wx.getStorageSync('userInfo');
-      that.setData({
-        miniUser: userInfo
-      })
       that.getUser(userInfo.id);
-      that.pankingCorps(!userInfo.id ? '' : userInfo.id);
+      that.pankingCorps(userInfo.id);
     });
     
    
@@ -53,7 +50,6 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
-        console.log(resp.data.result);
         if(resp.data.result === true){
           that.setData({
             miniUser: resp.data.obj
@@ -134,17 +130,23 @@ Page({
   },
   sign_click:function(){
     wx.navigateTo({
-      url: "/pages/sign/sign?userId=" + this.data.miniUser.userId
+      url: "/pages/sign/sign"
     })
   },
   corps_click:function(){
-    wx.navigateTo({
-      url: "/pages/corps/corps?userId=" + this.data.miniUser.userId
-    })
+    if(this.data.miniUser.corpsId==0){
+      wx.navigateTo({
+        url: "/pages/joincorps/joincorps"
+      })
+    }else{
+      wx.navigateTo({
+        url: "/pages/corps/corps"
+      })
+    }
   },
   userInfo_click:function(){
     wx.navigateTo({
-      url: "/pages/user/user?userId=" + this.data.miniUser.userId
+      url: "/pages/user/user"
     })
   }
 })

@@ -49,7 +49,7 @@
                         <tr>
                             <td>${((page.pageNum-1) * 10) + (data_index+1)}</td>
                             <td><span class="blue">${data.corpsName!''}</span></td>
-                            <td>${data.corpsIntroduce!''}</td>
+                            <td>${data.corpsIntroduce!''}${data.corpsIntroduce1!''}</td>
                             <td>${data.point!''}</td>
                             <td><a onclick="showImage('${data.corpsHeadImage}')"><img src="${data.corpsHeadImage!''}" style="width: 50px;height: 50px;"></a></td>
                             <td><a onclick="showImage('${data.corpsBannerImage}')"><img src="${data.corpsBannerImage!''}" style="width: 50px;height: 50px;"></a></td>
@@ -99,9 +99,9 @@
                 <form id="editForm" action="${request.getContextPath()}/system/corps/updateCorps" method="post">
                     <div class="form-horizontal" style="height: 500px;">
                         <!-- 用户ID -->
-                        <input <#--type="hidden"--> name="corpsId" />
-                        <input id="avatar" type="text" value="/static/images/sample.png" name="corpsHeadImage" />
-                        <input id="avatar1" type="text" value="/static/images/sample.png" name="corpsBannerImage" />
+                        <input type="hidden" name="corpsId" />
+                        <input type="hidden" id="avatar" type="text" value="/static/images/sample.png" name="corpsHeadImage" />
+                        <input type="hidden" id="avatar1" type="text" value="/static/images/sample.png" name="corpsBannerImage" />
                         <div class="form-group ">
                             <label class="col-sm-4 control-label">战队名</label>
                             <div class="col-sm-8">
@@ -111,7 +111,17 @@
                         <div class="form-group ">
                             <label class="col-sm-4 control-label">战队介绍</label>
                             <div class="col-sm-8">
-                                <textarea name="corpsIntroduce" style="width:200px;height:80px;" ></textarea>
+                                <input name="corpsIntroduce1" id="corpsIntroduce1" type="text" placeholder="战队介绍第一行(9个字内)" /></br>
+                                <input name="corpsIntroduce" id="corpsIntroduce" type="text" placeholder="战队介绍第二行(9个字内)"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-sm-4 control-label">是否特殊排行</label>
+                            <div class="col-sm-8">
+                                <select name="isSpecial" id="isSpecial">
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -128,6 +138,7 @@
                                 <img id="avatarPreview1" src="http://localhost:9090/Users/weiying/Desktop/minifile/temp1523605943722/120(1523605943726).jpg" title="点击更换图片" style="position: absolute; z-index: 9; width: 200px; height: 100px">
                             </div>
                         </div>
+
                     </div>
                 </form>
             </div>
@@ -193,19 +204,32 @@
     function updateUser(){
         var corpsId = $("#editForm").find("input[name='corpsId']").val();
         var corpsName = $("input#corpsName").val();
-        var corpsIntroduce = $("#editForm").find("textarea[name='corpsIntroduce']").val();
+        var corpsIntroduce1 = $("#editForm").find("input[name='corpsIntroduce1']").val();
+        var corpsIntroduce = $("#editForm").find("input[name='corpsIntroduce']").val();
         var corpsHeadImage = $("#editForm").find("input[name='corpsHeadImage']").val();
         var corpsBannerImage = $("#editForm").find("input[name='avatar1']").val();
+        var isSpecial = $("#editForm").find("select[name='isSpecial']").val();
         if(!corpsName){
             alert("战队姓名必须填写");
             $("#editForm").find("input[name='corpsName']").focus();
             return false;
         }
-        if(!corpsIntroduce){
-            alert("战队介绍必须填写");
-            $("#editForm").find("textarea[name='corpsIntroduce']").focus();
+        if(corpsName.length>6){
+            alert("战队姓名过长");
+            $("#editForm").find("input[name='corpsName']").focus();
             return false;
         }
+        if(corpsIntroduce.length>9){
+            alert("战队简介过长");
+            $("#editForm").find("input[name='corpsIntroduce']").focus();
+            return false;
+        }
+        if(corpsIntroduce1.length>9){
+            alert("战队简介过长");
+            $("#editForm").find("input[name='corpsIntroduce1']").focus();
+            return false;
+        }
+
         $.ajax({
             url : $("#editForm").attr("action"),
             type : 'post',
@@ -232,13 +256,14 @@
                 "corpsName":corpsName
             },
             success : function(data) {
-                console.log(data);
                 $("#editForm").find("input[name='corpsId']").val(data.corpsId);
                 $("#editForm").find("input[name='corpsName']").val(data.corpsName);
-                $("#editForm").find("textarea[name='corpsIntroduce']").val(data.corpsIntroduce);
+                $("#editForm").find("input[name='corpsIntroduce']").val(data.corpsIntroduce);
+                $("#editForm").find("input[name='corpsIntroduce1']").val(data.corpsIntroduce1);
                 $("#editForm").find("input[name='point']").val(data.point);
                 $("#editForm").find("input[name='corpsHeadImage']").val(data.corpsHeadImage);
                 $("#editForm").find("input[name='corpsBannerImage']").val(data.corpsBannerImage);
+                $("#editForm").find("select[name='isSpecial']").val(data.isSpecial);
                 $("#avatarPreview").attr('src',data.corpsHeadImage);
                 $("#avatarPreview1").attr('src',data.corpsBannerImage);
                 $("#edit_user_modal").modal("show");
@@ -294,6 +319,14 @@
         $("#avatarSlect").change(function () {
             var formData=new FormData();
             formData.append('file', $("#avatarSlect")[0].files[0]);
+            var fSize = 1024 * 1024 * 3;
+            //限制图片宽高
+            var fHeight = 676;
+            var fWidth = 242;
+            if($("#avatarSlect")[0].files[0].size>fSize){
+                alert("图片不能大于"+fSize/1024/1024+"M");
+                return;
+            }
             $.ajax({
                 url: basePath + "/import/up/temp",
                 type: 'POST',
@@ -314,21 +347,36 @@
         $("#avatarSlect1").change(function () {
             var formData=new FormData();
             formData.append('file', $("#avatarSlect1")[0].files[0]);
-            $.ajax({
-                url: basePath + "/import/up/temp",
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (args) {
-                    console.log(args);
-                    /*服务器端的图片地址*/
-                    $("#avatarPreview1").attr('src',args[0].filePath);
-                    /*预览图片*/
-                    $("#avatar1").val(args[0].filePath);
-                    /*将服务端的图片url赋值给form表单的隐藏input标签*/
+            var fSize = 1024 * 1024 * 3;
+            //限制图片宽高
+            var fHeight = 242;
+            var fWidth = 676;
+            if($("#avatarSlect1")[0].files[0].size>fSize){
+                alert("图片不能大于"+fSize/1024/1024+"M");
+                return;
+            }
+            var img = new Image;
+            img.onload = function(){
+                if(img.height!=fHeight || img.width!=fWidth){
+                    alert("请上传尺寸为："+fWidth+"*"+fHeight+"的图片，当前图片尺寸为："+img.width+"*"+img.height);
+                    return;
                 }
-            })
+            }
+            img.src=window.URL.createObjectURL($("#avatarSlect1")[0].files[0]);
+            $.ajax({
+            url: basePath + "/import/up/temp",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (args) {
+                /*服务器端的图片地址*/
+                $("#avatarPreview1").attr('src',args[0].filePath);
+                /*预览图片*/
+                $("#avatar1").val(args[0].filePath);
+                /*将服务端的图片url赋值给form表单的隐藏input标签*/
+            }
+        })
         })
     };
     function showImage(imagePath) {

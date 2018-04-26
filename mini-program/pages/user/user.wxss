@@ -157,3 +157,14 @@ page{
   top:13rpx;
   
 }
+.sign_image_view{
+  position:absolute;
+  top:1150rpx;
+  left:40rpx;
+  width:90%;
+  height:400rpx;
+}
+.table_view_tr{
+  position:absolute;
+  width:50%;
+}

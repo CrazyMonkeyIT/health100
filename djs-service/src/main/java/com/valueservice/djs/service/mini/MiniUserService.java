@@ -77,6 +77,7 @@ public class MiniUserService {
             miniUserVO.setPoint(miniUser.getPoint()==null?0L:miniUser.getPoint());
             miniUserVO.setNickName(miniUser.getNickName());
             miniUserVO.setAvatar(miniUser.getAvatarUrl());
+            miniUserVO.setCorpsId(miniUser.getCorpsId()==null?0L:miniUser.getCorpsId());
 
             MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
             if(!Objects.isNull(miniCorps)){
@@ -144,21 +145,6 @@ public class MiniUserService {
     public MiniUserVO getMiniUserAchieve(Integer userId){
         MiniUserVO miniUserVO = new MiniUserVO();
         return miniUserVO;
-    }
-
-    /**
-     * 加入战队 个人积分减半
-     * @param openId
-     * @param corpsId
-     * @return
-     */
-    public Integer initCorps(String openId, Long corpsId){
-        MiniUser miniUser = miniUserDOMapper.selectByOpenId(openId);
-        Long point = miniUser.getPoint()==0?0:miniUser.getPoint()/2;
-        miniUser.setPoint(point);
-        miniUser.setCorpsId(corpsId);
-        savePointWastBook(0-point,"3",openId);
-        return miniUserDOMapper.updateByPrimaryKey(miniUser);
     }
 
     public void savePointWastBook(Long point,String pointSource,String openId){

@@ -1,17 +1,24 @@
 const config = require("../../config.js")
+const userUtil = require("../../global-js/userUtil.js")
 var that = null;
 Page({
   data: {
     selected: true, //tab
     selected1: false,//tab
-    userInfo: {},
+    userId:'',
     corpsPanking: [],
+    usersPanking:[],
     pankingTopCorp:[],
     animationData: {}
   },
-  onLoad: function () {
+  onShow : function () {
     that = this;
-    this.pankingCorps();
+    userUtil.login(function () {
+      var userInfo = wx.getStorageSync('userInfo');
+      that.userId = userInfo.id;
+      that.pankingCorps(that.userId);
+    });
+    this.pankingUsers();
     this.pankingTopCorps();
   },
   selected: function (e) {
@@ -29,8 +36,8 @@ Page({
   pankingCorps: function () {
     wx.request({
       url: config.service.pankingCorps,
-      data: {},
-      method: 'POST',
+      data: {userId:this.data.userId},
+      method: 'GET',
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
@@ -40,14 +47,38 @@ Page({
       }
     })
   },
-  pankingTopCorps(){
-    that.setData({
-      pankingTopCorp:{
-        banner:"http://localhost:9090/health/minifile/temp1523606436299/07.png",
-        msg1:'像割韭菜一样割肉！',
-        msg2: '康宝莱战队欢迎您！'
+  pankingUsers: function () {
+    wx.request({
+      url: config.service.pankingUsers,
+      data: {},
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        that.setData({
+          usersPanking: resp.data.obj
+        })
       }
     })
+  },
+  pankingTopCorps:function(){
+    wx.request({
+      url: config.service.getTop1Corps,
+      data: {},
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        console.log(resp)
+        that.setData({
+          pankingTopCorp: resp.data.obj
+        })
+      }
+    })
+  },
+  sign_click:function(){
+    wx.navigateTo({
+      url: "/pages/sign/sign"
+    })
   }
-
 })

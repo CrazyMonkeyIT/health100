@@ -1,8 +1,10 @@
 const config = require("../../config.js")
+const userUtil = require("../../global-js/userUtil.js")
 var that = null;
 Page({
   data: {
     miniUser:{},
+    userSignImages:[],
     userId:'',
     animationData: {},
     circleDeg : -20,
@@ -12,11 +14,15 @@ Page({
     crightright :130,
     crightBottom : 200,
   },
-  onLoad: function (param) {
+  onShow: function () {
     that = this;
-    this.setData({userId: param.userId});
-    this.getUser(param.userId);
-
+    userUtil.login(function () {
+      var userInfo = wx.getStorageSync('userInfo');
+      that.setData({
+        userId: userInfo.id
+      })
+      that.getUser(userInfo.id);
+    });
     var animation = wx.createAnimation({
       duration: 1000,
       timingFunction: 'ease-in-out',
@@ -55,6 +61,11 @@ Page({
           })
         }
       }
+    })
+  },
+  userSignImages:function(){
+    that.setData({
+      userSignImages:[{imagePath:'',id:''}]
     })
   },
   scrollBottom:function(e){
@@ -104,6 +115,5 @@ Page({
       crightright: crightright,
       crightBottom: crightBottom
     })
-
   }
 })

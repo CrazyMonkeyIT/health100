@@ -29,7 +29,7 @@
 <!--战队榜 主体-->
     <view class="{{selected?'show':'hidden'}}">
         <image src='../images/ranking_corps.png' mode='widthFix' class='ranking_corps'></image>
-        <text style='position: absolute;left:440rpx;top:110rpx;font-size:40rpx;'>积分</text>
+        <text style='position: absolute;left:550rpx;top:120rpx;font-size:35rpx;color:blue;font-weight: bold;'>积分</text>
         <view class='table_view'>
         <view class='table_view_tr' wx:for="{{corpsPanking}}" wx:for-index="key" wx:key="{{corpsId}}" wx:for-item="value">
             <view class="table_view_td">
@@ -48,7 +48,7 @@
 <!--个人榜 主体-->
     <view class="{{selected1?'show':'hidden'}}">
       <image src='../images/ranking_users.png' mode='widthFix' class='ranking_corps'></image>
-      <text style='position: absolute;left:440rpx;top:110rpx;font-size:40rpx;'>积分</text>
+     <text style='position: absolute;left:550rpx;top:120rpx;font-size:35rpx;color:blue;font-weight: bold;'>积分</text>
       <view class='table_view'>
         <view class='table_view_tr' wx:for="{{usersPanking}}" wx:for-index="key" wx:key="{{id}}" wx:for-item="value">
             <view class="table_view_td">

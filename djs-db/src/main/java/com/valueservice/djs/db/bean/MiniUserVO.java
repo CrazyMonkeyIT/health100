@@ -16,6 +16,7 @@ public class MiniUserVO {
     private Long corpsPoint;
     private Long point;
     private Integer signCountDay;
+    private Long corpsId;
 
     private Boolean oneSign;
 
@@ -122,5 +123,13 @@ public class MiniUserVO {
 
     public void setCorpsPoint(Long corpsPoint) {
         this.corpsPoint = corpsPoint;
+    }
+
+    public Long getCorpsId() {
+        return corpsId;
+    }
+
+    public void setCorpsId(Long corpsId) {
+        this.corpsId = corpsId;
     }
 }
