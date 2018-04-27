@@ -1,12 +1,9 @@
 {
   "pages": [
-    "pages/user/user",
     "pages/index/index",
+    "pages/user/user",
     "pages/corps/corps",
     "pages/joincorps/joincorps",
-   
-    
-    
     "pages/achieve/achieve",
     "pages/sign/sign",
     "pages/logs/logs"

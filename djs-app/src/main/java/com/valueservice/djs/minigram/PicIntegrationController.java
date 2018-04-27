@@ -7,21 +7,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
 @Controller
-@RequestMapping("/mini/pic")
+@RequestMapping("/minigram/pic")
 public class PicIntegrationController {
 
     @Resource
     private PicIntegrationService picIntegrationService;
 
     @RequestMapping("/invite/{userId}")
+    @ResponseBody
     public BaseResult inviteImage(@PathVariable Integer userId){
         String picUrl = picIntegrationService.inviteImg(userId);
+        BaseResult result = new BaseResult();
+        if(picUrl != null){
+            result.setResult(true);
+            result.setMessage(picUrl);
+        }
+        return result;
+    }
 
-        return null;
+    @RequestMapping("/achive/{userId}")
+    @ResponseBody
+    public BaseResult achiveImage(@PathVariable Integer userId){
+        String picUrl = picIntegrationService.achivementImg(userId);
+        BaseResult result = new BaseResult();
+        if(picUrl != null){
+            result.setResult(true);
+            result.setMessage(picUrl);
+        }
+        return result;
     }
 
 }

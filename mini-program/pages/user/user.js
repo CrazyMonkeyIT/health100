@@ -126,5 +126,61 @@ Page({
       crightright: crightright,
       crightBottom: crightBottom
     })
+  },
+  inv_card_lick :function(){
+    wx.showLoading({
+      title: '生成中请稍候',
+      mask: true
+    })
+    wx.request({
+      url: config.service.host + '/minigram/pic/invite/' + this.data.userId,
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        if (res.data.result == true){
+          wx.previewImage({
+            current: res.data.message,
+            urls: [res.data.message],
+            success: function () {
+              wx.hideLoading();
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '我的邀请卡图片生成失败',
+            mask: true,
+          })
+        }
+      },
+    })
+  },
+  achive_click: function () {
+    wx.showLoading({
+      title: '生成中请稍候',
+      mask: true
+    })
+    wx.request({
+      url: config.service.host + '/minigram/pic/achive/' + this.data.userId,
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (res) {
+        if (res.data.result == true) {
+          wx.previewImage({
+            current: res.data.message,
+            urls: [res.data.message],
+            success: function () {
+              wx.hideLoading();
+            }
+          })
+        }else{
+          wx.showToast({
+            title: '个人成就图片生成失败',
+            mask: true,
+          })
+        }
+      },
+    })
   }
 })

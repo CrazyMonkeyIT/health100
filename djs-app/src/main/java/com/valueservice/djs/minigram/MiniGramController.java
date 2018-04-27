@@ -127,7 +127,7 @@ public class MiniGramController {
             result.setObj(corpsPanking);
             result.setMessage("获取战队排行成功~~");
         }catch (Exception e){
-            LOGGER.error("获取战队排行异常",e);
+            LOGGER.error("获取战队排行异常==userId:" + userId,e);
         }
         return result;
     }

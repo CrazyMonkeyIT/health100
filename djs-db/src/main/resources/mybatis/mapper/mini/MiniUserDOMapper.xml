@@ -14,13 +14,14 @@
     <result column="union_id" jdbcType="VARCHAR" property="unionId" />
     <result column="corps_id" jdbcType="BIGINT" property="corpsId" />
     <result column="point" jdbcType="DECIMAL" property="point" />
+    <result column="qrcode_url" jdbcType="VARCHAR" property="qrcodeUrl" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="active" jdbcType="INTEGER" property="active" />
   </resultMap>
   <sql id="Base_Column_List">
     id, nick_name, gender, country, province, city, language, avatar_url, open_id, union_id, 
-    corps_id, point, create_time, update_time, active
+    corps_id, point,qrcode_url, create_time, update_time, active
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,13 +37,13 @@
     insert into t_b_mini_user (id, nick_name, gender, 
       country, province, city, 
       language, avatar_url, open_id, 
-      union_id, corps_id, point, 
+      union_id, corps_id, point, qrcode_url,
       create_time, update_time, active
       )
     values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
       #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{language,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
-      #{unionId,jdbcType=VARCHAR}, #{corpsId,jdbcType=BIGINT}, #{point,jdbcType=DECIMAL}, 
+      #{unionId,jdbcType=VARCHAR}, #{corpsId,jdbcType=BIGINT}, #{point,jdbcType=DECIMAL}, #{qrcodeUrl,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{active,jdbcType=INTEGER}
       )
   </insert>
@@ -84,6 +85,9 @@
       </if>
       <if test="point != null">
         point,
+      </if>
+      <if test="qrcodeUrl != null">
+        qrcode_url,
       </if>
       <if test="createTime != null">
         create_time,
@@ -132,6 +136,9 @@
       <if test="point != null">
         #{point,jdbcType=DECIMAL},
       </if>
+      <if test="qrcodeUrl != null">
+        #{qrcodeUrl,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -179,6 +186,9 @@
       <if test="point != null">
         point = #{point,jdbcType=DECIMAL},
       </if>
+      <if test="qrcodeUrl != null">
+        qrcode_url = #{qrcodeUrl,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -204,11 +214,23 @@
       union_id = #{unionId,jdbcType=VARCHAR},
       corps_id = #{corpsId,jdbcType=BIGINT},
       point = #{point,jdbcType=DECIMAL},
+      qrcode_url = #{qrcodeUrl,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       active = #{active,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectRank" resultType="java.lang.Integer">
+    <![CDATA[
+      SELECT rownum
+      from
+      (select @rownum:=@rownum+1 AS rownum,id
+      from
+      t_b_mini_user,(SELECT @rownum:=0) r
+      ORDER BY point desc,create_time asc)b
+      WHERE id = #{id,jdbcType=INTEGER}
+    ]]>
+  </select>
   <select id="selectByOpenId" resultMap="BaseResultMap">
     select * from t_b_mini_user where open_id=#{openId,jdbcType=VARCHAR}
   </select>

@@ -12,7 +12,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/health?characterEncoding=utf-8"
                         userId="root"
-                        password="">
+                        password="123456">
         </jdbcConnection>
         <javaTypeResolver>  
             <property name="forceBigDecimals" value="false"/>  
@@ -31,7 +31,7 @@
             <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>  
         <!--生成对应表及类名-->  
-        <table tableName="t_b_mini_sign" domainObjectName="MiniSign" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true"></table>
-        <table tableName="t_b_mini_sign_waste_book" domainObjectName="MiniSignWasteBook" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true"></table>
+        <table tableName="t_b_post_pic_item" domainObjectName="PostPicItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true"></table>
+        <!--<table tableName="t_b_mini_sign_waste_book" domainObjectName="MiniSignWasteBook" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true"></table>-->
     </context>
 </generatorConfiguration>  

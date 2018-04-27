@@ -38,6 +38,12 @@ public class LoginController {
 	@Autowired
 	private UserInfoService userInfoService;
 
+	@RequestMapping(value = "/minigram/testing", method = RequestMethod.GET)
+	public ModelAndView testing(ModelAndView mv){
+		mv.setViewName("test");
+		return mv;
+	}
+
 	/**
 	 * 进入登录页
 	 * @param mv

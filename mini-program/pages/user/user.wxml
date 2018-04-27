@@ -8,8 +8,8 @@
   <image src='{{miniUser.badge3}}' class='badge_3_image'></image>
   <image src='{{miniUser.badge4}}' class='badge_4_image'></image> 
   <!-- 徽章下按钮 -->
-  <image src='../images/user/inv_card.png' mode='widthFix' class ='inv_card_image' bindtap="inv_card_lick"></image>
-   <image src='../images/user/user_achieve.png' mode='widthFix' class ='user_achieve_image' bindtap="user_achieve_lick"></image>
+   <image src='../images/user/inv_card.png' mode='widthFix' class ='inv_card_image' bindtap="inv_card_lick"></image>
+   <image src='../images/user/user_achieve.png' mode='widthFix' class ='user_achieve_image' bindtap="achive_click"></image>
    <!-- 积分打卡天数 -->
    <text class='signDay_text'>{{miniUser.signDay}}</text>
    <text class='countSignDay_text'>{{miniUser.signCountDay}}</text>

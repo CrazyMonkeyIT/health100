@@ -1,8 +1,17 @@
 package com.valueservice.djs.db.bean;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MiniImage {
+
+    Integer imageType = 0; // 0表示图片，1：表示文字
+
+    Font font = new Font("宋体", Font.PLAIN, 24);
+
+    Color color = new Color(255,255,255,255);
+
+    String content;
 
     BufferedImage image ;//图片缓存
 
@@ -59,5 +68,37 @@ public class MiniImage {
 
     public void setY(Integer y) {
         this.y = y;
+    }
+
+    public Integer getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(Integer imageType) {
+        this.imageType = imageType;
+    }
+
+    public Font getFont() {
+        return font;
+    }
+
+    public void setFont(Font font) {
+        this.font = font;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

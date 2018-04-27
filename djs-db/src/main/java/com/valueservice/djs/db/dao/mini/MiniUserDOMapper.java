@@ -13,6 +13,8 @@ public interface MiniUserDOMapper {
 
     MiniUser selectByPrimaryKey(Integer id);
 
+    Integer selectRank(Integer id);
+
     int updateByPrimaryKeySelective(MiniUser record);
 
     int updateByPrimaryKey(MiniUser record);

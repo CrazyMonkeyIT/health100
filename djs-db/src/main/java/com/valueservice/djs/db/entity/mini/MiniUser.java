@@ -27,6 +27,8 @@ public class MiniUser {
 
     private Long point;
 
+    private String qrcodeUrl;
+
     private Date createTime;
 
     private Date updateTime;
@@ -153,4 +155,11 @@ public class MiniUser {
         this.active = active;
     }
 
+    public String getQrcodeUrl() {
+        return qrcodeUrl;
+    }
+
+    public void setQrcodeUrl(String qrcodeUrl) {
+        this.qrcodeUrl = qrcodeUrl;
+    }
 }
