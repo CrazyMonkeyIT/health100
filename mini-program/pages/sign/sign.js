@@ -17,7 +17,6 @@ Page({
       })
       that.checkUserSign(userInfo.id);
     });
-    
   },
   checkUserSign:function(param){
     wx.request({

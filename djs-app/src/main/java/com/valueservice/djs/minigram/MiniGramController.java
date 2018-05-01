@@ -149,6 +149,25 @@ public class MiniGramController {
     }
 
     /**
+     * 获取战队队员排行
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/getCropsUserRanking",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getCropsUserRanking(Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            List<MiniUser> corpsPanking = miniUserService.selectCorpsUserPanking(userId);
+            result.setResult(true);
+            result.setObj(corpsPanking);
+            result.setMessage("获取战队排行成功~~");
+        }catch (Exception e){
+            LOGGER.error("获取战队排行异常==userId:" + userId,e);
+        }
+        return result;
+    }
+
+    /**
      * 获取所有的战队信息
      * @return
      */

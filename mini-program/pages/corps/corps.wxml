@@ -13,15 +13,15 @@
         <image src='../images/ranking_corps.png' mode='widthFix' class='ranking_corps'></image>
         <text style='position: absolute;left:550rpx;top:120rpx;font-size:35rpx;color:#29008e;font-weight: bold;'>积分</text>
         <view class='table_view'>
-        <view class='table_view_tr' wx:for="{{corpsPanking}}" wx:for-index="key" wx:key="{{corpsId}}" wx:for-item="value">
+        <view class='table_view_tr' wx:for="{{corpsUsersPanking}}" wx:for-index="key" wx:key="{{corpsId}}" wx:for-item="value">
             <view class="table_view_td">
             <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no'></image>
             <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no'></image>
               <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no'></image>
               <text class='table_view_td_no' wx:else>{{key+1}}</text>
               <image src='../images/panking_headImage.png' mode='widthFix' class='table_headimage'></image>
-              <image src='{{value.corpsHeadImage}}' mode='widthFix' class='table_headimage'></image>
-              <text class='table_view_td_name'>{{value.corpsName}}</text>
+              <image src='{{value.avatarUrl}}' mode='widthFix' class='table_headimage'></image>
+              <text class='table_view_td_name'>{{value.nickName}}</text>
               <text class='table_view_td_point'>{{value.point}}</text>
             </view>
         </view>
@@ -33,14 +33,14 @@
       <image src='../images/ranking_users.png' mode='widthFix' class='ranking_corps'></image>
       <text style='position: absolute;left:550rpx;top:120rpx;font-size:35rpx;color:#29008e;font-weight: bold;'>积分</text>
       <view class='table_view'>
-        <view class='table_view_tr' wx:for="{{usersPanking}}" wx:for-index="key" wx:key="{{id}}" wx:for-item="value">
+        <view class='table_view_tr' wx:for="{{corpsPanking}}" wx:for-index="key" wx:key="{{id}}" wx:for-item="value">
             <view class="table_view_td">
             <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no'></image>
             <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no'></image>
               <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no'></image>
               <text class='table_view_td_no' wx:else>{{key+1}}</text>
-              <image src='{{value.avatarUrl}}' mode='widthFix' class='table_headimage'></image>
-              <text class='table_view_td_name'>{{value.nickName}}</text>
+              <image src='{{value.corpsHeadImage}}' mode='widthFix' class='table_headimage'></image>
+              <text class='table_view_td_name'>{{value.corpsName}}</text>
               <text class='table_view_td_point'>{{value.point}}</text>
             </view>
         </view>
@@ -49,10 +49,10 @@
 <!--个人榜 主体end-->
 <!--tab 头-->
     <view class='tab_corps' bindtap="selected">
-      <text class="{{selected?'red':'default'}}">战队榜</text>
+      <text class="{{selected?'red':'default'}}">我的战队</text>
     </view> 
      <view class='tab_users' bindtap="selected1">
-      <text class="{{selected1?'red':'default'}}">个人榜</text>
+      <text class="{{selected1?'red':'default'}}">战队榜</text>
     </view> 
 <!--tab 头end-->
   </view>

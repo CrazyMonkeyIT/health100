@@ -53,7 +53,7 @@ public class MiniCorpService {
                 reults = miniCorpsMapper.selectCorpsPanking();
             }else{
                 MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
-                if(miniCorps!=null && miniCorps.getIsSpecial()==1){
+                if(miniCorps.getIsSpecial()!=null && miniCorps.getIsSpecial()==1){
                     reults = miniCorpsMapper.selectSpecialPanking();
                 }else{
                     reults = miniCorpsMapper.selectCorpsPanking();
@@ -96,7 +96,7 @@ public class MiniCorpService {
      */
     public String joinCorps(Long corpsId,Integer userId){
         MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
-        if(miniUser.getCorpsId()!=null)
+        if(miniUser.getCorpsId()!=null && miniUser.getCorpsId()!=0)
             return "您已加入过战队";
         miniUser.setCorpsId(corpsId);
         Long point = miniUser.getPoint()==0?0:miniUser.getPoint()/2;

@@ -91,7 +91,7 @@ page{
 }
 .corps_name_text{
   position:absolute;
-  left:428rpx;
+  left:380rpx;
   top:860rpx;
   width:300rpx;
   font-size:40rpx;
@@ -102,7 +102,7 @@ page{
 }
 .corps_point_text{
   position:absolute;
-  left:428rpx;
+  left:380rpx;
   top:949rpx;
   width:300rpx;
   font-size:50rpx;

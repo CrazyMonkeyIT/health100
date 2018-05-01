@@ -49,7 +49,7 @@ page{
 }
 .index-total-point {
   position: absolute;
-  left :575rpx;
+  left :580rpx;
   top :430rpx;
   font-size: 24rpx;
   color: #fff;

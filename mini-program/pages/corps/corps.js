@@ -8,7 +8,7 @@ Page({
     modalHidden: false,//
     userId:'',
     corpsPanking: [],
-    usersPanking:[],
+    corpsUsersPanking:[],
     pankingTopCorp:[],
     animationData: {}
   },
@@ -16,10 +16,12 @@ Page({
     that = this;
     userUtil.login(function () {
       var userInfo = wx.getStorageSync('userInfo');
-      that.userId = userInfo.id;
+      that.setData({
+        userId: userInfo.id
+      })
       that.pankingCorps(that.userId);
+      that.getCropsUserRanking(that.userId);
     });
-    this.pankingUsers();
     this.pankingTopCorps();
   },
   selected: function (e) {
@@ -48,16 +50,16 @@ Page({
       }
     })
   },
-  pankingUsers: function () {
+  getCropsUserRanking: function () {
     wx.request({
-      url: config.service.pankingUsers,
-      data: {},
+      url: config.service.getCropsUserRanking,
+      data: {userId: this.data.userId},
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
         that.setData({
-          usersPanking: resp.data.obj
+          corpsUsersPanking: resp.data.obj
         })
       }
     })

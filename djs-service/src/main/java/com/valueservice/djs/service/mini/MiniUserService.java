@@ -138,6 +138,11 @@ public class MiniUserService {
     public List<MiniUser> selectUserPanking(){
         return miniUserDOMapper.selectUserPanking();
     }
+
+    public List<MiniUser> selectCorpsUserPanking(Integer userId){
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        return miniUserDOMapper.selectCorpsUserPanking(miniUser.getCorpsId());
+    }
     /**
      * 通过openId查询用户信息
      * @param openId

@@ -22,4 +22,6 @@ public interface MiniUserDOMapper {
     MiniUser selectByOpenId(String openId);
 
     List<MiniUser> selectUserPanking();
+
+    List<MiniUser> selectCorpsUserPanking(Long corpsId);
 }
