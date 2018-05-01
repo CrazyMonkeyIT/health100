@@ -4,7 +4,7 @@ page{
 .down_png{
   position: fixed;
   bottom: 20rpx;
-  left :320rpx;
+  left :340rpx;
   width:70rpx;
 }
 .userinfo-avatar {
@@ -95,7 +95,7 @@ page{
   top:860rpx;
   width:300rpx;
   font-size:40rpx;
-  color:white;
+  color:#29008e;
   text-align:right;
   white-space:nowrap;
   overflow:hidden;
@@ -106,7 +106,7 @@ page{
   top:949rpx;
   width:300rpx;
   font-size:50rpx;
-  color:white;
+  color:#d724cb;
   text-align:right;
 }
 .percent_image{

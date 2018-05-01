@@ -56,7 +56,7 @@
                             <td><span class="blue"><#if data.isTop==0>否<#else>是</#if></span></td>
                             <td >
                                 <div class="btn-overlap btn-group">
-                                    <a onclick="topCorps('${data.corpsId}');" class="btn btn-white btn-primary btn-bold"  data-rel="tooltip" title="" data-original-title="置顶" title="置顶">
+                                    <a onclick="topCorps('${data.corpsId}','${data.isTop}');" class="btn btn-white btn-primary btn-bold"  data-rel="tooltip" title="" data-original-title="置顶" title="置顶">
                                         <i class="fa fa-exchange bigger-110 green" ></i>
                                     </a>
                                     <a onclick="showEditModal('${data.corpsName}');" class="btn btn-white btn-primary btn-bold"  data-rel="tooltip" title="" data-original-title="修改" title="修改">
@@ -135,7 +135,7 @@
                             <label class="col-sm-4 control-label">战队Banner</label>
                             <div class="col-sm-8">
                                 <input id="avatarSlect1" type="file" style="position: absolute;float: left; z-index: 10; opacity: 0;width: 200px; height: 100px;"><br/>
-                                <img id="avatarPreview1" src="http://localhost:9090/Users/weiying/Desktop/minifile/temp1523605943722/120(1523605943726).jpg" title="点击更换图片" style="position: absolute; z-index: 9; width: 200px; height: 100px">
+                                <img id="avatarPreview1" src="" title="点击更换图片" style="position: absolute; z-index: 9; width: 200px; height: 100px">
                             </div>
                         </div>
 
@@ -173,7 +173,11 @@
     </div>
 </div>
 <!-- 显示图片end -->
+
 <script>
+    jQuery(function($) {
+        $('[data-rel=tooltip]').tooltip();
+    });
     // 分页查询
     function submitForm(index){
         $("#pageIndex").val(index);
@@ -292,23 +296,41 @@
             });
         });
     };
-    function topCorps(corpsId) {
-        Ewin.confirm({ message: "确认要置顶该战队？" }).on(function () {
-            $.ajax({
-                url : basePath+"/system/corps/corpsTop",
-                type : 'post',
-                data : {
-                    "corpsId":corpsId
-                },
-                success : function(data) {
-                    if(data){
-                        $("#form1").submit();
-                    }else{
-                        alert("操作失败，系统异常");
+    function topCorps(corpsId,isTop) {
+        if(isTop==1){
+            Ewin.confirm({ message: "确认取消战队的置顶？" }).on(function () {
+                $.ajax({
+                    url : basePath+"/system/corps/corpsCancelTop",
+                    type : 'post',
+                    data : {
+                    },
+                    success : function(data) {
+                        if(data){
+                            $("#form1").submit();
+                        }else{
+                            alert("操作失败，系统异常");
+                        }
                     }
-                }
+                });
             });
-        });
+        }else{
+            Ewin.confirm({ message: "确认要置顶该战队？" }).on(function () {
+                $.ajax({
+                    url : basePath+"/system/corps/corpsTop",
+                    type : 'post',
+                    data : {
+                        "corpsId":corpsId
+                    },
+                    success : function(data) {
+                        if(data){
+                            $("#form1").submit();
+                        }else{
+                            alert("操作失败，系统异常");
+                        }
+                    }
+                });
+            });
+        }
     };
     /*图片预览*/
     $(function () {
@@ -320,27 +342,37 @@
             var formData=new FormData();
             formData.append('file', $("#avatarSlect")[0].files[0]);
             var fSize = 1024 * 1024 * 3;
-            //限制图片宽高
-            var fHeight = 676;
-            var fWidth = 242;
             if($("#avatarSlect")[0].files[0].size>fSize){
                 alert("图片不能大于"+fSize/1024/1024+"M");
                 return;
             }
-            $.ajax({
-                url: basePath + "/import/up/temp",
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (args) {
-                    /*服务器端的图片地址*/
-                    $("#avatarPreview").attr('src',args[0].filePath);
-                    /*预览图片*/
-                    $("#avatar").val(args[0].filePath);
-                    /*将服务端的图片url赋值给form表单的隐藏input标签*/
+            var flg = true;
+            var img = new Image;
+            img.onload = function() {
+                if (img.height != img.width ) {
+                    alert("请上传宽高相等的图片，当前图片尺寸为：" + img.width + "*" + img.height);
+                    flg = false;
                 }
-            })
+                if(flg==false){
+                    $("#avatarPreview1").attr('src','');
+                    return;
+                }else{
+                    $.ajax({
+                        url: basePath + "/import/up/temp",
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (args) {
+                            /*服务器端的图片地址*/
+                            $("#avatarPreview").attr('src',args[0].filePath);
+                            /*预览图片*/
+                            $("#avatar").val(args[0].filePath);
+                            /*将服务端的图片url赋值给form表单的隐藏input标签*/
+                        }
+                    })
+                }
+            }
         })
     };
     function bindAvatar1() {
@@ -349,34 +381,40 @@
             formData.append('file', $("#avatarSlect1")[0].files[0]);
             var fSize = 1024 * 1024 * 3;
             //限制图片宽高
-            var fHeight = 242;
-            var fWidth = 676;
+            var fHeight = 250;
+            var fWidth = 680;
             if($("#avatarSlect1")[0].files[0].size>fSize){
                 alert("图片不能大于"+fSize/1024/1024+"M");
                 return;
             }
+            var flg = true;
             var img = new Image;
             img.onload = function(){
                 if(img.height!=fHeight || img.width!=fWidth){
                     alert("请上传尺寸为："+fWidth+"*"+fHeight+"的图片，当前图片尺寸为："+img.width+"*"+img.height);
+                    flg = false;
+                }
+                if(flg==false){
+                    $("#avatarPreview1").attr('src','');
                     return;
+                }else{
+                    $.ajax({
+                        url: basePath + "/import/up/temp",
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (args) {
+                            /*服务器端的图片地址*/
+                            $("#avatarPreview1").attr('src',args[0].filePath);
+                            /*预览图片*/
+                            $("#avatar1").val(args[0].filePath);
+                            /*将服务端的图片url赋值给form表单的隐藏input标签*/
+                        }
+                    })
                 }
             }
             img.src=window.URL.createObjectURL($("#avatarSlect1")[0].files[0]);
-            $.ajax({
-            url: basePath + "/import/up/temp",
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (args) {
-                /*服务器端的图片地址*/
-                $("#avatarPreview1").attr('src',args[0].filePath);
-                /*预览图片*/
-                $("#avatar1").val(args[0].filePath);
-                /*将服务端的图片url赋值给form表单的隐藏input标签*/
-            }
-        })
         })
     };
     function showImage(imagePath) {

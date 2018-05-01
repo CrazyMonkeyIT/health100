@@ -18,6 +18,8 @@ public class MiniSignWasteBook {
 
     private Timestamp signTime;
 
+    private String nickName;
+
     public Long getId() {
         return id;
     }
@@ -73,5 +75,14 @@ public class MiniSignWasteBook {
 
     public void setSignTime(Timestamp signTime) {
         this.signTime = signTime;
+    }
+
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

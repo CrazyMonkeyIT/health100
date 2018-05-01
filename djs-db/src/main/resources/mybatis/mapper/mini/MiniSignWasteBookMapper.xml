@@ -9,6 +9,7 @@
     <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
     <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
     <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+    <result column="nick_name" jdbcType="TIMESTAMP" property="nickName" />
   </resultMap>
   <sql id="Base_Column_List">
     id, sign_id, sign_type, is_check, image_path
@@ -111,7 +112,10 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectNotCheckWasteBook" resultMap="BaseResultMap">
-    select * from t_b_mini_sign_waste_book where sign_type=1 and is_check=0
+    select a.*,c.nick_name from t_b_mini_sign_waste_book a
+    inner join t_b_mini_sign b on a.sign_id=b.sign_id
+    inner join t_b_mini_user c on b.mini_user_id = c.id
+    where sign_type=1 and is_check=0
   </select>
   <select id="selectLastSignWasteBook" resultMap="BaseResultMap">
     select * from t_b_mini_sign_waste_book where sign_id=#{signId,jdbcType=BIGINT} order by sign_time desc limit 1;

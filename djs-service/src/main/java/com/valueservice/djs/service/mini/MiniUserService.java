@@ -123,6 +123,14 @@ public class MiniUserService {
         }
         return miniUserVO;
     }
+
+    public String getMiniUserCountDay(Integer userId){
+        MiniSign miniSign = miniSignMapper.selectByMiniUserId(userId);
+        if(!Objects.isNull(miniSign)){
+
+        }
+        return "";
+    }
     /**
      * 获取用户积分排行榜 前30
      * @return

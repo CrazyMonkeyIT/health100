@@ -76,6 +76,22 @@ public class MiniGramController {
         return result;
     }
 
+    /**
+     * 用户连续打卡天数成就展示
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/getMiniUserCountDay",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getMiniUserCountDay(Integer userId){
+        BaseResult result = new BaseResult();
+        try{
+
+        }catch (Exception e){
+            LOGGER.error("用户连续打卡成就展示失败",e);
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/getMiniUserAchieve",method = RequestMethod.GET)
     public @ResponseBody BaseResult getMiniUserAchieve(Integer userId){
         BaseResult result = new BaseResult();

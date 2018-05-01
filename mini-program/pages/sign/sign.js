@@ -48,6 +48,14 @@ Page({
   },
   // 一键打卡
   sign_click:function(){
+    var hours = new Date().getHours();
+    if (hours < 5 || hours > 21) {
+      wx.showModal({
+        title: '提示',
+        content: '亲！每天打卡时间为5：00～21：00哦'
+      })
+      return;
+    }
     wx.request({
       url: config.service.userSign,
       data: { userId: that.data.userId},
@@ -71,13 +79,14 @@ Page({
   // 传图打卡
   image_sign_click:function(){
     var hours = new Date().getHours();
-    // if(hours<5 || hours>21){
-    //   wx.showModal({
-    //     title: '提示',
-    //     content: '亲！每天打卡时间为5：00～21：00哦'
-    //   })
-    //   return;
-    // }
+    if(hours<5 || hours>21){
+      wx.showModal({
+        title: '提示',
+        content: '亲！每天打卡时间为5：00～21：00哦'
+      })
+      return;
+    }
+   
     wx.chooseImage({ 
       count:1,
       sizeType: ['compressed'], 

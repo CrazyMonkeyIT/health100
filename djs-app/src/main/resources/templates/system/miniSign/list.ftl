@@ -38,7 +38,7 @@
                         <#list page.list as data>
                         <tr>
                             <td>${((page.pageNum-1) * 10) + (data_index+1)}</td>
-                            <td><span class="blue">${data.corpsName!''}</span></td>
+                            <td><span class="blue">${data.nickName!''}</span></td>
                             <td><a onclick="showImage('${data.imagePath}')"><img src="${data.imagePath!''}" style="width: 50px;height: 50px;"></a></td>
                             <td >
                                 <div class="btn-overlap btn-group">

@@ -14,7 +14,7 @@ page{
   width: 600rpx;
   text-align: left;
   font-size: 60rpx;
-  color:thistle;
+  color:#ffc5f1;
 }
 .corps_msg_02{
   position: absolute;
@@ -23,7 +23,7 @@ page{
   width: 600rpx;
   text-align:left;
   font-size: 60rpx;
-  color:thistle;
+  color:#ffc5f1;
 }
 .corps_click_image{
   position: absolute;
@@ -75,7 +75,10 @@ page{
 .show{display:block;text-align:center;}
 .hidden{display:none;text-align:center;}
 .red{
-  color: red;
+  color:#fff;
+}
+.default{
+  color:#ea7eed;
 }
 .table_view{
   position: absolute;
@@ -116,4 +119,45 @@ page{
   font-size:30rpx;
   padding: 10rpx; 
   text-align: left;
+}
+.corps_info{
+  position: absolute;
+  left:18rpx;
+  top:395rpx;
+  width:190rpx;
+  height:50rpx;
+}
+.corps_info_view{
+  position:absolute;
+  left:0rpx;
+  top:425rpx;
+  width:740rpx;
+  height:380rpx;
+}
+.corps_info_0{
+  position: absolute;
+  top:141rpx;
+  left:40rpx;
+  width: 650rpx;
+  text-align: center;
+  font-size: 40rpx;
+  color:#9277e5;
+}
+.corps_info_01{
+  position: absolute;
+  top:201rpx;
+  left:40rpx;
+  width: 650rpx;
+  font-size: 40rpx;
+  text-align: center;
+  color:#9277e5;
+}
+.corps_info_02{
+  position: absolute;
+  top:251rpx;
+  left:40rpx;
+  width: 650rpx;
+  font-size: 40rpx;
+  text-align: center;
+  color:#9277e5;
 }

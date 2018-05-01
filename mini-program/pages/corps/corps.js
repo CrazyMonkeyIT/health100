@@ -5,6 +5,7 @@ Page({
   data: {
     selected: true, //tab
     selected1: false,//tab
+    modalHidden: false,//
     userId:'',
     corpsPanking: [],
     usersPanking:[],
@@ -79,6 +80,16 @@ Page({
   sign_click:function(){
     wx.navigateTo({
       url: "/pages/sign/sign"
+    })
+  },
+  corps_info:function(){
+    this.setData({
+      modalHidden: !this.data.modalHidden,
+    })
+  },
+  cancel_corps_info:function(){
+    this.setData({
+      modalHidden: !this.data.modalHidden,
     })
   }
 })

@@ -6,14 +6,14 @@ page{
 }
 .one_join{
   position: absolute;
-  left: 225rpx;
-  top : 300rpx;
-  width : 300rpx;
+  left: 265rpx;
+  top : 280rpx;
+  width : 250rpx;
 }
 .tab_main{
   position:absolute;
   left:55rpx;
-  top:730rpx;
+  top:670rpx;
   width:80%;
   height: 400rpx;
   flex-direction:row;
@@ -41,8 +41,8 @@ page{
   position: absolute;
   border-radius:50%;
   left: 28rpx;
-  width: 105rpx;
-  top:18rpx;
+  width: 100rpx;
+  top:19rpx;
 }
 .corps_join{
   position: absolute;
@@ -73,4 +73,10 @@ page{
   top:70rpx;
   font-size:35rpx;
   color:blueviolet;
+}
+.down_png{
+  position: fixed;
+  bottom: 20rpx;
+  left :340rpx;
+  width:70rpx;
 }

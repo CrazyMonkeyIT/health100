@@ -14,19 +14,31 @@ page{
 .down_png{
   position: fixed;
   bottom: 20rpx;
-  left :320rpx;
+  left :340rpx;
   width:70rpx;
 }
 .camp_rule{
   position: absolute;
-  width:90px;
-  left:10rpx;
-  top:10rpx;
+  width:180rpx;
+  left:50rpx;
+  top:40rpx;
 }
 .index-join-day {
   position: absolute;
   left :80rpx;
   top :400rpx;
+  font-size: 24rpx;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content :center;
+  text-align: center;
+}
+.index-join-day_one {
+  position: absolute;
+  left :105rpx;
+  top :395rpx;
   font-size: 24rpx;
   color: #fff;
   display: flex;
@@ -47,6 +59,14 @@ page{
   justify-content :center;
   text-align: center;
 }
+.index-total-point_one {
+  position: absolute;
+  left :580rpx;
+  top :445rpx;
+  font-size: 24rpx;
+  color: #fff;
+  text-align: center;
+}
 .run_health {
   position: absolute;
   left :100rpx;
@@ -61,13 +81,13 @@ page{
 }
 .sign_click{
  position: absolute;
- left :95rpx;
+ left :112rpx;
  top :1020rpx;
  width : 250rpx;
 }
 .corps_click{
   position: absolute;
-  left: 355rpx;
+  left: 365rpx;
   top :1020rpx;
   width : 300rpx;
 }
@@ -121,7 +141,10 @@ page{
 .show{display:block;text-align:center;}
 .hidden{display:none;text-align:center;}
 .red{
-  color: red;
+  color:#fff;
+}
+.default{
+  color:#ea7eed;
 }
 .buydes-dialog-container{  
     width: 100%;  

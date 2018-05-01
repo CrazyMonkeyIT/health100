@@ -134,6 +134,10 @@ public class MiniCorpService {
         return false;
     }
 
+    public void corpsCancelTop(){
+        miniCorpsMapper.corpsCancelTop();
+    }
+
     public MiniCorps selectTop1Corps(){
         MiniCorps miniCorps = miniCorpsMapper.selectTopCorps();
         if(Objects.isNull(miniCorps)){

@@ -24,8 +24,8 @@
     corps_id, point,qrcode_url, create_time, update_time, active
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    *
     from t_b_mini_user
     where id = #{id,jdbcType=INTEGER}
   </select>

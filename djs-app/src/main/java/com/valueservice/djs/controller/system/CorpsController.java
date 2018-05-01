@@ -99,4 +99,17 @@ public class CorpsController extends BaseController {
         }
         return result;
     }
+    @RequestMapping("/corpsCancelTop")
+    @ResponseBody
+    public Boolean corpsCancelTop(){
+        Boolean result = true;
+        try{
+            miniCorpService.corpsCancelTop();
+        }catch (Exception e){
+            result=false;
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
