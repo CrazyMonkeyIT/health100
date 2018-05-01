@@ -159,9 +159,9 @@ page{
 }
 .sign_iamge_main{
   position:absolute;
-  left:40rpx;
+  left:37rpx;
   top:1150rpx;
-  width:670rpx;
+  width:680rpx;
   height:430rpx;
   overflow: scroll;
   display: flex;
