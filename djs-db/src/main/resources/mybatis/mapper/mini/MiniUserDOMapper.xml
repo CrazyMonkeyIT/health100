@@ -236,11 +236,11 @@
   </select>
   <select id="selectUserPanking" resultMap="BaseResultMap">
   select * from t_b_mini_user
-  GROUP BY point desc limit 30
+  ORDER BY point desc limit 30
   </select>
   <select id="selectCorpsUserPanking" resultMap="BaseResultMap">
     select * from t_b_mini_user
     where corps_id = #{corpsId,jdbcType=BIGINT}
-    GROUP BY point desc limit 30
+    ORDER BY point desc limit 30
   </select>
 </mapper>
