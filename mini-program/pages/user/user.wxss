@@ -9,10 +9,10 @@ page{
 }
 .userinfo-avatar {
   position:absolute;
-  width:180rpx;
-  left:75rpx;
-  top:140rpx;
-  height:180rpx;
+  width:172rpx;
+  left:80rpx;
+  top:44rpx;
+  height:172rpx;
   border-radius:50%;
 }
 .user_name_text{
@@ -65,7 +65,7 @@ page{
 .signDay_text{
   position:absolute;
   left:100rpx;
-  top:425rpx;
+  top:325rpx;
   width:90rpx;
   font-size:50rpx;
   color:white;
@@ -74,7 +74,7 @@ page{
 .countSignDay_text{
   position:absolute;
   left:100rpx;
-  top:580rpx;
+  top:480rpx;
   width:90rpx;
   font-size:50rpx;
   color:white;
@@ -92,7 +92,7 @@ page{
 .corps_name_text{
   position:absolute;
   left:380rpx;
-  top:860rpx;
+  top:760rpx;
   width:300rpx;
   font-size:40rpx;
   color:#29008e;
@@ -103,7 +103,7 @@ page{
 .corps_point_text{
   position:absolute;
   left:380rpx;
-  top:949rpx;
+  top:849rpx;
   width:300rpx;
   font-size:50rpx;
   color:#d724cb;
@@ -127,18 +127,17 @@ page{
 }
 .percent-view {
   position:absolute;
-  width:488rpx;
-  height: 488rpx;
-  left:240rpx;
-  top:370rpx;
+  width:430rpx;
+  height: 430rpx;
+  left:268rpx;
+  top:300rpx;
   overflow: hidden;
 }
 .percent-circle {
   position: inherit;
   left :1rpx;
-  width:244rpx;
-  top :200rpx;
-  
+  width:210rpx;
+  top :170rpx;
   transform-origin: 100% 50%;
   z-index:30;
 }
@@ -148,19 +147,19 @@ page{
   z-index: 20;
 }
 .circle-bb {
-  width:370rpx;
-  height:386rpx;
-  border:40rpx solid #EE00A2;
+  width:335rpx;
+  height:330rpx;
+  border:30rpx solid #EE00A2;
   border-radius:351rpx;
   position:absolute;
   left:20rpx;
-  top:13rpx;
+  top:20rpx;
   
 }
 .sign_iamge_main{
   position:absolute;
   left:37rpx;
-  top:1150rpx;
+  top:1050rpx;
   width:680rpx;
   height:430rpx;
   overflow: scroll;

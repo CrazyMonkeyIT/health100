@@ -1,5 +1,5 @@
 <scroll-view>
-  <image src='../images/user/user_back.jpg' mode='widthFix' style='width:100%'></image>
+  <image src='../images/user/user_back.png' mode='widthFix' style='width:100%'></image>
   <image class="userinfo-avatar" src="{{miniUser.avatar}}" background-size="cover"></image>
   <text class='user_name_text'>{{miniUser.nickName}}</text>
   <!-- 徽章 -->
@@ -15,9 +15,9 @@
    <text class='countSignDay_text'>{{miniUser.signCountDay}}</text>
    <text class='point_text'>{{miniUser.point}}</text>
    <view class='percent-view'>
-      <view class='circle-bb'style="clip:rect({{clefttop}}rpx, {{cleftright}}rpx, 345rpx, 0px);"></view>
-      <view class='circle-bb'style="clip:rect(0px, {{crightright}}rpx, {{crightBottom}}rpx, 130px);"></view>
-      <image src='../images/user/png_circle.png' mode='widthFix' style='width:487rpx' class='circle-image'></image>
+      <view class='circle-bb'style="clip:rect({{clefttop}}rpx, {{cleftright}}rpx, 290rpx, 0px);"></view>
+      <view class='circle-bb'style="clip:rect(0px, {{crightright}}rpx, {{crightBottom}}rpx, 170rpx);"></view>
+      <image src='../images/user/png_circle.png' mode='widthFix' style='width:430rpx' class='circle-image'></image>
       <image class='percent-circle' src='../images/user/percent_cirlce.png' mode='widthFix' style='transform: rotate({{circleDeg}}deg);'></image>
    </view>
   

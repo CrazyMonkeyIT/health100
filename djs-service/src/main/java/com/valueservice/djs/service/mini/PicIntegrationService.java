@@ -123,7 +123,7 @@ public class PicIntegrationService {
         lunch.setX(300);
         lunch.setY(742);
         lunch.setContent(lanchContent);
-        lunch.setFont(new Font("宋体", Font.BOLD, 32));
+        lunch.setFont(new Font("苹方黑体", Font.BOLD, 32));
         lunch.setColor(new Color(202,0,191,255));
         return lunch;
     }
@@ -149,7 +149,7 @@ public class PicIntegrationService {
         rank.setX(500);
         rank.setY(485);
         rank.setContent(rankContent);
-        rank.setFont(new Font("宋体", Font.BOLD, 38));
+        rank.setFont(new Font("苹方黑体", Font.BOLD, 38));
         rank.setColor(new Color(202,0,191,255));
         return rank;
     }
@@ -168,7 +168,7 @@ public class PicIntegrationService {
         signDaysCount.setX(235);
         signDaysCount.setY(485);
         signDaysCount.setContent(content);
-        signDaysCount.setFont(new Font("宋体", Font.BOLD, 38));
+        signDaysCount.setFont(new Font("苹方黑体", Font.BOLD, 38));
         signDaysCount.setColor(new Color(202,0,191,255));
         return signDaysCount;
     }
@@ -182,13 +182,14 @@ public class PicIntegrationService {
     private MiniImage getFontContent(MiniUser miniUser){
         MiniImage image = new MiniImage(210,1070,0,0);
         image.setImageType(1);
-        image.setFont(new Font("宋体", Font.BOLD, 24));
+        image.setFont(new Font("苹方黑体", Font.PLAIN, 24));
+        image.setX(380);
         if(miniUser.getCorpsId() == null){
             image.setContent("打败肉肉，你不是一个人在战斗！");
         }else{
             MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
             image.setContent("我在"+miniCorps.getCorpsName()+"战队等你一起科学减重！");
-            image.setX(210);
+
         }
 
         logger.info("邀请文字内容：" + image.getContent());

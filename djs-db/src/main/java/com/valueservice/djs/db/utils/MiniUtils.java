@@ -1,8 +1,9 @@
 package com.valueservice.djs.db.utils;
 
 
-import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.JSONObject;
+
+import com.meidusa.fastjson.JSONException;
+import com.meidusa.fastjson.JSONObject;
 import com.valueservice.djs.db.bean.CommonConst;
 import com.valueservice.djs.db.bean.WxAccessToken;
 import com.valueservice.djs.db.bean.WxX509TrustManager;

@@ -9,10 +9,10 @@ Page({
     animationData: {},
     circleDeg : -20,
     leftBBtop :345,//345
-    cleftright:240,//234
+    cleftright:170,//234
     clefttop:0,
-    crightright :130,
-    crightBottom : 200,
+    crightright :395,//130
+    crightBottom : 290,//200
   },
   onShow: function () {
     that = this;
@@ -98,26 +98,28 @@ Page({
     })
   },
   continuousDay : function(day){
-    let initDeg = -20, step = 2.4, cleftright = 120,clefttop=0,
-    crightright = 130,crightBottom = 200;
+    console.log(day);
+    let initDeg = -20, step = 2.1, cleftright = 120,clefttop=0,
+    crightright = 130,crightBottom = 60;
     if(day < 30){
-      clefttop = 345-30 - 9 * day;
+      clefttop = 290-30 - 9 * day;
     }
     if(day >= 30 && day < 50){
       clefttop = 0;
-      cleftright = 100 + (day-30) * 9
+      cleftright = 90 + (day-30) * 3.7
     }
-    if(day >=50 && day <= 65){
-      cleftright = 240;
-      crightright = 240 + (day - 50) * 9
-    } else if (day > 65 && day <=80){
-      cleftright = 240;
-      crightright = 480;
-      crightBottom = 105 + (day - 65) * 5.2
+    if(day >=50 && day <= 75){
+      cleftright = 170;
+      crightright = 170 + (day - 50) * 7
+    } else if (day > 75 && day <=80){
+      cleftright = 170;
+      crightright = 395;
+      crightBottom = 60 + (day - 65) * 2.3
     }else if(day > 80){
-      cleftright = 240;
-      crightright = 480;
-      crightBottom = 105 + (day - 65) * 7.4
+      cleftright = 200;
+      crightright = 395;
+      crightBottom = 60 + (day - 65) * 6;
+      step = 2.3
     }
     this.setData({
       circleDeg: (step * day) + initDeg,

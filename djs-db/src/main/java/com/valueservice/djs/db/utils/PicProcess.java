@@ -176,24 +176,25 @@ public class PicProcess {
         BufferedImage res= modifyImagetogeter(mainPic,uPic);
         writeImageLocal("/Users/maowankui/Documents/testImg/result1.jpg",res);*/
 
-//        BufferedImage mainPic = loadImageLocal("/Users/maowankui/Documents/testImg/mainPic.jpg");
-//        BufferedImage mini1 = loadImageLocal("/Users/maowankui/Documents/testImg/post.png");
-//        BufferedImage mini2 = loadImageLocal("/Users/maowankui/Documents/testImg/uPic.png");
-//        MiniImage post = new MiniImage(163, 394, 440, 616);
-//        post.setImage(mini1);
-//        MiniImage qrcode = new MiniImage(303, 1124, 150, 150);
-//        qrcode.setImage(mini2);
-//        Long time = System.currentTimeMillis();
-//        MiniImage image = new MiniImage(210,1070,0,0);
-//        image.setImageType(1);
-//        String teamName = "呆地在地夺在";
-//        String content = "我在"+teamName+"战队等你一起科学减重！";
-//        image.setX(210-12*(teamName.length() > 2?teamName.length()-2:0));
-//        image.setContent(content);
-//        //image.setContent("打败肉肉，你不是一个人在战斗！");
-//        String pngName = "/Users/maowankui/Documents/" + time + ".png";
-//        writePngImg(pngName,mainPic,post,qrcode,image);
-        BufferedImage achive_back = loadImageLocal("/Users/maowankui/Desktop/minifile/achive_back.png");
+        BufferedImage mainPic = loadImageLocal("/Users/maowankui/Documents/testImg/mainPic.jpg");
+        BufferedImage mini1 = loadImageLocal("/Users/maowankui/Documents/testImg/post.png");
+        BufferedImage mini2 = loadImageLocal("/Users/maowankui/Documents/testImg/uPic.png");
+        MiniImage post = new MiniImage(163, 394, 440, 616);
+        post.setImage(mini1);
+        MiniImage qrcode = new MiniImage(303, 1124, 150, 150);
+        qrcode.setImage(mini2);
+        Long time = System.currentTimeMillis();
+        MiniImage image = new MiniImage(210,1070,0,0);
+        image.setImageType(1);
+        String teamName = "呆地在地夺在";
+        String content = "我在"+teamName+"战队等你一起科学减重！";
+        image.setX(380);
+        image.setFont(new Font("苹方黑体", Font.PLAIN, 24));
+        image.setContent(content);
+        //image.setContent("打败肉肉，你不是一个人在战斗！");
+        String pngName = "/Users/maowankui/Documents/" + time + ".png";
+        writePngImg(pngName,mainPic,post,qrcode,image);
+       /* BufferedImage achive_back = loadImageLocal("/Users/maowankui/Desktop/minifile/achive_back.png");
 
         BufferedImage mainPic = loadImageLocal("/Users/maowankui/Documents/WechatIMG1.jpeg");
         BufferedImage circlepic = ellipseImage(mainPic);
@@ -235,7 +236,7 @@ public class PicProcess {
 
         Long time = System.currentTimeMillis();
         String pngName = "/Users/maowankui/Documents/" + time + ".png";
-        writePngImg(pngName,achive_back,achive_circle_image,qrcode,image,rank,lanch);
+        writePngImg(pngName,achive_back,achive_circle_image,qrcode,image,rank,lanch);*/
     }
 
 }
