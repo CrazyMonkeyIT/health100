@@ -42,4 +42,16 @@ public class PicIntegrationController {
         return result;
     }
 
+    @RequestMapping("/firstclick/{userId}")
+    @ResponseBody
+    public BaseResult firstclick(@PathVariable Integer userId){
+        String picUrl = picIntegrationService.firstClickImg(userId);
+        BaseResult result = new BaseResult();
+        if(picUrl != null){
+            result.setResult(true);
+            result.setMessage(picUrl);
+        }
+        return result;
+    }
+
 }
