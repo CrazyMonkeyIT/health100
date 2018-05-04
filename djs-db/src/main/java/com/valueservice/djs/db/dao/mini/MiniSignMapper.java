@@ -18,5 +18,11 @@ public interface MiniSignMapper {
 
     MiniSign selectByMiniUserId(@Param("miniUserId")Integer miniUserId);
 
+    int updateCountDay7(Long signId);
 
+    int updateCountDay30(Long signId);
+
+    int updateCountDay60(Long signId);
+
+    int updateCountDay100(Long signId);
 }

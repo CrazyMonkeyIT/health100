@@ -12,12 +12,11 @@ import com.valueservice.djs.db.entity.mini.MiniUser;
 import com.valueservice.djs.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import sun.jvm.hotspot.oops.ObjectHeap;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by weiying on 2018/4/13.
@@ -89,24 +88,45 @@ public class MiniSignService {
 
     /**
      * 传图用户打卡
+     * 第一天和最后一天需要确认
      * @param userId
      * @param imagePath
      * @return
      */
-    public String imageSign(Integer userId,String imagePath){
-        return saveOrUpdateSign(userId,imagePath);
+    public Map<String,Object> imageSign(Integer userId,String imagePath){
+        Map<String,Object> map = new HashMap<>();
+        String result = saveOrUpdateSign(userId,imagePath);
+        if(result.equals("success")){
+            MiniSign miniSign = miniSignMapper.selectByMiniUserId(userId);
+            if(miniSign.getSignDays()!=1 && miniSign.getSignDays()!=100){
+                MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+                Long tempPoint = Long.valueOf(20*miniSign.getCountDays());
+                miniUser.setPoint(miniUser.getPoint()+tempPoint);
+                miniUser.setUpdateTime(new Timestamp(new Date().getTime()));
+                miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+                map.put("point","积分+"+tempPoint);
+            }else{
+                map.put("point","积分审批中");
+            }
+        }
+        map.put("result",result);
+        return map;
     }
 
-    public String userSign(Integer userId)throws Exception{
+    public Map<String,Object> userSign(Integer userId)throws Exception{
+        Map<String,Object> map = new HashMap<>();
         String result = saveOrUpdateSign(userId,"");
         if(result.equals("success")){
             MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
             MiniSign miniSign = miniSignMapper.selectByMiniUserId(userId);
-            miniUser.setPoint(miniUser.getPoint()+5*miniSign.getCountDays());
+            Long tempPoint = Long.valueOf(5*miniSign.getCountDays());
+            miniUser.setPoint(miniUser.getPoint()+tempPoint);
             miniUser.setUpdateTime(new Timestamp(new Date().getTime()));
             miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+            map.put("point","积分+"+tempPoint);
         }
-        return result;
+        map.put("result",result);
+        return map;
     }
     /**
      * 创建打卡记录
@@ -115,6 +135,7 @@ public class MiniSignService {
      * @return
      */
     public String saveOrUpdateSign(Integer userId,String imagePath){
+        int signDay = 1;  //打卡天数
         try{
             MiniSign miniSign = miniSignMapper.selectByMiniUserId(userId);
             if(Objects.isNull(miniSign)){ //第一次打卡
@@ -127,7 +148,7 @@ public class MiniSignService {
             }else{
                 /**当天是否已经打过卡**/
                 if(DateUtil.daysBetween(miniSign.getLastSignTime(),new Date())==0){
-                    return "Signed in today";
+                    return "今天已经打过卡了哦～";
                 }else if (DateUtil.daysBetween(miniSign.getLastSignTime(),new Date())==1){
                     /**连续打卡**/
                     MiniSignWasteBook miniSignWasteBook = miniSignWasteBookMapper.selectLastSignWasteBook(miniSign.getSignId());
@@ -142,11 +163,12 @@ public class MiniSignService {
                     /**非连续打卡**/
                     miniSign.setCountDays(1);
                 }
-                miniSign.setSignDays(miniSign.getSignDays()+1);
+                signDay = miniSign.getSignDays()+1; //获取打卡天数
+                miniSign.setSignDays(signDay);
                 miniSign.setLastSignTime(new Timestamp(new Date().getTime()));
                 miniSignMapper.updateByPrimaryKeySelective(miniSign);
             }
-            saveSignWasteBook(miniSign.getSignId(),imagePath);
+            saveSignWasteBook(miniSign.getSignId(),imagePath,signDay);
         }catch (Exception e){
             e.printStackTrace();
             return "error";
@@ -159,12 +181,16 @@ public class MiniSignService {
      * @param signId
      * @param imagePath
      */
-    public void saveSignWasteBook(Long signId,String imagePath){
+    public void saveSignWasteBook(Long signId,String imagePath,int signDay){
         MiniSignWasteBook miniSignWasteBook = new MiniSignWasteBook();
         miniSignWasteBook.setSignId(signId);
         miniSignWasteBook.setSignTime(new Timestamp(new Date().getTime()));
         /**传图打卡**/
         if(StringUtil.isNotEmpty(imagePath)){
+            if(signDay!=1&&signDay!=100){//除了第一天和第一百天  传图打卡自动获得积分
+                miniSignWasteBook.setCheckTime(new Timestamp(new Date().getTime()));
+                miniSignWasteBook.setIsCheck(1);
+            }
             miniSignWasteBook.setSignType(1);
             miniSignWasteBook.setImagePath(imagePath);
         }else{

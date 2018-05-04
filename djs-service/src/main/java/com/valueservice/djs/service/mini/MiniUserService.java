@@ -90,6 +90,26 @@ public class MiniUserService {
                 miniUserVO.setOneSign(false);
                 miniUserVO.setSignDay(sign.getSignDays());
                 miniUserVO.setSignCountDay(sign.getCountDays());
+                miniUserVO.setAchieveShow(false);
+                //判断是否需要弹出成就
+                if(sign.getCountDays()==7 && sign.getCountDays7()==0){
+                    miniUserVO.setAchieveShow(true);
+                    miniUserVO.setAchieveImage("../images/achieve/sign_countday_7.png");
+                    miniSignMapper.updateCountDay7(sign.getSignId());
+                }else if(sign.getCountDays()==30 && sign.getCountDays7()==0){
+                    miniUserVO.setAchieveShow(true);
+                    miniUserVO.setAchieveImage("../images/achieve/sign_countday_30.png");
+                    miniSignMapper.updateCountDay30(sign.getSignId());
+                }else if(sign.getCountDays()==60 && sign.getCountDays7()==0){
+                    miniUserVO.setAchieveShow(true);
+                    miniUserVO.setAchieveImage("../images/achieve/sign_countday_60.png");
+                    miniSignMapper.updateCountDay60(sign.getSignId());
+                }else if(sign.getCountDays()==100 && sign.getCountDays7()==0){
+                    miniUserVO.setAchieveShow(true);
+                    miniUserVO.setAchieveImage("../images/achieve/sign_countday_100.png");
+                    miniSignMapper.updateCountDay100(sign.getSignId());
+                }
+                //取勋章
                 if(sign.getSignDays()>=1 && sign.getSignDays()<30){
                     miniUserVO.setBadge1("../images/user/badge_1_y.png");
                     miniUserVO.setBadge2("../images/user/badge_2_n.png");

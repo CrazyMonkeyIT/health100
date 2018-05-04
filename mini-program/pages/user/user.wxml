@@ -31,4 +31,7 @@
     </view>
    </view>
    <image animation="{{animationData}}" src="../images/down.png" bindtap='scrollBottom' class='down_png' mode='widthFix'></image>
+    <view class='achieveShow' wx:if="{{achieveShow}}">
+      <image src='{{miniUser.achieveImage}}' mode='widthFix' style='width:100%;z-index:100;' bindtap='achieveImageCancel'></image>
+   </view>
 </scroll-view>

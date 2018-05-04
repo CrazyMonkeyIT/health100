@@ -5,6 +5,7 @@ Page({
   data: {
     imageSign:true, //一键打卡不可用
     clickSign:false,//一键打卡可用
+    big:true,
     userId:'',
     miniSign:[],
   },
@@ -68,8 +69,18 @@ Page({
             content: resp.data.message
           })
         } else {
-          wx.navigateTo({
-            url: "/pages/user/user"
+          wx.showToast({
+            title:resp.data.obj,
+            icon: 'success',
+            mask: true,
+            duration: 1000,
+            success:function(){
+              setTimeout(function(){
+                wx.navigateTo({
+                  url: "/pages/user/user"
+                })
+              },1000)
+            }
           })
         }
       }
@@ -129,11 +140,25 @@ Page({
             content: resp.data.message
           })
         }else{
-          wx.navigateTo({
-            url: "/pages/user/user"
+          wx.showToast({
+            title: resp.data.obj,
+            mask: true,
+            duration: 1000,
+            success: function () {
+              setTimeout(function () {
+                wx.navigateTo({
+                  url: "/pages/user/user"
+                })
+              }, 1000)
+            }
           })
         }
       }
+    })
+  },
+  bigbig:function(){
+    that.setData({
+      big:!that.data.big
     })
   }
 })

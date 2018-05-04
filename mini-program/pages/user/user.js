@@ -5,6 +5,7 @@ Page({
   data: {
     miniUser:{},
     userSignImages:[],
+    achieveShow:false,
     userId:'',
     animationData: {},
     circleDeg : -20,
@@ -49,10 +50,10 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
-        console.log(resp)
         if (resp.data.result == true) {
           that.setData({
-            miniUser: resp.data.obj
+            miniUser: resp.data.obj,
+            achieveShow: resp.data.obj.achieveShow
           })
           that.continuousDay(resp.data.obj.signDay);
         } else {
@@ -72,7 +73,6 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
-        console.log(resp)
         that.setData({
           userSignImages: resp.data.obj
         })
@@ -183,6 +183,11 @@ Page({
           })
         }
       },
+    })
+  },
+  achieveImageCancel:function(){
+    that.setData({
+      achieveShow:false
     })
   }
 })

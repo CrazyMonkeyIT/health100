@@ -21,50 +21,24 @@ page{
   position: absolute;
   width:180rpx;
   left:50rpx;
-  top:40rpx;
+  top:20rpx;
 }
-.index-join-day {
-  position: absolute;
-  left :80rpx;
-  top :400rpx;
-  font-size: 24rpx;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content :center;
+.index_total_day{
+  position:absolute;
+  font-size:30rpx;
+  left:85rpx;
+  top:310rpx;
+  color:#fff;
+  width:90rpx;
   text-align: center;
 }
-.index-join-day_one {
-  position: absolute;
-  left :105rpx;
-  top :395rpx;
-  font-size: 24rpx;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content :center;
-  text-align: center;
-}
-.index-total-point {
-  position: absolute;
-  right:90rpx;
-  top :430rpx;
-  font-size: 24rpx;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content :center;
-  text-align: center;
-}
-.index-total-point_one {
-  position: absolute;
-  left :580rpx;
-  top :445rpx;
-  font-size: 24rpx;
-  color: #fff;
+.index_total_point{
+  position:absolute;
+  font-size:30rpx;
+  left:573rpx;
+  top:360rpx;
+  color:#fff;
+  width:90rpx;
   text-align: center;
 }
 .run_health {
@@ -99,44 +73,35 @@ page{
 }
 .tab_main{
   position: absolute;
-  left :25rpx;
-  width:94%;
-  top :1140rpx;
+  /* left :25rpx;*/
+  top :1130rpx;
   color: #fff;
   display: flex;
   flex-wrap: wrap;
   justify-content :center;
   text-align: center;
-  flex-direction:row;
+  flex-direction:row; 
 }
 .tab_corps{
   position: absolute;
   font-size: 40rpx;
-  top:35rpx;
-  left:55rpx;
-  width:300rpx;
+  top:50rpx;
+  left:50rpx;
+  width:310rpx;
+  height: 60rpx;
 }
 .tab_users{
   position: absolute;
   font-size:40rpx;
-  left:355rpx;
-  top:35rpx;
-  width:300rpx;
-}
-.tab_main_back{
-  position: absolute;
-  left: 0rpx;
-  width: 100%;
+  left:375rpx;
+  top:50rpx;
+  width:310rpx;
+  height: 60rpx;
 }
 .ranking_corps{
   position: absolute;
-  width: 100%;
+  width: 750rpx;
   left: 0rpx;
-}
-.ranking_users{
- position: absolute;
- width: 100%;
- left: 0rpx;
 }
 .show{display:block;text-align:center;}
 .hidden{display:none;text-align:center;}
@@ -201,7 +166,6 @@ page{
  position: fixed;
  top: 150rpx;
  left: 70rpx;
- overflow: scroll;
 }
 .modal-dialog-info-back{
    position: absolute;
@@ -210,12 +174,19 @@ page{
 }
 .modal-dialog-info{
   position: absolute;
-  width: 600rpx;
-  height: 950rpx;
+  top:35rpx;
+  left:50rpx;
+  width: 500rpx;
+  height: 850rpx;
+  overflow: scroll;
+}
+.modal-dialog-info_image{
+  position: absolute;
+   width: 500rpx;
 }
 .modal-dialog-info-cancel{
   position: fixed;
   width: 50rpx;
-  top: 150rpx;
-  left: 620rpx;
+  top: 190rpx;
+  left: 580rpx;
 }

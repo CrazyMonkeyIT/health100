@@ -9,6 +9,7 @@ Page({
     selected: true, //tab
     selected1: false,//tab
     modalHidden: false,//活动规则弹窗
+    index_back_image:'../images/index_back.jpg',
     isScroll:true,
     corpsPanking:[],
     usersPanking:[],
@@ -54,6 +55,11 @@ Page({
           that.setData({
             miniUser: resp.data.obj
           })
+          if (resp.data.obj.oneSign==true){
+            that.setData({
+              index_back_image:'../images/index_back_one.jpg'
+            })
+          }
         }else{
           wx.showModal({
             title: '提示',

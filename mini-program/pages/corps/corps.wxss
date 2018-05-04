@@ -33,8 +33,6 @@ page{
 }
 .tab_main{
   position: absolute;
-  left :25rpx;
-  width:94%;
   top :870rpx;
   color: #fff;
   display: flex;
@@ -44,33 +42,25 @@ page{
   flex-direction:row;
 }
 .tab_corps{
-  position:absolute;
-  font-size:40rpx;
-  top:35rpx;
-  left:55rpx;
-  width:300rpx;
+  position: absolute;
+  font-size: 40rpx;
+  top:50rpx;
+  left:50rpx;
+  width:310rpx;
+  height: 60rpx;
 }
 .tab_users{
   position: absolute;
   font-size:40rpx;
-  left:355rpx;
-  top:35rpx;
-  width:300rpx;
-}
-.tab_main_back{
-  position: absolute;
-  left: 0rpx;
-  width: 100%;
+  left:375rpx;
+  top:50rpx;
+  width:310rpx;
+  height: 60rpx;
 }
 .ranking_corps{
   position: absolute;
-  width: 100%;
+  width: 750rpx;
   left: 0rpx;
-}
-.ranking_users{
- position: absolute;
- width: 100%;
- left: 0rpx;
 }
 .show{display:block;text-align:center;}
 .hidden{display:none;text-align:center;}

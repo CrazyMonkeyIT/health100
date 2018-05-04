@@ -1,10 +1,21 @@
-<view class='view_main'>
-  <image src='../images/sign/sign_back.jpg' style='width:100%;height:100%;'></image>
+<scroll-view>
+  <image src='../images/sign/sign_back.jpg' style='width:100%;' mode='widthFix' ></image>
   <image hidden='{{clickSign}}' src='../images/sign/sign_click.png' mode='widthFix' class='sing_click' bindtap='sign_click'></image>
   <image hidden='{{imageSign}}' src='../images/sign/sign_click_n.png' mode='widthFix' class='sing_click'></image>
   <image src='../images/sign/sign_click_image.png' mode='widthFix' class='sing_click_image' bindtap='image_sign_click'></image>
-  <view class='sign_remark'>
-    <image src='../images/sign/sign_remark.png' mode='widthFix' class='sign_remark_image' ></image>
-  </view>
+  
+ <view class='sign_remark_small' wx:if='{{big}}'>
+   <image src='../images/sign/sign_remark_small.png' mode='widthFix' class='sign_remark_small_back'></image>
+     <view class='sign_remark_small_image'>
+        <image src='../images/sign/sign_remark.png' mode='widthFix' class='sign_remark_image' bindtap='bigbig'></image> 
+     </view>
+ </view> 
 
-</view>
+  <view class='sign_remark_big' wx:if='{{!big}}'>
+   <image src='../images/sign/sign_remark_big.png' mode='widthFix' class='sign_remark_big_back'></image>
+   <view class='sign_remark_big_image'>
+        <image src='../images/sign/sign_remark.png' mode='widthFix' class='sign_remark_image' bindtap='bigbig'></image> 
+     </view>
+ </view>
+
+</scroll-view>

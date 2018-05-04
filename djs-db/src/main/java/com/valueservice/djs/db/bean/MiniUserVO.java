@@ -20,6 +20,9 @@ public class MiniUserVO {
 
     private Boolean oneSign;
 
+    private Boolean achieveShow;
+    private String achieveImage;
+
     public Integer getUserId() {
         return userId;
     }
@@ -131,5 +134,21 @@ public class MiniUserVO {
 
     public void setCorpsId(Long corpsId) {
         this.corpsId = corpsId;
+    }
+
+    public Boolean getAchieveShow() {
+        return achieveShow;
+    }
+
+    public void setAchieveShow(Boolean achieveShow) {
+        this.achieveShow = achieveShow;
+    }
+
+    public String getAchieveImage() {
+        return achieveImage;
+    }
+
+    public void setAchieveImage(String achieveImage) {
+        this.achieveImage = achieveImage;
     }
 }

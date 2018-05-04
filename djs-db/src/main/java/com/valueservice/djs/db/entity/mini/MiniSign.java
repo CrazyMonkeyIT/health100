@@ -13,6 +13,14 @@ public class MiniSign {
 
     private Integer signDays;
 
+    private Integer countDays7;
+
+    private Integer countDays30;
+
+    private Integer countDays60;
+
+    private Integer countDays100;
+
     public Long getSignId() {
         return signId;
     }
@@ -52,5 +60,38 @@ public class MiniSign {
 
     public void setSignDays(Integer signDays) {
         this.signDays = signDays;
+    }
+
+
+    public Integer getCountDays7() {
+        return countDays7;
+    }
+
+    public void setCountDays7(Integer countDays7) {
+        this.countDays7 = countDays7;
+    }
+
+    public Integer getCountDays30() {
+        return countDays30;
+    }
+
+    public void setCountDays30(Integer countDays30) {
+        this.countDays30 = countDays30;
+    }
+
+    public Integer getCountDays60() {
+        return countDays60;
+    }
+
+    public void setCountDays60(Integer countDays60) {
+        this.countDays60 = countDays60;
+    }
+
+    public Integer getCountDays100() {
+        return countDays100;
+    }
+
+    public void setCountDays100(Integer countDays100) {
+        this.countDays100 = countDays100;
     }
 }

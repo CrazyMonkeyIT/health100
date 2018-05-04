@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -250,13 +251,14 @@ public class MiniGramController {
     public @ResponseBody BaseResult imageSign(Integer userId,String filePath){
         BaseResult result = new BaseResult();
         try {
-            String msg = miniSignService.imageSign(userId,filePath);
-            if(msg.equals("success")){
+            Map<String,Object> map = miniSignService.imageSign(userId,filePath);
+            if(map.get("result").equals("success")){
                 result.setResult(true);
+                result.setObj(map.get("point"));
             }else{
                 result.setResult(false);
             }
-            result.setMessage(msg);
+            result.setMessage(String.valueOf(map.get("result")));
         }catch (Exception e){
             LOGGER.error("校验用户打卡状态失败",e);
         }
@@ -272,13 +274,14 @@ public class MiniGramController {
     public @ResponseBody BaseResult userSign(Integer userId){
         BaseResult result = new BaseResult();
         try {
-            String msg = miniSignService.userSign(userId);
-            if(msg.equals("success")){
+            Map<String,Object> map = miniSignService.userSign(userId);
+            if(map.get("result").equals("success")){
                 result.setResult(true);
+                result.setObj(map.get("point"));
             }else{
                 result.setResult(false);
             }
-            result.setMessage(msg);
+            result.setMessage(String.valueOf(map.get("result")));
         }catch (Exception e){
             LOGGER.error("校验用户打卡状态失败",e);
         }

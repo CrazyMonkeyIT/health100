@@ -7,6 +7,10 @@
     <result column="last_sign_time" jdbcType="TIMESTAMP" property="lastSignTime" />
     <result column="count_days" jdbcType="INTEGER" property="countDays" />
     <result column="sign_days" jdbcType="INTEGER" property="signDays" />
+    <result column="count_days_7" jdbcType="INTEGER" property="countDays7" />
+    <result column="count_days_30" jdbcType="INTEGER" property="countDays30" />
+    <result column="count_days_60" jdbcType="INTEGER" property="countDays60" />
+    <result column="count_days_100" jdbcType="INTEGER" property="countDays100" />
   </resultMap>
   <sql id="Base_Column_List">
     sign_id, mini_user_id, last_sign_time, count_days ,sign_days
@@ -94,5 +98,28 @@
     select * from t_b_mini_sign where mini_user_id=#{miniUserId,jdbcType=BIGINT}
   </select>
 
+  <update id="updateCountDay7">
+    update t_b_mini_sign
+    set count_days_7=1
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateCountDay30">
+    update t_b_mini_sign
+    set count_days_30=1
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateCountDay60">
+    update t_b_mini_sign
+    set count_days_60=1
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateCountDay100">
+    update t_b_mini_sign
+    set count_days_100=1
+    where sign_id = #{signId,jdbcType=BIGINT}
+  </update>
 
 </mapper>
