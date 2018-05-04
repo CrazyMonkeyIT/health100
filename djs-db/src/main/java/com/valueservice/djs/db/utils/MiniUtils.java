@@ -12,14 +12,14 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ConnectException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.net.Proxy.Type.HTTP;
 
 public class MiniUtils {
 
@@ -68,8 +68,35 @@ public class MiniUtils {
         return null;
     }
 
+    //https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=ACCESS_TOKEN
+    //获取小程序码并保存到本地
+    public static boolean getMiniInviteQrcodeLocal(String page,Integer width,String fileName){
+
+        String accessToken = "9_3cmpdfKYrREk7m-QDKqetsCSBw4txsFfLJe5dYoyAbbbOAiPpGMPnzNwNgezSDtCilwF3IB3NeI3RMObXsQhNxb3b0MTlfO9jTcC1GPmNdMmNrmDxgICSk60y54yhwqTwys3t9B0EzpRRTIcVDJeABAIQW";//requestAccessToken().getToken();
+        String requestUrl="https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=ACCESS_TOKEN";
+        requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
+        Map<String,Object> params = new HashMap<>();
+        params.put("path",page);
+        params.put("width",width);
+        String json = JsonLibUtils.mapToJson(params);
+        InputStream imgStream = httpsRequestGetStream(requestUrl, "POST", json);
+        try {
+            boolean result = saveStreamImage(imgStream,fileName);
+            return true;
+        } catch (FileNotFoundException e) {
+
+            return false;
+        }
+
+
+    }
+
+
+
     public static void main(String[] args) {
-        getMiniInviteQrcode("1232","pages/index/index",430);
+        Long time = System.currentTimeMillis();
+        String pngName = "/Users/maowankui/Documents/" + time + ".png";
+        getMiniInviteQrcodeLocal("pages/index/index?ksd=123",430,pngName);
     }
 
     /**
@@ -129,4 +156,81 @@ public class MiniUtils {
         }
         return jsonObject;
     }
+
+
+    /**
+     * 发起https请求并获取结果
+     *
+     * @param requestUrl    请求地址
+     * @param requestMethod 请求方式（GET、POST）
+     * @param outputStr     提交的数据
+     * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
+     */
+    public static InputStream httpsRequestGetStream(String requestUrl, String requestMethod, String outputStr) {
+        try {
+            // 创建SSLContext对象，并使用我们指定的信任管理器初始化
+            TrustManager[] tm = {new WxX509TrustManager()};
+            SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
+            sslContext.init(null, tm, new java.security.SecureRandom());
+            // 从上述SSLContext对象中得到SSLSocketFactory对象
+            SSLSocketFactory ssf = sslContext.getSocketFactory();
+            URL url = new URL(requestUrl);
+            HttpsURLConnection httpUrlConn = (HttpsURLConnection) url.openConnection();
+            httpUrlConn.setSSLSocketFactory(ssf);
+            httpUrlConn.setDoOutput(true);
+            httpUrlConn.setDoInput(true);
+            httpUrlConn.setUseCaches(false);
+            // 设置请求方式（GET/POST）
+            httpUrlConn.setRequestMethod(requestMethod);
+            if ("GET".equalsIgnoreCase(requestMethod))
+                httpUrlConn.connect();
+            // 当有数据需要提交时
+            if (null != outputStr) {
+                OutputStream outputStream = httpUrlConn.getOutputStream();
+                // 注意编码格式，防止中文乱码
+                outputStream.write(outputStr.getBytes("UTF-8"));
+                outputStream.close();
+            }
+            // 将返回的输入流转换成字符串
+            InputStream inputStream = httpUrlConn.getInputStream();
+            return inputStream ;
+        } catch (ConnectException ce) {
+            ce.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static boolean saveStreamImage(InputStream instreams,String filename) throws FileNotFoundException {
+
+        boolean result = true;
+        File file=new File(filename);//可以是任何图片格式.jpg,.png等
+        FileOutputStream fos=new FileOutputStream(file);
+        if(instreams != null){
+            try {
+
+                byte[] b = new byte[1024];
+                int nRead = 0;
+                while ((nRead = instreams.read(b)) != -1) {
+                    fos.write(b, 0, nRead);
+                }
+
+            } catch (Exception e) {
+                result = false;
+                e.printStackTrace();
+            } finally {
+
+                try {
+                    fos.flush();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+
 }

@@ -60,7 +60,7 @@ public class PicIntegrationService {
 
         MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
         //模板文件
-        String inviteTmpPic = filePath + "/inviteTmp.jpg";
+        String inviteTmpPic = filePath + "/invite_main.png";
         String inviteQrcode = getInviteQrcode(miniUser);
         BufferedImage inviteTmpBuff = PicProcess.loadImageLocal(inviteTmpPic);
         Long time = System.currentTimeMillis();
@@ -71,9 +71,9 @@ public class PicIntegrationService {
         }
 
         BufferedImage inviteQrcodeBuff = PicProcess.loadImageLocal(inviteQrcode);
-        MiniImage post = new MiniImage(163, 394, 440, 616);
+        MiniImage post = new MiniImage(160, 365, 430, 600);//163, 394, 440, 616
         post.setImage(postBuff);
-        MiniImage qrcode = new MiniImage(303, 1124, 150, 150);
+        MiniImage qrcode = new MiniImage(500, 1020, 105, 105);//303 - 1124 - 150 - 150
         qrcode.setImage(inviteQrcodeBuff);
         PicProcess.writePngImg(filePath + "/" + time + ".png",inviteTmpBuff,post,qrcode,getFontContent(miniUser));
         return contextPath + "minifile/" + time + ".png";
@@ -115,6 +115,33 @@ public class PicIntegrationService {
                 achive_circle_image,singDaysCount,rank,lunch);
         return contextPath + "minifile/" + time + ".png";
     }
+
+
+    /**
+     * 获取首次打开时要弹出的图片
+     * @param userId
+     * @return
+     */
+    public String firstClickImg(Integer userId){
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        //模板文件
+        String firstClickBackPic = filePath + "/first_click.png";
+        BufferedImage irstClickBackBuff = PicProcess.loadImageLocal(firstClickBackPic);
+        BufferedImage postBuff = queryPostPic();
+        String inviteQrcode = getInviteQrcode(miniUser);
+        if(postBuff == null || inviteQrcode == null){
+            return null;
+        }
+        BufferedImage inviteQrcodeBuff = PicProcess.loadImageLocal(inviteQrcode);
+        MiniImage post = new MiniImage(00,240,450,630);
+        post.setImage(postBuff);
+        MiniImage qrcode = new MiniImage(270, 935, 112, 1125);//303 - 1124 - 150 - 150
+        qrcode.setImage(inviteQrcodeBuff);
+        Long time = System.currentTimeMillis();
+        PicProcess.writePngImg(filePath + "/" + time + ".png",irstClickBackBuff,post,qrcode);
+        return contextPath + "minifile/" + time + ".png";
+    }
+
 
     private MiniImage getLunch(MiniUser miniUser){
         MiniImage lunch = new MiniImage(210,1070,0,0);
@@ -183,7 +210,7 @@ public class PicIntegrationService {
         MiniImage image = new MiniImage(210,1070,0,0);
         image.setImageType(1);
         image.setFont(new Font("苹方黑体", Font.PLAIN, 24));
-        image.setX(380);
+        image.setX(250);//380
         if(miniUser.getCorpsId() == null){
             image.setContent("打败肉肉，你不是一个人在战斗！");
         }else{
@@ -206,7 +233,17 @@ public class PicIntegrationService {
         if(StringUtils.isNotEmpty(miniUser.getQrcodeUrl())){
             return miniUser.getQrcodeUrl();
         }else{
-            return MiniUtils.getMiniInviteQrcode(miniUser.getOpenId(),"pages/index/index",430);
+            Long time = System.currentTimeMillis();
+
+            String fileName = filePath + "/" + time + ".png";
+            boolean result = MiniUtils.getMiniInviteQrcodeLocal("pages/index/index?openId="+miniUser.getOpenId(),430,fileName);
+            if(result){
+                miniUser.setQrcodeUrl(fileName);
+                miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+                return fileName;
+            }else {
+                return null;
+            }
         }
     }
 
