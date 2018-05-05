@@ -126,20 +126,23 @@ public class PicIntegrationService {
         MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
         //模板文件
         String firstClickBackPic = filePath + "/first_click.png";
-        BufferedImage irstClickBackBuff = PicProcess.loadImageLocal(firstClickBackPic);
+        BufferedImage firstClickBackBuff = PicProcess.loadImageLocal(firstClickBackPic);
         BufferedImage postBuff = queryPostPic();
         String inviteQrcode = getInviteQrcode(miniUser);
         if(postBuff == null || inviteQrcode == null){
             return null;
         }
         BufferedImage inviteQrcodeBuff = PicProcess.loadImageLocal(inviteQrcode);
-        MiniImage post = new MiniImage(00,240,450,630);
+        MiniImage post = new MiniImage(108,266,531,741);
         post.setImage(postBuff);
-        MiniImage qrcode = new MiniImage(270, 935, 112, 1125);//303 - 1124 - 150 - 150
+        MiniImage qrcode = new MiniImage(310, 1085, 130, 130);//303 - 1124 - 150 - 150
         qrcode.setImage(inviteQrcodeBuff);
         Long time = System.currentTimeMillis();
-        PicProcess.writePngImg(filePath + "/" + time + ".png",irstClickBackBuff,post,qrcode);
-        return contextPath + "minifile/" + time + ".png";
+        PicProcess.writePngImg(filePath + "/" + time + ".png",firstClickBackBuff,post,qrcode);
+        String first_click_img_url = contextPath + "minifile/" + time + ".png";
+        miniUser.setFirstSignPost(first_click_img_url);
+        miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+        return first_click_img_url;
     }
 
 
@@ -235,8 +238,8 @@ public class PicIntegrationService {
         }else{
             Long time = System.currentTimeMillis();
 
-            String fileName = filePath + "/" + time + ".png";
-            boolean result = MiniUtils.getMiniInviteQrcodeLocal("pages/index/index?openId="+miniUser.getOpenId(),430,fileName);
+            String fileName = filePath + time + ".png";
+            boolean result = MiniUtils.getMiniInviteQrcodeLocal("pages/index/index?userid="+miniUser.getId(),430,fileName);
             if(result){
                 miniUser.setQrcodeUrl(fileName);
                 miniUserDOMapper.updateByPrimaryKeySelective(miniUser);

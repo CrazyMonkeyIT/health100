@@ -243,11 +243,11 @@ public class PicProcess {
 
         BufferedImage post_pic = loadImageLocal("/Users/maowankui/Desktop/minifile/invite_post_1.png");
         //头像位置
-        MiniImage post_mini = new MiniImage(100,240,450,630);
+        MiniImage post_mini = new MiniImage(108,266,531,741);
         post_mini.setImage(post_pic);
         BufferedImage mini2 = loadImageLocal("/Users/maowankui/Desktop/minifile/upic.png");
         //二维码位置
-        MiniImage qrcode = new MiniImage(270, 935, 112, 112);
+        MiniImage qrcode = new MiniImage(310, 1085, 130, 130);
         qrcode.setImage(mini2);
 
         Long time = System.currentTimeMillis();

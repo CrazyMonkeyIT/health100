@@ -35,6 +35,8 @@ public class MiniUser {
 
     private Integer active;
 
+    private String firstSignPost;//first_sign_post  首次打卡海报
+
     public Integer getId() {
         return id;
     }
@@ -161,5 +163,13 @@ public class MiniUser {
 
     public void setQrcodeUrl(String qrcodeUrl) {
         this.qrcodeUrl = qrcodeUrl;
+    }
+
+    public String getFirstSignPost() {
+        return firstSignPost;
+    }
+
+    public void setFirstSignPost(String firstSignPost) {
+        this.firstSignPost = firstSignPost;
     }
 }

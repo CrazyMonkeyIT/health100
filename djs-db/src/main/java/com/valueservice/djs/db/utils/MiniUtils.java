@@ -2,12 +2,19 @@ package com.valueservice.djs.db.utils;
 
 
 
+import com.google.gson.Gson;
 import com.meidusa.fastjson.JSONException;
 import com.meidusa.fastjson.JSONObject;
 import com.valueservice.djs.db.bean.CommonConst;
 import com.valueservice.djs.db.bean.WxAccessToken;
 import com.valueservice.djs.db.bean.WxX509TrustManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -21,7 +28,19 @@ import java.util.Map;
 
 import static java.net.Proxy.Type.HTTP;
 
+@Component
 public class MiniUtils {
+
+    private static Logger logger = LoggerFactory.getLogger(MiniUtils.class);
+
+    protected static Gson gson = new Gson();
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
+
+    protected static RedisTemplate<String,String> stringRedisTemplate;
+
 
     /**
      * accesstoken的访问地址
@@ -30,6 +49,49 @@ public class MiniUtils {
             = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
     private static String qrcode_url
             = "String https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=ACCESS_TOKEN";
+
+    /**
+     * 获取access_token
+     *
+     * @return
+     */
+    public static WxAccessToken getAccessToken() {
+        long nowTime = System.currentTimeMillis();
+        final String token_key = CommonConst.MINI_PROGRAM_APPID + "_access_token";
+        String obj = stringRedisTemplate.opsForValue().get(token_key);
+        if(obj != null){
+            WxAccessToken token = gson.fromJson(obj, WxAccessToken.class);
+            logger.info("nowTime:" + nowTime + "; nextGetTime:" +token.getNextGetTime() );
+            if((token.getNextGetTime() - nowTime) > 0){
+                if(CheckAccessToken(token.getToken())){
+                    return token;
+                }
+            }else{
+                stringRedisTemplate.delete(token_key);
+            }
+        }
+        logger.info("request for accessToken........");
+        return requestAccessToken();
+    }
+
+    /**
+     * 验证AccessToken是否有效
+     */
+    public static boolean CheckAccessToken(String accessToken){
+        boolean result = false;
+        try{
+            JSONObject jsonObject = null;
+            String requestUrl = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=ACCESS_TOKEN";
+            requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
+            jsonObject = httpsRequest(requestUrl,"GET",null);
+            if(jsonObject.get("errcode") == null){
+                result = true;
+            }
+        }catch(Exception e){
+            logger.error("验证AccessToken是否有效出错",e);
+        }
+        return result;
+    }
 
     private static WxAccessToken requestAccessToken(){
         long nowTime = System.currentTimeMillis();
@@ -45,6 +107,7 @@ public class MiniUtils {
                 accessToken.setNextGetTime(nextGetTime);
                 accessToken.setAppid(CommonConst.MINI_PROGRAM_APPID);
                 accessToken.setAppsecret(CommonConst.MINI_PROGRAM_APPSECRET);
+                stringRedisTemplate.opsForValue().set(CommonConst.MINI_PROGRAM_APPID + "_access_token",gson.toJson(accessToken));
             } catch (JSONException e) {
                 accessToken = null;
 
@@ -72,19 +135,22 @@ public class MiniUtils {
     //获取小程序码并保存到本地
     public static boolean getMiniInviteQrcodeLocal(String page,Integer width,String fileName){
 
-        String accessToken = "9_3cmpdfKYrREk7m-QDKqetsCSBw4txsFfLJe5dYoyAbbbOAiPpGMPnzNwNgezSDtCilwF3IB3NeI3RMObXsQhNxb3b0MTlfO9jTcC1GPmNdMmNrmDxgICSk60y54yhwqTwys3t9B0EzpRRTIcVDJeABAIQW";//requestAccessToken().getToken();
+        String accessToken =
+                //"9_3cmpdfKYrREk7m-QDKqetsCSBw4txsFfLJe5dYoyAbbbOAiPpGMPnzNwNgezSDtCilwF3IB3NeI3RMObXsQhNxb3b0MTlfO9jTcC1GPmNdMmNrmDxgICSk60y54yhwqTwys3t9B0EzpRRTIcVDJeABAIQW";//
+                requestAccessToken().getToken();
         String requestUrl="https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=ACCESS_TOKEN";
         requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
         Map<String,Object> params = new HashMap<>();
         params.put("path",page);
         params.put("width",width);
         String json = JsonLibUtils.mapToJson(params);
+        logger.info("请求二维码参数："+json);
         InputStream imgStream = httpsRequestGetStream(requestUrl, "POST", json);
         try {
             boolean result = saveStreamImage(imgStream,fileName);
             return true;
         } catch (FileNotFoundException e) {
-
+            e.printStackTrace();
             return false;
         }
 
@@ -94,9 +160,10 @@ public class MiniUtils {
 
 
     public static void main(String[] args) {
-        Long time = System.currentTimeMillis();
-        String pngName = "/Users/maowankui/Documents/" + time + ".png";
-        getMiniInviteQrcodeLocal("pages/index/index?ksd=123",430,pngName);
+//        Long time = System.currentTimeMillis();
+//        String pngName = "/Users/maowankui/Documents/" + time + ".png";
+//        getMiniInviteQrcodeLocal("pages/index/index?ksd=123",430,pngName);
+        getAccessToken();
     }
 
     /**
@@ -218,7 +285,7 @@ public class MiniUtils {
 
             } catch (Exception e) {
                 result = false;
-                e.printStackTrace();
+                logger.error("read streams error :",e);
             } finally {
 
                 try {
@@ -230,6 +297,11 @@ public class MiniUtils {
             }
         }
         return result;
+    }
+
+    @PostConstruct
+    public void setRedisTemplate() {
+        MiniUtils.stringRedisTemplate = redisTemplate;
     }
 
 

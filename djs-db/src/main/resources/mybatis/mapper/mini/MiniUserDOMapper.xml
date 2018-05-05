@@ -15,13 +15,14 @@
     <result column="corps_id" jdbcType="BIGINT" property="corpsId" />
     <result column="point" jdbcType="DECIMAL" property="point" />
     <result column="qrcode_url" jdbcType="VARCHAR" property="qrcodeUrl" />
+    <result column="first_sign_post" jdbcType="VARCHAR" property="firstSignPost" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="active" jdbcType="INTEGER" property="active" />
   </resultMap>
   <sql id="Base_Column_List">
     id, nick_name, gender, country, province, city, language, avatar_url, open_id, union_id, 
-    corps_id, point,qrcode_url, create_time, update_time, active
+    corps_id, point,qrcode_url,first_sign_post, create_time, update_time, active
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -189,6 +190,9 @@
       <if test="qrcodeUrl != null">
         qrcode_url = #{qrcodeUrl,jdbcType=VARCHAR},
       </if>
+      <if test="firstSignPost != null">
+        first_sign_post = #{firstSignPost,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -215,6 +219,7 @@
       corps_id = #{corpsId,jdbcType=BIGINT},
       point = #{point,jdbcType=DECIMAL},
       qrcode_url = #{qrcodeUrl,jdbcType=VARCHAR},
+      first_sign_post = #{firstSignPost,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       active = #{active,jdbcType=INTEGER}

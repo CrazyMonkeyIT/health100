@@ -21,50 +21,50 @@ page{
 }
 .user_name_text{
   position:absolute;
-  left:300rpx;
-  top:140rpx;
+  left:330rpx;
+  top:40rpx;
   font-size:40rpx;
   color: white;
 }
 .badge_1_image{
   position:absolute;
   width:75rpx;
-  left:290rpx;
-  top:195rpx;
+  left:320rpx;
+  top:110rpx;
   height:70rpx;
 }
 .badge_2_image{
   position:absolute;
   width:75rpx;
-  left:360rpx;
-  top:195rpx;
+  left:390rpx;
+  top:110rpx;
   height:70rpx;
 }
 .badge_3_image{
   position:absolute;
   width:75rpx;
-  left:430rpx;
-  top:195rpx;
+  left:460rpx;
+  top:110rpx;
   height:70rpx;
 }
 .badge_4_image{
   position:absolute;
   width:75rpx;
-  left:500rpx;
-  top:195rpx;
+  left:530rpx;
+  top:110rpx;
   height:70rpx;
 }
 .inv_card_image{
   position:absolute;
   width: 190rpx;
-  left:290rpx;
-  top:255rpx;
+  left:320rpx;
+  top:170rpx;
 }
 .user_achieve_image{
   position:absolute;
   width: 170rpx;
-  left:480rpx;
-  top:255rpx;
+  left:510rpx;
+  top:170rpx;
 }
 .signDay_text{
   position:absolute;

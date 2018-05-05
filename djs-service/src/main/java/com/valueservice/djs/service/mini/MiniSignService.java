@@ -12,7 +12,6 @@ import com.valueservice.djs.db.entity.mini.MiniUser;
 import com.valueservice.djs.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import sun.jvm.hotspot.oops.ObjectHeap;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;

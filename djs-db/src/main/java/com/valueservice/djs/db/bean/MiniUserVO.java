@@ -19,6 +19,7 @@ public class MiniUserVO {
     private Long corpsId;
 
     private Boolean oneSign;
+    private Boolean hasFirstSign = false;
 
     private Boolean achieveShow;
     private String achieveImage;
@@ -134,6 +135,14 @@ public class MiniUserVO {
 
     public void setCorpsId(Long corpsId) {
         this.corpsId = corpsId;
+    }
+
+    public Boolean getHasFirstSign() {
+        return hasFirstSign;
+    }
+
+    public void setHasFirstSign(Boolean hasFirstSign) {
+        this.hasFirstSign = hasFirstSign;
     }
 
     public Boolean getAchieveShow() {

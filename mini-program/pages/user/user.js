@@ -56,6 +56,10 @@ Page({
             achieveShow: resp.data.obj.achieveShow
           })
           that.continuousDay(resp.data.obj.signDay);
+          //首次打卡，生成海报
+          if (resp.data.obj.hasFirstSign == false){
+            that.showFirstClick();
+          }
         } else {
           wx.showModal({
             title: '提示',
@@ -149,8 +153,41 @@ Page({
             }
           })
         } else {
+          wx.hideLoading();
           wx.showToast({
+            icon :'none',
             title: '我的邀请卡图片生成失败',
+            mask: true,
+          })
+        }
+      },
+    })
+  },
+  showFirstClick : function () {
+    wx.showLoading({
+      title: '首次打卡海报生成中请稍候',
+      mask: true
+    })
+    wx.request({
+      url: config.service.host + '/minigram/pic/firstclick/' + this.data.userId,
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (res) {
+        console.debug(res.data);
+        if (res.data.result == true) {
+          wx.previewImage({
+            current: res.data.message,
+            urls: [res.data.message],
+            success: function () {
+              wx.hideLoading();
+            }
+          })
+        } else {
+          wx.hideLoading();
+          wx.showToast({
+            icon: 'none',
+            title: '首次打卡海报生成失败',
             mask: true,
           })
         }

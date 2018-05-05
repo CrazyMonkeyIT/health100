@@ -1,5 +1,6 @@
 package com.valueservice.djs.minigram;
 
+import com.valueservice.djs.db.utils.MiniUtils;
 import com.valueservice.djs.params.InviteImageDO;
 import com.valueservice.djs.result.BaseResult;
 import com.valueservice.djs.service.mini.PicIntegrationService;
@@ -51,6 +52,16 @@ public class PicIntegrationController {
             result.setResult(true);
             result.setMessage(picUrl);
         }
+        return result;
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public BaseResult test(){
+
+        BaseResult result = new BaseResult();
+
+        MiniUtils.getAccessToken();
         return result;
     }
 

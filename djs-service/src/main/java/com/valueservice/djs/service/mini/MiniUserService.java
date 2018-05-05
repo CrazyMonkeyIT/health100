@@ -3,6 +3,7 @@ package com.valueservice.djs.service.mini;
 import com.valueservice.djs.db.bean.MiniUserVO;
 import com.valueservice.djs.db.dao.mini.*;
 import com.valueservice.djs.db.entity.mini.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -75,6 +76,7 @@ public class MiniUserService {
             miniUserVO.setNickName(miniUser.getNickName());
             miniUserVO.setAvatar(miniUser.getAvatarUrl());
             miniUserVO.setCorpsId(miniUser.getCorpsId()==null?0L:miniUser.getCorpsId());
+            miniUserVO.setHasFirstSign(StringUtils.isNotBlank(miniUser.getFirstSignPost())?true:false);
 
             MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
             if(!Objects.isNull(miniCorps)){

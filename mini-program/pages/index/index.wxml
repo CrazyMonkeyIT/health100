@@ -4,6 +4,8 @@
   <image src='../images/camp_rule.jpg' mode='widthFix' class='camp_rule' bindtap='ruleinfo'></image>
 
 <view class="{{miniUser.oneSign?'hidden':'show'}}"> 
+    <view class='person_click_left' bindtap='userInfo_click'></view>
+    <view class='person_click_right' bindtap='userInfo_click'></view>
     <text class='index_total_day'>{{miniUser.signDay}}</text>
     <text class='index_total_point'>{{miniUser.point}}</text>
 </view>
