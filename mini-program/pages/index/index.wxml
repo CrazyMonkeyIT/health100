@@ -14,8 +14,15 @@
   <image src="../images/health100_run.gif" bindtap='scrollBottom' class='run_health' mode='widthFix'></image>
 <!--button-->
   <view class="{{miniUser.oneSign?'hidden':'show'}}">
-   <image src='../images/index_corp_click.png' bindtap='corps_click' class='sign_click' mode='widthFix'></image>
+   <!-- 非首次打卡 检索战队按钮 -->
+   <view class="{{hasCorps?'show':'hidden'}}">
+    <image src='../images/index_corp_click.png' bindtap='corps_click' class='sign_click' mode='widthFix'></image>
    <image src='../images/index_click.png' bindtap='sign_click' class='corps_click' mode='widthFix'></image>
+   </view>
+   <view class="{{hasCorps?'hidden':'show'}}">
+    <image src='../images/index_corps_sign_click.png' bindtap='corps_sign_click' class='corps_sign_click' mode='widthFix'></image>
+   </view>
+   <!-- 非首次打卡 检索战队按钮 -->
   </view>
   <view class="{{miniUser.oneSign?'show':'hidden'}}">
     <image src='../images/one_join.png' bindtap='sign_0ne_click' class='one_join' mode='widthFix'></image>

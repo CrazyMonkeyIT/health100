@@ -4,7 +4,7 @@
   <image src='{{pankingTopCorp.corpsBannerImage}}' mode='widthFix' class='banner_image'></image>
   <image src='../images/corps/corps_info.png' class='corps_info' bindtap='corps_info'></image>
   <text class='corps_msg_01'>{{pankingTopCorp.corpsIntroduce1}}</text>
-  <text class='corps_msg_02'>{{pankingTopCorp.corpsIntroduce}}</text>
+  <!-- <text class='corps_msg_02'>{{pankingTopCorp.corpsIntroduce}}</text> -->
   <image src='../images/corps/corps_click.png' mode='widthFix' class='corps_click_image' bindtap='sign_click'></image>
   <!--tab-->
   <view class='tab_main'>
@@ -59,7 +59,7 @@
   <view class='corps_info_view' wx:if="{{modalHidden}}">
     <image src="../images/corps/corps_info_view.png" mode='widthFix' style='width:100%;' bindtap='cancel_corps_info'></image>
     <text class='corps_info_0'>战队介绍</text>
-    <text class='corps_info_01'>{{pankingTopCorp.corpsIntroduce1}}</text>
-    <text class='corps_info_02'>{{pankingTopCorp.corpsIntroduce}}</text>
+    <text class='corps_info_01'>{{pankingTopCorp.corpsIntroduce}}</text>
+    <!-- <text class='corps_info_02'>{{pankingTopCorp.corpsIntroduce}}</text> -->
   </view>
 </view>

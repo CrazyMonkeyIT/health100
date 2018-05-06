@@ -8,6 +8,7 @@ Page({
     selected: true, //tab
     selected1: false,//tab
     modalHidden: false,//活动规则弹窗
+    hasCorps:false,
     index_back_image:'../images/index_back.jpg',
     isScroll:true,
     corpsPanking:[],
@@ -54,6 +55,11 @@ Page({
           that.setData({
             miniUser: resp.data.obj
           })
+          if (resp.data.obj.corpsId == 0 || resp.data.obj.corpsId == null){
+            that.setData({
+              hasCorps: true
+            })
+          }
           if (resp.data.obj.oneSign==true){
             that.setData({
               index_back_image:'../images/index_back_one.jpg'
@@ -151,15 +157,14 @@ Page({
     
   },
   corps_click:function(){
-    if(this.data.miniUser.corpsId==0){
-      wx.navigateTo({
-        url: "/pages/joincorps/joincorps"
-      })
-    }else{
-      wx.navigateTo({
-        url: "/pages/corps/corps"
-      })
-    }
+    wx.navigateTo({
+      url: "/pages/joincorps/joincorps"
+    })
+  },
+  corps_sign_click:function(){
+    wx.navigateTo({
+      url: "/pages/corps/corps"
+    })
   },
   userInfo_click:function(){
     wx.navigateTo({

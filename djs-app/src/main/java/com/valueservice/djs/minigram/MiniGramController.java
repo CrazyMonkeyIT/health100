@@ -205,6 +205,7 @@ public class MiniGramController {
     /**
      * 获取手动置顶的战队或排行第一的
      * 修改为获取用户的战队
+     * 修改回积分抢占和手动置顶
      * @param userId
      * @return
      */

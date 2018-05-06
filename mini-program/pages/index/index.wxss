@@ -70,6 +70,12 @@ page{
   top :1020rpx;
   width : 300rpx;
 }
+.corps_sign_click{
+  position: absolute;
+  left: 190rpx;
+  top :1000rpx;
+  width : 400rpx;
+}
 .tab_main{
   position: absolute;
   /* left :25rpx;*/

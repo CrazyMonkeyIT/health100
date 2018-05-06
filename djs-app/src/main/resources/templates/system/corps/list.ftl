@@ -111,8 +111,8 @@
                         <div class="form-group ">
                             <label class="col-sm-4 control-label">战队介绍</label>
                             <div class="col-sm-8">
-                                <input name="corpsIntroduce1" id="corpsIntroduce1" type="text" placeholder="战队介绍第一行(9个字内)" /></br>
-                                <input name="corpsIntroduce" id="corpsIntroduce" type="text" placeholder="战队介绍第二行(9个字内)"/>
+                                <input name="corpsIntroduce1" id="corpsIntroduce1" type="text" placeholder="slogan(18个字内)" /></br>
+                                <input name="corpsIntroduce" id="corpsIntroduce" type="text" placeholder="banner介绍(20个字内)"/>
                             </div>
                         </div>
                         <div class="form-group ">
@@ -223,12 +223,12 @@
             $("#editForm").find("input[name='corpsName']").focus();
             return false;
         }
-        if(corpsIntroduce.length>9){
+        if(corpsIntroduce.length>20){
             alert("战队简介过长");
             $("#editForm").find("input[name='corpsIntroduce']").focus();
             return false;
         }
-        if(corpsIntroduce1.length>9){
+        if(corpsIntroduce1.length>18){
             alert("战队简介过长");
             $("#editForm").find("input[name='corpsIntroduce1']").focus();
             return false;
