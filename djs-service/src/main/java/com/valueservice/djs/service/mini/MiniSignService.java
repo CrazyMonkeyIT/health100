@@ -86,6 +86,15 @@ public class MiniSignService {
     }
 
     /**
+     * 检查用户今天是否打过卡
+     * @param userId
+     * @return
+     */
+    public MiniSign checkTodaySign(Integer userId){
+        return miniSignMapper.selectByToday(userId);
+    }
+
+    /**
      * 传图用户打卡
      * 第一天和最后一天需要确认
      * @param userId

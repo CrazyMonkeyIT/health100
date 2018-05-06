@@ -57,7 +57,7 @@
 <!--tab 头end-->
   </view>
   <view class='corps_info_view' wx:if="{{modalHidden}}">
-    <image src="../images/corps/corps_Info_view.png" mode='widthFix' style='width:100%;' bindtap='cancel_corps_info'></image>
+    <image src="../images/corps/corps_info_view.png" mode='widthFix' style='width:100%;' bindtap='cancel_corps_info'></image>
     <text class='corps_info_0'>战队介绍</text>
     <text class='corps_info_01'>{{pankingTopCorp.corpsIntroduce1}}</text>
     <text class='corps_info_02'>{{pankingTopCorp.corpsIntroduce}}</text>

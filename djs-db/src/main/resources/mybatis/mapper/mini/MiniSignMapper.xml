@@ -98,6 +98,11 @@
     select * from t_b_mini_sign where mini_user_id=#{miniUserId,jdbcType=BIGINT}
   </select>
 
+  <select id="selectByToday" resultMap="BaseResultMap">
+    select * from t_b_mini_sign where mini_user_id=#{miniUserId,jdbcType=BIGINT}
+    and date_format(last_sign_time,'%Y-%m-%d') = curdate()
+  </select>
+
   <update id="updateCountDay7">
     update t_b_mini_sign
     set count_days_7=1

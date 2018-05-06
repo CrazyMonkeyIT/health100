@@ -19,7 +19,7 @@ page{
 }
 .corps_msg_02{
   position: absolute;
-  top:551rpx;
+  top:500rpx;
   left:120rpx;
   width: 600rpx;
   text-align:left;

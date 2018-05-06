@@ -66,7 +66,9 @@ Page({
         if (resp.data.result == false) {
           wx.showModal({
             title: '提示',
-            content: resp.data.message
+            content: resp.data.message,
+            confirmText : "我知道了",
+            cancelText :"个人中心"
           })
         } else {
           wx.showToast({
@@ -96,34 +98,61 @@ Page({
       })
       return;
     }
-   
-    wx.chooseImage({ 
-      count:1,
-      sizeType: ['compressed'], 
-      sourceType: ['album', 'camera'], 
-      success: function (res) {  
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-        var tempFilePaths = res.tempFilePaths; 
-        wx.showToast({
-          title: '正在上传...',
-          icon: 'loading',
-          mask: true,
-          duration: 10000
-        })
-        wx.uploadFile({
-          url: config.service.upUrl,
-          filePath: tempFilePaths[0],
-          name:'file',
-          success: function (resp) {
-            wx.hideToast();
-            var obj = JSON.parse(resp.data)
-            that.userImageSign(obj[0].filePath);
-          },
-          fail: function (res) { 
-          },
-        })
-      }
+    wx.request({
+      url: config.service.host + '/minigram/checkTodaySign',
+      data: { userId: that.data.userId },
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        if(res.data.result == true){//已经打过卡的
+          wx.showModal({
+            title: '提示',
+            content: "您今天已经打过卡了",
+            cancelText: "我知道了",
+            confirmText: "个人中心",
+            success: function (res) {
+              console.log(res)
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: "/pages/user/user"
+                })
+              } 
+            }
+          })
+          return;
+        }else{
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+            success: function (res) {
+              // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+              var tempFilePaths = res.tempFilePaths;
+              wx.showToast({
+                title: '正在上传...',
+                icon: 'loading',
+                mask: true,
+                duration: 10000
+              })
+              wx.uploadFile({
+                url: config.service.upUrl,
+                filePath: tempFilePaths[0],
+                name: 'file',
+                success: function (resp) {
+                  wx.hideToast();
+                  var obj = JSON.parse(resp.data)
+                  that.userImageSign(obj[0].filePath);
+                },
+                fail: function (res) {
+                },
+              })
+            }
+          })
+        }
+      },
     })
+    
   },
   userImageSign:function(filePath){
     wx.request({

@@ -129,6 +129,22 @@ public class MiniGramController {
         return result;
     }
 
+    @RequestMapping(value = "/checkTodaySign",method = RequestMethod.GET)
+    public @ResponseBody BaseResult checkTodaySign(@RequestParam Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            MiniSign miniSign = miniSignService.checkTodaySign(userId);
+            if(miniSign != null) {
+                result.setResult(true);
+            }
+            result.setMessage("获取个人排行成功~~");
+        }catch (Exception e){
+            LOGGER.error("校验用户打卡状态失败",e);
+        }
+        return result;
+    }
+
+
     /**
      * 获取战队排行 top20
      * 根据用户的战队  如果用户的战队的战队是特殊排行 获取特殊的排行

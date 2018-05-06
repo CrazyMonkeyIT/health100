@@ -87,7 +87,7 @@ page{
 .point_text{
   position:absolute;
   left:428rpx;
-  top:549rpx;
+  top:449rpx;
   width:100rpx;
   font-size:50rpx;
   color:white;
