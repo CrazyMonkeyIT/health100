@@ -16,7 +16,7 @@
     corps_id, corps_name, corps_head_image, corps_banner_image, point,is_special,corps_introduce_1
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select a.corps_id,a.corps_name,a.corps_head_image,a.corps_banner_image,a.is_top,a.is_special,a.corps_introduce,a.is_top,if(a.is_special is null,0,a.is_special),if(sum(b.point) is null,0,sum(b.point)) as point
+    select a.corps_id,a.corps_name,a.corps_head_image,a.corps_banner_image,a.is_top,a.is_special,a.corps_introduce,a.is_special,a.corps_introduce_1,a.is_top,if(a.is_special is null,0,a.is_special),if(sum(b.point) is null,0,sum(b.point)) as point
     from t_b_mini_corps a inner join t_b_mini_user b on a.corps_id=b.corps_id
     where a.corps_id = #{corpsId,jdbcType=BIGINT}
   </select>

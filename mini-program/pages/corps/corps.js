@@ -7,6 +7,7 @@ Page({
     selected1: false,//tab
     modalHidden: false,//
     userId:'',
+    userCorps:{},
     corpsPanking: [],
     corpsUsersPanking:[],
     pankingTopCorp:[],
@@ -23,6 +24,7 @@ Page({
       that.getCropsUserRanking(that.userId);
     });
     this.pankingTopCorps();
+    this.getMiniUserCorps();
   },
   selected: function (e) {
     this.setData({
@@ -34,6 +36,20 @@ Page({
     this.setData({
       selected: false,
       selected1: true
+    })
+  },
+  getMiniUserCorps: function () {
+    wx.request({
+      url: config.service.getMiniUserCorps,
+      data: { userId: this.data.userId },
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        that.setData({
+          userCorps: resp.data.obj
+        })
+      }
     })
   },
   pankingCorps: function () {

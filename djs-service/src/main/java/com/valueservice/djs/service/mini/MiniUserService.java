@@ -98,21 +98,21 @@ public class MiniUserService {
                     miniUserVO.setAchieveShow(true);
                     miniUserVO.setAchieveImage("../images/achieve/sign_countday_7.png");
                     miniSignMapper.updateCountDay7(sign.getSignId());
-                }else if(sign.getCountDays()==30 && sign.getCountDays7()==0){
+                }else if(sign.getCountDays()==30 && sign.getCountDays30()==0){
                     miniUserVO.setAchieveShow(true);
                     miniUserVO.setAchieveImage("../images/achieve/sign_countday_30.png");
                     miniSignMapper.updateCountDay30(sign.getSignId());
-                }else if(sign.getCountDays()==60 && sign.getCountDays7()==0){
+                }else if(sign.getCountDays()==60 && sign.getCountDays60()==0){
                     miniUserVO.setAchieveShow(true);
                     miniUserVO.setAchieveImage("../images/achieve/sign_countday_60.png");
                     miniSignMapper.updateCountDay60(sign.getSignId());
-                }else if(sign.getCountDays()==100 && sign.getCountDays7()==0){
+                }else if(sign.getCountDays()==100 && sign.getCountDays100()==0){
                     miniUserVO.setAchieveShow(true);
                     miniUserVO.setAchieveImage("../images/achieve/sign_countday_100.png");
                     miniSignMapper.updateCountDay100(sign.getSignId());
                 }
                 //取勋章
-                if(sign.getSignDays()>=1 && sign.getSignDays()<30){
+                if(sign.getSignDays()>=7 && sign.getSignDays()<30){
                     miniUserVO.setBadge1("../images/user/badge_1_y.png");
                     miniUserVO.setBadge2("../images/user/badge_2_n.png");
                     miniUserVO.setBadge3("../images/user/badge_3_n.png");
@@ -173,6 +173,8 @@ public class MiniUserService {
     public MiniUser selectByOpenId(String openId){
         return miniUserDOMapper.selectByOpenId(openId);
     }
+
+    public MiniUser selectByPrimaryKey(Integer userId){return miniUserDOMapper.selectByPrimaryKey(userId);};
 
     public List<MiniSignWasteBook> selectUserSignImage(Integer userId){
         return miniSignWasteBookMapper.selectUserSignImage(userId);

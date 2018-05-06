@@ -78,6 +78,28 @@ public class MiniGramController {
     }
 
     /**
+     * 获取用户战队信息
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/getMiniUserCorps",method = RequestMethod.GET)
+    public @ResponseBody BaseResult getMiniUserCorps(Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            MiniUser user = miniUserService.selectByPrimaryKey(userId);
+            MiniCorps corps = miniCorpService.getCorps(user.getCorpsId());
+            if(!Objects.isNull(corps)){
+                result.setResult(true);
+                result.setObj(corps);
+                result.setMessage("获取用户信息成功！");
+            }
+        }catch (Exception ex){
+            LOGGER.error("获取小程序用户异常",ex);
+        }
+        return result;
+    }
+
+    /**
      * 用户连续打卡天数成就展示
      * @param userId
      * @return
