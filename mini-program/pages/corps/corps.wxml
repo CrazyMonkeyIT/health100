@@ -1,4 +1,5 @@
 <view>
+
   <image src="../images/corps/corps_back.png" mode='widthFix' style='width:100%;'></image>
   <image src='{{pankingTopCorp.corpsBannerImage}}' mode='widthFix' class='banner_image'></image>
   <image src='../images/corps/corps_info.png' class='corps_info' bindtap='corps_info'></image>
