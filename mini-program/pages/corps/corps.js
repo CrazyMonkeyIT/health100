@@ -67,12 +67,11 @@ Page({
   pankingTopCorps:function(){
     wx.request({
       url: config.service.getTop1Corps,
-      data: {},
+      data: { userId: this.data.userId },
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
-        console.log(resp)
         that.setData({
           pankingTopCorp: resp.data.obj
         })

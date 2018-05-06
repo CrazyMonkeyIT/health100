@@ -124,6 +124,6 @@
   <select id="selectUserSignImage" resultMap="BaseResultMap">
     SELECT * from t_b_mini_sign_waste_book a
     inner join t_b_mini_sign b on a.sign_id=b.sign_id
-    where b.mini_user_id=#{userId,jdbcType=BIGINT} and sign_type=1
+    where b.mini_user_id=#{userId,jdbcType=BIGINT} and sign_type=1 and is_check=1
   </select>
 </mapper>

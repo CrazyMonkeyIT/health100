@@ -186,11 +186,17 @@ public class MiniGramController {
         return result;
     }
 
+    /**
+     * 获取手动置顶的战队或排行第一的
+     * 修改为获取用户的战队
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/getTop1Corps",method = RequestMethod.GET)
-    public @ResponseBody BaseResult getTop1Corps(){
+    public @ResponseBody BaseResult getTop1Corps(Integer userId){
         BaseResult result = new BaseResult();
         try {
-            MiniCorps corps = miniCorpService.selectTop1Corps();
+            MiniCorps corps = miniCorpService.selectTop1Corps(userId);
             result.setResult(true);
             result.setObj(corps);
             result.setMessage("获取top1战队成功~~");
@@ -289,7 +295,7 @@ public class MiniGramController {
     }
 
     /**
-     * 获取用户打卡图片
+     * 获取用户打卡图片  审核通过的图片
      * @param userId
      * @return
      */
@@ -308,17 +314,4 @@ public class MiniGramController {
         }
         return result;
     }
-
-    /**
-     * 获取战队成员信息
-     * @return
-     */
-    @RequestMapping(value = "/aaa",method = RequestMethod.GET)
-    public @ResponseBody BaseResult getCropsInfo(){
-        BaseResult result = new BaseResult();
-
-        return result;
-    }
-
-
 }

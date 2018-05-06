@@ -138,12 +138,13 @@ public class MiniCorpService {
         miniCorpsMapper.corpsCancelTop();
     }
 
-    public MiniCorps selectTop1Corps(){
-        MiniCorps miniCorps = miniCorpsMapper.selectTopCorps();
+    public MiniCorps selectTop1Corps(Integer userId){
+        /*MiniCorps miniCorps = miniCorpsMapper.selectTopCorps();
         if(Objects.isNull(miniCorps)){
             miniCorps = miniCorpsMapper.selectTop1Corps();
-        }
-        return miniCorps;
+        }*/
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        return miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());
     }
 
 }

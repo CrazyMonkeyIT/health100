@@ -1,6 +1,5 @@
 const config = require("../../config.js")
 const userUtil = require("../../global-js/userUtil.js")
-//index.js
 //获取应用实例
 const app = getApp();
 var that = null;
@@ -138,6 +137,18 @@ Page({
     wx.navigateTo({
       url: "/pages/sign/sign"
     })
+  },
+  sign_0ne_click:function(){
+    if (that.data.miniUser.corpsId == 0 || that.data.miniUser.corpsId==null){
+      wx.navigateTo({
+        url: "/pages/joincorps/joincorps"
+      })
+    }else{
+      wx.navigateTo({
+        url: "/pages/corps/corps"
+      })
+    }
+    
   },
   corps_click:function(){
     if(this.data.miniUser.corpsId==0){

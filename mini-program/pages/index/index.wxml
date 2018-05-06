@@ -18,7 +18,7 @@
    <image src='../images/index_click.png' bindtap='sign_click' class='corps_click' mode='widthFix'></image>
   </view>
   <view class="{{miniUser.oneSign?'show':'hidden'}}">
-    <image src='../images/one_join.png' bindtap='sign_click' class='one_join' mode='widthFix'></image>
+    <image src='../images/one_join.png' bindtap='sign_0ne_click' class='one_join' mode='widthFix'></image>
   </view>
 <!--button-->
 <!--tab-->
