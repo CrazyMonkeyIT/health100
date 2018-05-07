@@ -51,31 +51,23 @@ Page({
   },
   joincorps:function(data){
     var corpsId = data.currentTarget.dataset.id;
-    wx.showModal({
-      title: '提示',
-      content: '加入战队后，个人总积分将减半， 请确认是否继续',
-      success: function (res) {
-        if (res.confirm) {
-          wx.request({
-            url: config.service.joinCorps,
-            data: { corpsId: corpsId, userId: that.data.userId },
-            method: 'GET',
-            dataType: 'json',
-            responseType: 'text',
-            success: function (resp) {
-              if (resp.data.result) {
-                wx.navigateTo({
-                  url: "/pages/corps/corps"
-                })
-              } else {
-                wx.showModal({
-                  title: '提示',
-                  content: resp.data.message
-                })
-              }
-            }
+    wx.request({
+      url: config.service.joinCorps,
+      data: { corpsId: corpsId, userId: that.data.userId },
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        if (resp.data.result) {
+          wx.navigateTo({
+            url: "/pages/corps/corps"
           })
-        } 
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: resp.data.message
+          })
+        }
       }
     })
   },

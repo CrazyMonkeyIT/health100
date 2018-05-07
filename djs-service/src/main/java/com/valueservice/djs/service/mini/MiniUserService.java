@@ -76,6 +76,7 @@ public class MiniUserService {
             miniUserVO.setNickName(miniUser.getNickName());
             miniUserVO.setAvatar(miniUser.getAvatarUrl());
             miniUserVO.setCorpsId(miniUser.getCorpsId()==null?0L:miniUser.getCorpsId());
+            miniUserVO.setHasCorps(miniUser.getCorpsId()==null?false:miniUser.getCorpsId()==0?false:true);
             miniUserVO.setHasFirstSign(StringUtils.isNotBlank(miniUser.getFirstSignPost())?true:false);
 
             MiniCorps miniCorps = miniCorpsMapper.selectByPrimaryKey(miniUser.getCorpsId());

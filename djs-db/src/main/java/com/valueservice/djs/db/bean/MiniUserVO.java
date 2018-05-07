@@ -24,6 +24,8 @@ public class MiniUserVO {
     private Boolean achieveShow;
     private String achieveImage;
 
+    private Boolean hasCorps;
+
     public Integer getUserId() {
         return userId;
     }
@@ -159,5 +161,13 @@ public class MiniUserVO {
 
     public void setAchieveImage(String achieveImage) {
         this.achieveImage = achieveImage;
+    }
+
+    public Boolean getHasCorps() {
+        return hasCorps;
+    }
+
+    public void setHasCorps(Boolean hasCorps) {
+        this.hasCorps = hasCorps;
     }
 }

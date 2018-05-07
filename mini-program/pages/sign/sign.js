@@ -187,7 +187,8 @@ Page({
   },
   bigbig:function(){
     that.setData({
-      big:!that.data.big
+      big:!that.data.big,
+      finger: !that.data.finger
     })
   }
 })

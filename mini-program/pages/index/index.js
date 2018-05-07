@@ -8,7 +8,6 @@ Page({
     selected: true, //tab
     selected1: false,//tab
     modalHidden: false,//活动规则弹窗
-    hasCorps:false,
     index_back_image:'../images/index_back.jpg',
     isScroll:true,
     corpsPanking:[],
@@ -23,7 +22,6 @@ Page({
       that.getUser(userInfo.id);
       that.pankingCorps(userInfo.id);
     });
-    
    
     var animation = wx.createAnimation({
       duration: 1000,
@@ -55,11 +53,6 @@ Page({
           that.setData({
             miniUser: resp.data.obj
           })
-          if (resp.data.obj.corpsId == 0 || resp.data.obj.corpsId == null){
-            that.setData({
-              hasCorps: true
-            })
-          }
           if (resp.data.obj.oneSign==true){
             that.setData({
               index_back_image:'../images/index_back_one.jpg'
@@ -157,8 +150,16 @@ Page({
     
   },
   corps_click:function(){
-    wx.navigateTo({
-      url: "/pages/joincorps/joincorps"
+    wx.showModal({
+      title: '提示',
+      content: '加入战队后，个人总积分将减半， 请确认是否继续',
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: "/pages/joincorps/joincorps"
+          })
+        }
+      }
     })
   },
   corps_sign_click:function(){

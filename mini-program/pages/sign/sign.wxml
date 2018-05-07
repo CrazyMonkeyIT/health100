@@ -18,4 +18,6 @@
      </view>
  </view>
 
+<image src='../images/sign/big_finger.gif' mode='widthFix' class='big_finger' wx:if='{{big}}' bindtap='bigbig'></image>
+<image src='../images/sign/cancel.png' wx:if='{{!big}}' mode='widthFix' class='big_cancel' bindtap='bigbig'></image>
 </scroll-view>

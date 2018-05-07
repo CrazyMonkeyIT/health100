@@ -56,3 +56,15 @@ page{
   top: 100rpx;
   overflow: scroll;
 }
+.big_finger{
+  position: absolute;
+  top: 600rpx;
+  width: 90rpx;
+  left: 670rpx;
+}
+.big_cancel{
+  position: absolute;
+  top: 150rpx;
+  width: 90rpx;
+  left: 670rpx;
+}

@@ -46,6 +46,11 @@ page{
   top :250rpx;
   width : 750rpx;
 }
+.run_health_back {
+  position: absolute;
+  top :870rpx;
+  width : 750rpx;
+}
 .run_health_line {
   position: absolute;
   left :15rpx;
