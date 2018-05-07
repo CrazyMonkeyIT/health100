@@ -112,7 +112,12 @@ public class MiniUserService {
                     miniSignMapper.updateCountDay100(sign.getSignId());
                 }
                 //取勋章
-                if(sign.getSignDays()>=7 && sign.getSignDays()<30){
+                if(sign.getSignDays()<7){
+                    miniUserVO.setBadge1("../images/user/badge_1_n.png");
+                    miniUserVO.setBadge2("../images/user/badge_2_n.png");
+                    miniUserVO.setBadge3("../images/user/badge_3_n.png");
+                    miniUserVO.setBadge4("../images/user/badge_4_n.png");
+                }else if(sign.getSignDays()>=7 && sign.getSignDays()<30){
                     miniUserVO.setBadge1("../images/user/badge_1_y.png");
                     miniUserVO.setBadge2("../images/user/badge_2_n.png");
                     miniUserVO.setBadge3("../images/user/badge_3_n.png");
