@@ -15,6 +15,24 @@ Page({
     miniUser:[],     //主页面加载数据user
     animationData: {}
   },
+  onLoad: function (param){
+    var scene = decodeURIComponent(param.userId);
+    if (!scene) {
+      this.sharePoint(scene)
+    }
+  },
+  sharePoint:function(userId){
+    wx.request({
+      url: config.service.sharePoint,
+      data: { userId: userId },
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (resp) {
+        
+      }
+    })
+  },
   onShow: function () {
     that = this;
     userUtil.login(function(){

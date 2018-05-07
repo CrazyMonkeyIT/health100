@@ -52,6 +52,11 @@ public class MiniUserService {
         }
     }
 
+    public void sharePoint(Integer userId){
+        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        miniUser.setPoint(miniUser.getPoint()+20);
+        miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+    }
     /**
      * 根据openId获取 微信用户  并返回 vo对象
      * @param userId

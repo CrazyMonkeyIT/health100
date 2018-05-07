@@ -57,14 +57,14 @@ page{
   overflow: scroll;
 }
 .big_finger{
-  position: absolute;
-  top: 600rpx;
+  position: fixed;
+  bottom:491rpx;
   width: 90rpx;
   left: 670rpx;
 }
 .big_cancel{
-  position: absolute;
-  top: 150rpx;
+  position: fixed;
+  bottom:941rpx;
   width: 90rpx;
   left: 670rpx;
 }

@@ -333,6 +333,18 @@ public class MiniGramController {
         return result;
     }
 
+    @RequestMapping(value = "/sharePoint",method = RequestMethod.GET)
+    public @ResponseBody BaseResult sharePoint(Integer userId){
+        BaseResult result = new BaseResult();
+        try {
+            miniUserService.sharePoint(userId);
+            result.setResult(true);
+        }catch (Exception e){
+            LOGGER.error("校验用户打卡状态失败",e);
+        }
+        return result;
+    }
+
     /**
      * 获取用户打卡图片  审核通过的图片
      * @param userId

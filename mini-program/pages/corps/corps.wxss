@@ -75,6 +75,9 @@ page{
   position: absolute;
   left: 50rpx;
   top:170rpx;
+  width: 650rpx;
+  height: 1680rpx;
+  overflow: scroll;
 }
 .table_headimage{
   position: absolute;
