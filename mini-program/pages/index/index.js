@@ -16,7 +16,7 @@ Page({
     animationData: {}
   },
   onLoad: function (param){
-    var scene = decodeURIComponent(param.userId);
+    var scene = decodeURIComponent(param.scene);
     if (!scene) {
       this.sharePoint(scene)
     }
