@@ -174,34 +174,34 @@ page{
 }
 
 .modal-dialog{
- width: 600rpx;
+ width: 650rpx;
  height: 950rpx;
  position: fixed;
- top: 150rpx;
- left: 70rpx;
+ top: 50rpx;
+ left: 50rpx;
 }
 .modal-dialog-info-back{
    position: absolute;
-   width: 600rpx;
+   width: 650rpx;
    height: 950rpx;
 }
 .modal-dialog-info{
   position: absolute;
-  top:35rpx;
+  top:55rpx;
   left:50rpx;
-  width: 500rpx;
-  height: 850rpx;
+  width: 550rpx;
+  height: 880rpx;
   overflow: scroll;
 }
 .modal-dialog-info_image{
   position: absolute;
-   width: 500rpx;
+   width: 550rpx;
 }
 .modal-dialog-info-cancel{
   position: fixed;
   width: 50rpx;
-  top: 190rpx;
-  left: 580rpx;
+  top: 90rpx;
+  left: 610rpx;
 }
 .person_click_left{
   position: absolute;

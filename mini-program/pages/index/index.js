@@ -39,6 +39,7 @@ Page({
       var userInfo = wx.getStorageSync('userInfo');
       that.getUser(userInfo.id);
       that.pankingCorps(userInfo.id);
+      that.showIntro();
     });
    
     var animation = wx.createAnimation({
@@ -59,6 +60,23 @@ Page({
       })
     }.bind(this), 1000)
   },
+  showIntro:function(){
+    wx.getStorage({
+      key: 'ori_member',
+      success: function(res) {},
+      fail: function(res) {
+        that.setData({
+          modalHidden: true
+        });
+        wx.setStorage({
+          key: 'ori_member',
+          data: 'delete'
+        })
+      },
+      complete: function(res) {
+      },
+    })
+  },
   getUser:function(userId){
     wx.request({
       url: config.service.getMiniUser,
@@ -73,7 +91,8 @@ Page({
           })
           if (resp.data.obj.oneSign==true){
             that.setData({
-              index_back_image:'../images/index_back_one.jpg'
+              index_back_image:'../images/index_back_one.jpg',
+             
             })
           }
         }else{
