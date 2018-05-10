@@ -15,5 +15,4 @@
       </view>
     </view>
  </view>
- <image animation="{{animationData}}" src="../images/down.png" bindtap='scrollBottom' class='down_png' mode='widthFix'></image>
 </view>

@@ -74,9 +74,3 @@ page{
   font-size:35rpx;
   color:blueviolet;
 }
-.down_png{
-  position: fixed;
-  bottom: 20rpx;
-  left :340rpx;
-  width:70rpx;
-}

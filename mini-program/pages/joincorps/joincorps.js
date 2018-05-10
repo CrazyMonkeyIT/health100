@@ -5,8 +5,7 @@ var that = null;
 Page({
   data: {
     userId:'',
-    corps:[],
-    animationData: {}
+    corps:[]
   },
   onShow: function (param) {
     that = this;
@@ -21,23 +20,10 @@ Page({
       duration: 1000,
       timingFunction: 'ease-in-out',
     })
-    this.animation = animation
-
-    animation.bottom(50).step().bottom(20).step()
-    this.setData({
-      animationData: animation.export()
-    })
-
-    setInterval(function () {
-      animation.bottom(20).step().bottom(50).step()
-      this.setData({
-        animationData: animation.export()
-      })
-    }.bind(this), 1000)
   },
   getCorpsList:function(){
     wx.request({
-      url: config.service.pankingCorps,
+      url: config.service.getCorpsList,
       data: {},
       method: 'GET',
       dataType: 'json',
