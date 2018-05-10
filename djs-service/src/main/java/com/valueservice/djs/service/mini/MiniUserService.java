@@ -36,7 +36,7 @@ public class MiniUserService {
      * @return
      * @throws Exception
      */
-    public MiniUser saveOrUpdate(MiniUser record) throws Exception{
+    public synchronized MiniUser saveOrUpdate(MiniUser record) throws Exception{
         MiniUser existsUser = miniUserDOMapper.selectByOpenId(record.getOpenId());
         if(existsUser == null){
             record.setActive(1);

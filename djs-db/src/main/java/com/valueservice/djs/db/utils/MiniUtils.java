@@ -107,7 +107,7 @@ public class MiniUtils {
                 accessToken.setNextGetTime(nextGetTime);
                 accessToken.setAppid(CommonConst.MINI_PROGRAM_APPID);
                 accessToken.setAppsecret(CommonConst.MINI_PROGRAM_APPSECRET);
-                stringRedisTemplate.opsForValue().set(CommonConst.MINI_PROGRAM_APPID + "_access_token",gson.toJson(accessToken));
+                //stringRedisTemplate.opsForValue().set(CommonConst.MINI_PROGRAM_APPID + "_access_token",gson.toJson(accessToken));
             } catch (JSONException e) {
                 accessToken = null;
 
@@ -153,17 +153,37 @@ public class MiniUtils {
             e.printStackTrace();
             return false;
         }
+    }
 
-
+    public static boolean getSceneQrcodeLocal(String scene,String page,Integer width,String fileName){
+        String accessToken =
+                //"9_3cmpdfKYrREk7m-QDKqetsCSBw4txsFfLJe5dYoyAbbbOAiPpGMPnzNwNgezSDtCilwF3IB3NeI3RMObXsQhNxb3b0MTlfO9jTcC1GPmNdMmNrmDxgICSk60y54yhwqTwys3t9B0EzpRRTIcVDJeABAIQW";//
+                getAccessToken().getToken();
+        String requestUrl="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=ACCESS_TOKEN";
+        requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
+        Map<String,Object> params = new HashMap<>();
+        params.put("scene",scene);
+        params.put("path",page);
+        params.put("width",width);
+        String json = JsonLibUtils.mapToJson(params);
+        logger.info("请求二维码参数："+json);
+        InputStream imgStream = httpsRequestGetStream(requestUrl, "POST", json);
+        try {
+            boolean result = saveStreamImage(imgStream,fileName);
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
 
     public static void main(String[] args) {
-//        Long time = System.currentTimeMillis();
-//        String pngName = "/Users/maowankui/Documents/" + time + ".png";
-//        getMiniInviteQrcodeLocal("pages/index/index?ksd=123",430,pngName);
-        getAccessToken();
+        Long time = System.currentTimeMillis();
+        String pngName = "/Users/maowankui/Documents/" + time + ".png";
+        getSceneQrcodeLocal("1232","pages/index/index?ksd=123",430,pngName);
+        //getAccessToken();
     }
 
     /**

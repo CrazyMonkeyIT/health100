@@ -66,10 +66,19 @@ Page({
         if (resp.data.result == false) {
           wx.showModal({
             title: '提示',
-            content: resp.data.message,
-            confirmText : "我知道了",
-            cancelText :"个人中心"
+            content: "您今天已经打过卡了",
+            cancelText: "我知道了",
+            confirmText: "个人中心",
+            success: function (res) {
+              console.log(res)
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: "/pages/user/user"
+                })
+              }
+            }
           })
+          return;
         } else {
           wx.showToast({
             title:resp.data.obj,
