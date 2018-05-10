@@ -3,8 +3,8 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://health100.cnsoc.org/health';
-//var host = 'http://localhost:9090/health';
+//var host = 'https://health100.cnsoc.org/health';
+var host = 'http://localhost:9090/health';
 
 var config = {
   // 下面的地址配合云端 Demo 工作
@@ -26,12 +26,14 @@ var config = {
     pankingUsers:host + '/minigram/usersPanking',
     //校验用户打卡类型
     checkSign:host+'/minigram/checkSign',
+    //分享得积分
+    sharePoint: host +'/minigram/sharePoint',
     //传图打卡
     imageSign: host +'/minigram/imageSign',
     // 一键打卡
     userSign:host+'/minigram/userSign',
     //获取所有的战队信息
-    getCorpsList: host +'/minigram/getCorpsList',
+    getCorpsList: host +'/minigram/corpsList',
     //加入战队
     joinCorps: host + '/minigram/joinCorps',
     //获取积分top1的战队
