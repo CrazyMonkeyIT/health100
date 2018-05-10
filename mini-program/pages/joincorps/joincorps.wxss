@@ -15,7 +15,7 @@ page{
   left:55rpx;
   top:670rpx;
   width:80%;
-  height: 400rpx;
+  height: 500rpx;
   flex-direction:row;
   overflow: scroll;
 }
