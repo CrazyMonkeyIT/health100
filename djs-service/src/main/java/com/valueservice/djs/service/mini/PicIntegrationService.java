@@ -153,7 +153,7 @@ public class PicIntegrationService {
         lunch.setX(300);
         lunch.setY(742);
         lunch.setContent(lanchContent);
-        lunch.setFont(new Font("苹方黑体", Font.BOLD, 32));
+        lunch.setFont(new Font(".PingFang SC", Font.BOLD, 32));
         lunch.setColor(new Color(202,0,191,255));
         return lunch;
     }
@@ -179,7 +179,7 @@ public class PicIntegrationService {
         rank.setX(500);
         rank.setY(485);
         rank.setContent(rankContent);
-        rank.setFont(new Font("苹方黑体", Font.BOLD, 38));
+        rank.setFont(new Font(".PingFang SC", Font.BOLD, 38));
         rank.setColor(new Color(202,0,191,255));
         return rank;
     }
@@ -198,7 +198,7 @@ public class PicIntegrationService {
         signDaysCount.setX(235);
         signDaysCount.setY(485);
         signDaysCount.setContent(content);
-        signDaysCount.setFont(new Font("苹方黑体", Font.BOLD, 38));
+        signDaysCount.setFont(new Font(".PingFang SC", Font.BOLD, 38));
         signDaysCount.setColor(new Color(202,0,191,255));
         return signDaysCount;
     }
@@ -212,7 +212,7 @@ public class PicIntegrationService {
     private MiniImage getFontContent(MiniUser miniUser){
         MiniImage image = new MiniImage(210,1070,0,0);
         image.setImageType(1);
-        image.setFont(new Font("苹方黑体", Font.PLAIN, 24));
+        image.setFont(new Font(".PingFang SC", Font.PLAIN, 24));
         image.setX(250);//380
         if(miniUser.getCorpsId() == null){
             image.setContent("打败肉肉，你不是一个人在战斗！");
@@ -239,7 +239,7 @@ public class PicIntegrationService {
             Long time = System.currentTimeMillis();
 
             String fileName = filePath + time + ".png";
-            boolean result = MiniUtils.getMiniInviteQrcodeLocal("pages/index/index?userid="+miniUser.getId(),430,fileName);
+            boolean result = MiniUtils.getSceneQrcodeLocal(miniUser.getId()+"","pages/index/index",430,fileName);
             if(result){
                 miniUser.setQrcodeUrl(fileName);
                 miniUserDOMapper.updateByPrimaryKeySelective(miniUser);

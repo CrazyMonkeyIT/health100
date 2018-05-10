@@ -8,6 +8,15 @@ page{
   top:131rpx;
   width:689rpx;
 }
+.corps_name_text {
+  position: absolute;
+  top:230rpx;
+  left:100rpx;
+  width: 600rpx;
+  text-align: left;
+  font-size: 36rpx;
+  color:#fff;
+}
 .corps_msg_01{
   position: absolute;
   top:481rpx;
@@ -32,6 +41,13 @@ page{
   left:220rpx;
   width: 300rpx;
 }
+.corps_top_1 {
+  position: absolute;
+  top:130rpx;
+  left:30rpx;
+  width: 100rpx;
+}
+
 .tab_main{
   position: absolute;
   top :870rpx;
@@ -124,7 +140,7 @@ page{
 .corps_info_view{
   position:absolute;
   left:0rpx;
-  top:425rpx;
+  top:390rpx;
   width:740rpx;
   height:380rpx;
 }

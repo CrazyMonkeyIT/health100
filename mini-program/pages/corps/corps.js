@@ -11,7 +11,8 @@ Page({
     corpsPanking: [],
     corpsUsersPanking:[],
     pankingTopCorp:[],
-    animationData: {}
+    animationData: {},
+    nobanner :false
   },
   onShow : function () {
     that = this;
@@ -88,6 +89,12 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function (resp) {
+        if (!resp.data.obj.corpsBannerImage){
+          resp.data.obj.corpsBannerImage = '../images/corps/random/banner-' + (parseInt(5 * Math.random()) + 1) + '.jpg';
+          that.setData({
+            nobanner: true
+          })
+        }
         that.setData({
           pankingTopCorp: resp.data.obj
         })

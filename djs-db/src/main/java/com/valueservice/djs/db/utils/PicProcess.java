@@ -195,7 +195,7 @@ public class PicProcess {
         //image.setContent("打败肉肉，你不是一个人在战斗！");
         String pngName = "/Users/maowankui/Documents/" + time + ".png";
         writePngImg(pngName,mainPic,post,qrcode,image);*/
-       /* BufferedImage achive_back = loadImageLocal("/Users/maowankui/Desktop/minifile/achive_back.png");
+        BufferedImage achive_back = loadImageLocal("/Users/maowankui/Desktop/minifile/achive_back.png");
 
         BufferedImage mainPic = loadImageLocal("/Users/maowankui/Documents/WechatIMG1.jpeg");
         BufferedImage circlepic = ellipseImage(mainPic);
@@ -213,7 +213,7 @@ public class PicProcess {
         image.setX(235);
         image.setY(485);
         image.setContent(content);
-        image.setFont(new Font("宋体", Font.BOLD, 38));
+        image.setFont(new Font("PingFang SC-Medium", Font.BOLD, 38));
         image.setColor(new Color(202,0,191,255));
         //签到天数
         MiniImage rank = new MiniImage(210,1070,0,0);
@@ -222,7 +222,7 @@ public class PicProcess {
         rank.setX(500);
         rank.setY(485);
         rank.setContent(rankContent);
-        rank.setFont(new Font("宋体", Font.BOLD, 38));
+        rank.setFont(new Font("苹方-简 中粗体", Font.BOLD, 38));
         rank.setColor(new Color(202,0,191,255));
 
         //签到天数
@@ -232,14 +232,14 @@ public class PicProcess {
         lanch.setX(300);
         lanch.setY(742);
         lanch.setContent(lanchContent);
-        lanch.setFont(new Font("宋体", Font.BOLD, 32));
+        lanch.setFont(new Font("PingFang SC-Medium", Font.BOLD, 32));
         lanch.setColor(new Color(202,0,191,255));
 
         Long time = System.currentTimeMillis();
         String pngName = "/Users/maowankui/Documents/" + time + ".png";
-        writePngImg(pngName,achive_back,achive_circle_image,qrcode,image,rank,lanch);*/
+        writePngImg(pngName,achive_back,achive_circle_image,qrcode,image,rank,lanch);
 
-        BufferedImage achive_back = loadImageLocal("/Users/maowankui/Desktop/minifile/first_click.png");
+        /*BufferedImage achive_back = loadImageLocal("/Users/maowankui/Desktop/minifile/first_click.png");
 
         BufferedImage post_pic = loadImageLocal("/Users/maowankui/Desktop/minifile/invite_post_1.png");
         //头像位置
@@ -252,7 +252,7 @@ public class PicProcess {
 
         Long time = System.currentTimeMillis();
         String pngName = "/Users/maowankui/Documents/" + time + ".png";
-        writePngImg(pngName,achive_back,post_mini,qrcode);
+        writePngImg(pngName,achive_back,post_mini,qrcode);*/
 
     }
 
