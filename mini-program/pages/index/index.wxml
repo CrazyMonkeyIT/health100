@@ -80,7 +80,7 @@
   </view>
   <image animation="{{animationData}}" src="../images/down.png" bindtap='scrollBottom' class='down_png' mode='widthFix'></image>
   <!--弹出层 -->
-  <view class="modal-dialog" wx:if="{{modalHidden}}">
+  <view class="modal-dialog" wx:if="{{modalHidden}}" >
         <image src='../images/rule_info_back.png' class='modal-dialog-info-back' mode='widthFix'></image>  
         <view  class='modal-dialog-info'>
           <image src='../images/rule_info.png' mode='widthFix' class='modal-dialog-info_image' ></image>  

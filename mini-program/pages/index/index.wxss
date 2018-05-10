@@ -54,7 +54,7 @@ page{
 .run_health_line {
   position: absolute;
   left :15rpx;
-  top :520rpx;
+  top :440rpx;
   width : 750rpx;
 }
 .sign_click{
@@ -174,34 +174,34 @@ page{
 }
 
 .modal-dialog{
- width: 650rpx;
- height: 950rpx;
+ width: 700rpx;
+ height: 1350rpx;
  position: fixed;
- top: 50rpx;
- left: 50rpx;
+ top: 40rpx;
+ left: 15rpx;
 }
 .modal-dialog-info-back{
    position: absolute;
-   width: 650rpx;
-   height: 950rpx;
+   width: 720rpx;
+   height: 1350rpx;
 }
 .modal-dialog-info{
   position: absolute;
-  top:55rpx;
-  left:50rpx;
-  width: 550rpx;
-  height: 880rpx;
+  top:115rpx;
+  left:75rpx;
+  width: 750rpx;
+  height: 930rpx;
   overflow: scroll;
 }
 .modal-dialog-info_image{
   position: absolute;
-   width: 550rpx;
+   width: 580rpx;
 }
 .modal-dialog-info-cancel{
   position: fixed;
-  width: 50rpx;
-  top: 90rpx;
-  left: 610rpx;
+  width: 100rpx;
+  top: 80rpx;
+  left: 600rpx;
 }
 .person_click_left{
   position: absolute;

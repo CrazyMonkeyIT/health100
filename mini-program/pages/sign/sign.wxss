@@ -58,13 +58,13 @@ page{
 }
 .big_finger{
   position: fixed;
-  bottom:491rpx;
+  bottom:427rpx;
   width: 90rpx;
-  left: 670rpx;
+  left: 580rpx;
 }
 .big_cancel{
   position: fixed;
   bottom:941rpx;
   width: 90rpx;
-  left: 670rpx;
+  left: 650rpx;
 }
