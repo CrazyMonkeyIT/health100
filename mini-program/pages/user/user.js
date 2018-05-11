@@ -55,6 +55,14 @@ Page({
             miniUser: resp.data.obj,
             achieveShow: resp.data.obj.achieveShow
           })
+          /*console.log(resp.data.obj.achieveImage);
+          if (resp.data.obj.achieveShow == true){
+            wx.previewImage({
+              current: resp.data.obj.achieveImage,
+              urls: [resp.data.obj.achieveImage],
+            })
+          }*/
+          
           that.continuousDay(resp.data.obj.signDay);
           //首次打卡，生成海报
           if (resp.data.obj.hasFirstSign == false){

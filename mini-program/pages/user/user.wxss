@@ -184,4 +184,5 @@ page{
   height:100%;
   top:0px;
   background:rgba(0,0,0,0.8);
+  z-index :100;
 }

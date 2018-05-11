@@ -38,7 +38,6 @@ Page({
     userUtil.login(function(){
       var userInfo = wx.getStorageSync('userInfo');
       that.getUser(userInfo.id);
-      that.pankingCorps(userInfo.id);
       that.showIntro();
     });
    
@@ -92,14 +91,23 @@ Page({
           if (resp.data.obj.oneSign==true){
             that.setData({
               index_back_image:'../images/index_back_one.jpg',
-             
             })
           }
+          that.pankingCorps(userId);
         }else{
-          wx.showModal({
-            title: '提示',
-            content: '系统错误'
+          wx.removeStorage({
+            key: 'userInfo',
+            success: function(res) {
+              //没有获得用户数据 可能是清理过用户信息
+              userUtil.login(function () {
+                var userInfo = wx.getStorageSync('userInfo');
+                that.getUser(userInfo.id);
+              });
+            },
+            fail: function(res) {
+            },
           })
+          
         }
       }
     })
