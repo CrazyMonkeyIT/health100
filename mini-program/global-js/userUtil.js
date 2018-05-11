@@ -7,6 +7,7 @@ const login = function(callback){
     loginOper(callback);
     return;
   }
+  
   if(callback){
     callback();
   }
