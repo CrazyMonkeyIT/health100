@@ -333,6 +333,19 @@ public class MiniGramController {
         return result;
     }
 
+    @RequestMapping(value = "/sharePointInvoke",method = RequestMethod.GET)
+    public @ResponseBody BaseResult sharePointInvoke(@RequestParam("userId") Integer userId,@RequestParam("scene")Integer scene){
+        BaseResult result = new BaseResult();
+        try {
+            miniUserService.sharePointInvoke(userId,scene);
+            result.setResult(true);
+            result.setMessage("邀请成功");
+        }catch (Exception e){
+            LOGGER.error("校验用户打卡状态失败",e);
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/sharePoint",method = RequestMethod.GET)
     public @ResponseBody BaseResult sharePoint(Integer userId){
         BaseResult result = new BaseResult();

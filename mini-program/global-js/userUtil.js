@@ -4,7 +4,11 @@ const config = require("../config.js")
 const login = function(callback){
   var userData = wx.getStorageSync("userInfo");
   if(!userData){
-    loginOper(callback);
+    //loginOper(callback);
+    /*wx.navigateTo({
+      url: 'pages/index/index',
+    })*/
+    callback();
     return;
   }
   
@@ -52,10 +56,35 @@ const saveUserStorage = function (result, saveRes, callback) {
     callback();
   }
 }
+const getWxUser = function(data,callback){
+  wx.login({
+    success: function (res) {
+      if (res.code) {
+        wx.request({
+          url: config.service.getauth,
+          data: {
+            code: res.code,
+            iv: data.detail.iv,
+            encryptedData: data.detail.encryptedData
+          },
+          header: {},
+          method: 'GET',
+          dataType: 'json',
+          success: function (result) {
+            asynchronous(result, callback);
+          }
+        })
+      }
+    },
+    fail: function (res) { },
+    complete: function (res) { },
+  });
+}
 const loginOper = function (callback) {
   wx.login({
     success: function (res) {
       if (res.code) {
+        
         wx.getUserInfo({
           success: function (userRes) {
             wx.request({
@@ -72,7 +101,9 @@ const loginOper = function (callback) {
                 asynchronous(result, callback);
               }
             })
-          }
+          }, fail: function (res) { 
+            console.log(res)
+          },
         })
       }
     },
@@ -82,5 +113,6 @@ const loginOper = function (callback) {
 }
 
 module.exports = {
-  login: login
+  login: login,
+  getWxUser: getWxUser
 }

@@ -134,7 +134,7 @@
   select c.corps_id,c.corps_head_image,c.corps_name,if(sum(u.point) is null,0,sum(u.point)) as point from t_b_mini_corps c
   left join t_b_mini_user u on c.corps_id=u.corps_id
   group by c.corps_id,c.corps_head_image,c.corps_name
-  order by point desc limit 20;
+  order by point desc
   </select>
 
   <select id="selectSpecialPanking" resultMap="BaseResultMap">

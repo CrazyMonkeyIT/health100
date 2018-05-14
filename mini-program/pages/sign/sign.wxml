@@ -1,5 +1,5 @@
-<scroll-view>
-  <image src='../images/sign/sign_back.jpg' style='width:100%;' mode='widthFix' ></image>
+<view>
+  <image src='../images/sign/sign_back.jpg' style='width:750rpx;height:1334rpx;' ></image>
   <image hidden='{{clickSign}}' src='../images/sign/sign_click.png' mode='widthFix' class='sing_click' bindtap='sign_click'></image>
   <image hidden='{{imageSign}}' src='../images/sign/sign_click_n.png' mode='widthFix' class='sing_click'></image>
   <image src='../images/sign/sign_click_image.png' mode='widthFix' class='sing_click_image' bindtap='image_sign_click'></image>
@@ -20,4 +20,4 @@
 
 <image src='../images/sign/big_finger.gif' mode='widthFix' class='big_finger' wx:if='{{big}}' bindtap='bigbig'></image>
 <image src='../images/sign/cancel.png' wx:if='{{!big}}' mode='widthFix' class='big_cancel' bindtap='bigbig'></image>
-</scroll-view>
+</view>

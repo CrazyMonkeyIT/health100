@@ -1,33 +1,38 @@
 <!--index.wxml-->
 <scroll-view scroll-y="{{isScroll}}">
-  <image src="{{index_back_image}}" mode='widthFix' style='width:100%'></image>
+  <image src="../images/index_back.jpg" mode='widthFix' style='width:100%' hidden='{{!userHasSign}}'></image>
+  <image src="../images/index_back_one.jpg" mode='widthFix' style='width:100%' hidden='{{userHasSign}}'></image>
   <image src='../images/camp_rule.jpg' mode='widthFix' class='camp_rule' bindtap='ruleinfo'></image>
 
-<view class="{{miniUser.oneSign?'hidden':'show'}}"> 
+<view hidden='{{!userHasSign}}'> 
     <view class='person_click_left' bindtap='userInfo_click'></view>
     <view class='person_click_right' bindtap='userInfo_click'></view>
     <text class='index_total_day'>{{miniUser.signDay}}</text>
     <text class='index_total_point'>{{miniUser.point}}</text>
 </view>
-
-  <image src="../images/health100_run_line.gif" bindtap='scrollBottom' class='run_health_line' mode='widthFix'></image>
-  <image src="../images/health100_run_back.gif" bindtap='scrollBottom' class='run_health_back' mode='widthFix'></image>
-  <image src="../images/health100_run.gif" bindtap='scrollBottom' class='run_health' mode='widthFix'></image>
+<view>
+  <image src="../images/health100_run_line.gif"  class='run_health_line' mode='widthFix'></image>
+  <image src="../images/health100_run_back.gif" class='run_health_back' mode='widthFix'></image>
+  <image src="../images/health100_run.gif" class='run_health' mode='widthFix'></image>
+</view>
 <!--button-->
-  <view class="{{miniUser.oneSign?'hidden':'show'}}">
+  <view hidden='{{firstOpenIndex}}'>
    <!-- 非首次打卡 检索战队按钮 -->
-   <view class="{{miniUser.hasCorps?'hidden':'show'}}">
+   <view hidden='{{!userHasSign || userHasCorp}}'>
     <image src='../images/index_corp_click.png' bindtap='corps_click' class='sign_click' mode='widthFix'></image>
    <image src='../images/index_click.png' bindtap='sign_click' class='corps_click' mode='widthFix'></image>
    </view>
-   <view class="{{miniUser.hasCorps?'show':'hidden'}}">
+   <view  hidden='{{!userHasCorp}}'>
     <image src='../images/index_corps_sign_click.png' bindtap='corps_sign_click' class='corps_sign_click' mode='widthFix'></image>
    </view>
    <!-- 非首次打卡 检索战队按钮 -->
   </view>
-  <view class="{{miniUser.oneSign?'show':'hidden'}}">
+  <view hidden='{{(userHasCorp || firstOpenIndex || userHasSign)}}'>
     <image src='../images/one_join.png' bindtap='sign_0ne_click' class='one_join' mode='widthFix'></image>
   </view>
+  <!-- 授权按钮  -->
+  <button class='firstButton' open-type="getUserInfo" hidden="{{!firstOpenIndex}}" bindgetuserinfo="getWxUser" type='mini'>
+  我要参加</button>
 <!--button-->
 <!--tab-->
   <view class='tab_main'>
@@ -38,9 +43,9 @@
         <view class='table_view'>
         <view class='table_view_tr' wx:for="{{corpsPanking}}" wx:for-index="key" wx:key="{{corpsId}}" wx:for-item="value">
             <view class="table_view_td">
-            <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no'></image>
-            <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no'></image>
-              <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no'></image>
+            <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no' style='margin-top:10rpx;'></image>
+            <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no' style='margin-top:10rpx;'></image>
+              <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no' style='margin-top:10rpx;'></image>
               <text class='table_view_td_no' wx:else>{{key+1}}</text>
               <image src='{{value.corpsHeadImage}}' mode='widthFix' class='table_headimage'></image>
               <text class='table_view_td_name'>{{value.corpsName}}</text>
@@ -57,9 +62,9 @@
       <view class='table_view'>
         <view class='table_view_tr' wx:for="{{usersPanking}}" wx:for-index="key" wx:key="{{id}}" wx:for-item="value">
             <view class="table_view_td">
-            <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no'></image>
-            <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no'></image>
-              <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no'></image>
+            <image wx:if="{{key==0}}" src='../images/No1.png' mode='widthFix' class='table_view_td_no' style='margin-top:10rpx;'></image>
+            <image wx:elif="{{key==1}}" src='../images/No2.png' mode='widthFix' class='table_view_td_no' style='margin-top:10rpx;'></image>
+              <image wx:elif="{{key==2}}" src='../images/No3.png' mode='widthFix' class='table_view_td_no' style='margin-top:10rpx;'></image>
               <text class='table_view_td_no' wx:else>{{key+1}}</text>
               <image src='{{value.avatarUrl}}' mode='widthFix' class='table_headimage'></image>
               <text class='table_view_td_name'>{{value.nickName}}</text>
@@ -87,5 +92,6 @@
         </view>
        <image src='../images/rule_info_cancel.png' mode='widthFix' class='modal-dialog-info-cancel' bindtap='ruleInfoCancel'></image> 
   </view>
+  
 </scroll-view>
  

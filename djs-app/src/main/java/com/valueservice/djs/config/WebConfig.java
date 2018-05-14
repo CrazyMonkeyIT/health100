@@ -81,6 +81,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             e.printStackTrace();
         }
         configuration.setSharedVariable("shiro", new ShiroTags());
+        configuration.setNumberFormat("#");
         factory.setConfiguration(configuration);
         return factory;
     }

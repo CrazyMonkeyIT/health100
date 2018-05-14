@@ -71,9 +71,9 @@ public class PicIntegrationService {
         }
 
         BufferedImage inviteQrcodeBuff = PicProcess.loadImageLocal(inviteQrcode);
-        MiniImage post = new MiniImage(160, 365, 430, 600);//163, 394, 440, 616
+        MiniImage post = new MiniImage(158, 360, 435, 605);//163, 394, 440, 616
         post.setImage(postBuff);
-        MiniImage qrcode = new MiniImage(500, 1020, 105, 105);//303 - 1124 - 150 - 150
+        MiniImage qrcode = new MiniImage(499, 1018, 106, 106);//303 - 1124 - 150 - 150
         qrcode.setImage(inviteQrcodeBuff);
         PicProcess.writePngImg(filePath + "/" + time + ".png",inviteTmpBuff,post,qrcode,getFontContent(miniUser));
         return contextPath + "minifile/" + time + ".png";

@@ -100,6 +100,7 @@ page{
   left: 70rpx;
   width: 60rpx;
   border-radius:50%;
+  margin-top :10rpx;
 }
 .table_view_tr{
   justify-content: space-between;
@@ -107,6 +108,7 @@ page{
 }
 .table_view_td{
   height: 80rpx;
+  line-height: 80rpx;
 }
 .table_view_td_no{
   position: absolute;

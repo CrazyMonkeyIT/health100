@@ -2,29 +2,55 @@ const config = require("../../config.js")
 const userUtil = require("../../global-js/userUtil.js")
 //获取应用实例
 const app = getApp();
-var that = null;
+var that = null, scene=null;
 Page({
   data: {
     selected: true, //tab
     selected1: false,//tab
     modalHidden: false,//活动规则弹窗
-    index_back_image:'../images/index_back.jpg',
+    index_back_image:'../images/index_back_one.jpg',
     isScroll:true,
     corpsPanking:[],
     usersPanking:[],
     miniUser:[],     //主页面加载数据user
-    animationData: {}
+    animationData: {},
+    firstOpenIndex : true,
+    userHasCorp :false,
+    userHasSign :false,
+  },
+  getWxUser: function(data){
+    if(!data.detail.signature){
+      return;
+    }
+    userUtil.getWxUser(data,function(){
+      wx.setStorage({
+        key: 'firstOpenIndex',
+        data: 'false',
+        success: function(res) {
+          that.setData({
+            firstOpenIndex : false
+          });
+        },
+      })
+      var userData = wx.getStorageSync("userInfo");
+      if (userData) {
+        that.getUser(userData.id);
+        if (scene != null) {
+          that.sharePoint(userData.id,scene)
+        }
+      }
+      
+    });
   },
   onLoad: function (param){
-    var scene = decodeURIComponent(param.scene);
-    if (!scene) {
-      this.sharePoint(scene)
+    if (param.scene){
+      scene = decodeURIComponent(param.scene);
     }
   },
-  sharePoint:function(userId){
+  sharePoint:function(userId,scene){
     wx.request({
       url: config.service.sharePoint,
-      data: { userId: userId },
+      data: { userId: userId, scene: scene},
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
@@ -35,12 +61,20 @@ Page({
   },
   onShow: function () {
     that = this;
+    that.showIntro();
     userUtil.login(function(){
-      var userInfo = wx.getStorageSync('userInfo');
-      that.getUser(userInfo.id);
-      that.showIntro();
+      var userData = wx.getStorageSync("userInfo");
+      if (userData){
+        that.getUser(userData.id);
+      }else{
+        that.pankingCorps(0);
+      }
+      if (wx.getStorageSync("firstOpenIndex")){
+        that.setData({
+          firstOpenIndex :false
+        })
+      }
     });
-   
     var animation = wx.createAnimation({
       duration: 1000,
       timingFunction: 'ease-in-out',
@@ -86,26 +120,22 @@ Page({
       success: function (resp) {
         if(resp.data.result === true){
           that.setData({
-            miniUser: resp.data.obj
+            miniUser: resp.data.obj,
+            userHasCorp: resp.data.obj.hasCorps,
+            userHasSign: resp.data.obj.hasFirstSign,
+            firstOpenIndex : false
           })
-          if (resp.data.obj.oneSign==true){
-            that.setData({
-              index_back_image:'../images/index_back_one.jpg',
-            })
-          }
+          wx.setStorage({
+            key: 'firstOpenIndex',
+            data: 'false',
+          })
           that.pankingCorps(userId);
         }else{
           wx.removeStorage({
-            key: 'userInfo',
-            success: function(res) {
-              //没有获得用户数据 可能是清理过用户信息
-              userUtil.login(function () {
-                var userInfo = wx.getStorageSync('userInfo');
-                that.getUser(userInfo.id);
-              });
-            },
-            fail: function(res) {
-            },
+            key: 'userInfo'
+          })
+          wx.removeStorage({
+            key: 'firstOpenIndex'
           })
           
         }

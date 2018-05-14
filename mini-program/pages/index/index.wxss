@@ -142,6 +142,7 @@ page{
   border-radius:50%;
   left: 70rpx;
   width: 60rpx;
+  margin-top: 10rpx;
 }
 .table_view_tr{
   justify-content: space-between;
@@ -149,6 +150,7 @@ page{
 }
 .table_view_td{
   height: 80rpx;
+  line-height: 80rpx;
 }
 .table_view_td_no{
   position: absolute;
@@ -221,3 +223,13 @@ page{
   top: 310rpx;
   z-index: 2;
 }
+
+.firstButton {
+  border-radius: 40rpx;
+  position: absolute;
+  left: 190rpx;
+  top :1000rpx;
+  width : 400rpx;
+  color: #D727CC;
+}
+

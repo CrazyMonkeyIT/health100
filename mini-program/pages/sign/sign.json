@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText":"减重100天打卡行动天"
+  "navigationBarTitleText":"减重100天打卡行动天",
+  "disableScroll" :true
 }

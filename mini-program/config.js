@@ -27,7 +27,7 @@ var config = {
     //校验用户打卡类型
     checkSign:host+'/minigram/checkSign',
     //分享得积分
-    sharePoint: host +'/minigram/sharePoint',
+    sharePoint: host +'/minigram/sharePointInvoke',
     //传图打卡
     imageSign: host +'/minigram/imageSign',
     // 一键打卡

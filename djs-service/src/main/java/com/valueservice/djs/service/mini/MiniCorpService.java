@@ -45,7 +45,7 @@ public class MiniCorpService {
         List<MiniCorps> reults = new ArrayList<>();
         //处理特殊战队的排行  如果用户属于特殊战队  战队排行内比
 
-        if(Objects.isNull(userId)){
+        if(Objects.isNull(userId) || userId == 0){
             reults = miniCorpsMapper.selectCorpsPanking();
         }else{
             MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);

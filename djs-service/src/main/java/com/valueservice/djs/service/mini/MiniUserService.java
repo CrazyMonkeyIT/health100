@@ -57,9 +57,25 @@ public class MiniUserService {
     }
 
     public void sharePoint(Integer userId){
-        MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        /*MiniUser miniUser = miniUserDOMapper.selectByPrimaryKey(userId);
         miniUser.setPoint(miniUser.getPoint()+20);
-        miniUserDOMapper.updateByPrimaryKeySelective(miniUser);
+        miniUserDOMapper.updateByPrimaryKeySelective(miniUser);*/
+    }
+
+    /**
+     * 邀请获得积分
+     * @param userId
+     * @param scene
+     */
+    public void sharePointInvoke(Integer userId,Integer scene){
+        //被邀请的用户
+        MiniUser invitedUser = miniUserDOMapper.selectByPrimaryKey(userId);
+        if(invitedUser != null){
+            //发出邀请的用户
+            MiniUser inviteUser = miniUserDOMapper.selectByPrimaryKey(scene);
+            inviteUser.setPoint(inviteUser.getPoint()+20);
+            miniUserDOMapper.updateByPrimaryKeySelective(inviteUser);
+        }
     }
     /**
      * 根据openId获取 微信用户  并返回 vo对象
@@ -126,27 +142,27 @@ public class MiniUserService {
                     miniSignMapper.updateCountDay100(sign.getSignId());
                 }
                 //取勋章
-                if(sign.getSignDays()<7){
+                if(sign.getCountDays()<7){
                     miniUserVO.setBadge1("../images/user/badge_1_n.png");
                     miniUserVO.setBadge2("../images/user/badge_2_n.png");
                     miniUserVO.setBadge3("../images/user/badge_3_n.png");
                     miniUserVO.setBadge4("../images/user/badge_4_n.png");
-                }else if(sign.getSignDays()>=7 && sign.getSignDays()<30){
+                }else if(sign.getCountDays()>=7 && sign.getCountDays()<30){
                     miniUserVO.setBadge1("../images/user/badge_1_y.png");
                     miniUserVO.setBadge2("../images/user/badge_2_n.png");
                     miniUserVO.setBadge3("../images/user/badge_3_n.png");
                     miniUserVO.setBadge4("../images/user/badge_4_n.png");
-                }else if(sign.getSignDays()>=30 && sign.getSignDays()<60){
+                }else if(sign.getCountDays()>=30 && sign.getCountDays()<60){
                     miniUserVO.setBadge1("../images/user/badge_1_y.png");
                     miniUserVO.setBadge2("../images/user/badge_2_y.png");
                     miniUserVO.setBadge3("../images/user/badge_3_n.png");
                     miniUserVO.setBadge4("../images/user/badge_4_n.png");
-                }else if(sign.getSignDays()>=60 && sign.getSignDays()<100){
+                }else if(sign.getCountDays()>=60 && sign.getCountDays()<100){
                     miniUserVO.setBadge1("../images/user/badge_1_y.png");
                     miniUserVO.setBadge2("../images/user/badge_2_y.png");
                     miniUserVO.setBadge3("../images/user/badge_3_y.png");
                     miniUserVO.setBadge4("../images/user/badge_4_n.png");
-                }else if(sign.getSignDays()==100){
+                }else if(sign.getCountDays()==100){
                     miniUserVO.setBadge1("../images/user/badge_1_y.png");
                     miniUserVO.setBadge2("../images/user/badge_2_y.png");
                     miniUserVO.setBadge3("../images/user/badge_3_y.png");
